@@ -2,7 +2,7 @@
  *
  */
 
-package main.com.everdro1d.swingtemplate.core;
+package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.commands.CommandInterface;
 import com.everdro1d.libs.commands.CommandManager;
@@ -10,8 +10,8 @@ import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.core.LocaleManager;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.DebugConsoleWindow;
-import main.com.everdro1d.swingtemplate.core.commands.DebugCommand;
-import main.com.everdro1d.swingtemplate.ui.MainWindow;
+import main.com.everdro1d.jpackage.core.commands.DebugCommand;
+import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -152,7 +152,7 @@ public class MainWorker {
     public static void showDebugConsole() {
         if (debugConsoleWindow == null) {
             debugConsoleWindow = new DebugConsoleWindow(
-                    MainWindow.topFrame, MainWindow.fontName, MainWindow.fontSize, prefs, debug, localeManager);
+                    MainWindow.topFrame, MainWindow.fontName, MainWindow.fontSize - 2, prefs, debug, localeManager);
             if (debug) System.out.println("Debug console created.");
         } else if (!debugConsoleWindow.isVisible()) {
             debugConsoleWindow.setVisible(true);

@@ -2,7 +2,7 @@
  *
  */
 
-package main.com.everdro1d.swingtemplate.ui;
+package main.com.everdro1d.jpackage.ui;
 
 import com.everdro1d.libs.swing.SwingGUI;
 
@@ -13,8 +13,8 @@ import java.awt.event.ComponentEvent;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static main.com.everdro1d.swingtemplate.core.MainWorker.localeManager;
-import static main.com.everdro1d.swingtemplate.core.MainWorker.windowPosition;
+import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
+import static main.com.everdro1d.jpackage.core.MainWorker.windowPosition;
 
 public class MainWindow extends JFrame {
     // Variables ------------------------------------------------------------------------------------------------------|

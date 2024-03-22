@@ -6,16 +6,16 @@ package main.com.everdro1d.jpackage.ui;
 
 import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.swing.SwingGUI;
+import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
+import main.com.everdro1d.jpackage.ui.panels.*;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static main.com.everdro1d.jpackage.core.CmdSettings.getSubsetOSTypeArray;
 import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
 import static main.com.everdro1d.jpackage.core.MainWorker.windowPosition;
 
@@ -50,7 +50,7 @@ public class MainWindow extends JFrame {
 
     private final int WINDOW_WIDTH = 800;
     private final int EDGE_PADDING = 15;
-    private final int WINDOW_HEIGHT = 700;
+    private final int WINDOW_HEIGHT = 750;
 
 
     // End of variables -----------------------------------------------------------------------------------------------|
@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
             {
                 // Add components to northPanel
                 titleLabel = new JLabel(titleText);
-                titleLabel.setFont(new Font(fontName, Font.BOLD, fontSize + 8));
+                titleLabel.setFont(new Font(fontName, Font.BOLD, fontSize + 12));
                 titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
                 northPanel.add(titleLabel, gbc);
 
@@ -141,59 +141,45 @@ public class MainWindow extends JFrame {
             centerPanel = new JPanel();
             mainPanel.add(centerPanel, BorderLayout.CENTER);
             {
+                boolean exclusive = true;
+
                 genericOptionsPanel = new GenericOptionsPanel();
-                genericOptionsPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 240));
+                genericOptionsPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 270));
                 genericOptionsPanel.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                    TitledBorder genericTitledBorder = BorderFactory.createTitledBorder("Generic Options");
-                    genericTitledBorder.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
-                    genericTitledBorder.setTitleColor(Color.BLACK);
-                    genericTitledBorder.setTitleJustification(TitledBorder.LEFT);
-                    genericTitledBorder.setTitlePosition(TitledBorder.TOP);
-                genericOptionsPanel.setBorder(genericTitledBorder);
                 centerPanel.add(genericOptionsPanel);
+
+                genericOptionsPanel.setBorder(new CollapsableTitledBorder(
+                        genericOptionsPanel, "Generic Options", true,
+                        exclusive, 270, 50,
+                        new Font(fontName, Font.PLAIN, fontSize + 2))
+                );
 
                 // Add components to centerPanel
                 osTabbedPane = new JTabbedPane();
                 osTabbedPane.setTabPlacement(JTabbedPane.TOP);
                 osTabbedPane.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                osTabbedPane.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 280));
+                osTabbedPane.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 520));
                 osTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-                    TitledBorder osTitledBorder = BorderFactory.createTitledBorder("OS Specific Options");
-                    osTitledBorder.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
-                    osTitledBorder.setTitleColor(Color.BLACK);
-                    //osTitledBorder.setTitleJustification(TitledBorder.CENTER);
-                    osTitledBorder.setTitlePosition(TitledBorder.TOP);
-                osTabbedPane.setBorder(osTitledBorder);
                 centerPanel.add(osTabbedPane);
                 {
-                    //genericOptionsPanel = new GenericOptionsPanel();
-                    //osTabbedPane.addTab("Generic", genericOptionsPanel);
-
-                    windowsPanel = new JPanel();
+                    windowsPanel = new WindowsOptionsPanel();
                     osTabbedPane.addTab("Windows", windowsPanel);
-                    {
-                        // Add components to windowsPanel
-                    }
 
-                    macOSPanel = new JPanel();
+                    macOSPanel = new MacOSOptionsPanel();
                     osTabbedPane.addTab("macOS", macOSPanel);
-                    {
-                        // Add components to macOSPanel
-                    }
 
-                    unixPanel = new JPanel();
+                    unixPanel = new UnixOptionsPanel();
                     osTabbedPane.addTab("Unix", unixPanel);
-                    {
-                        // Add components to unixPanel
-                    }
                 }
-                String os = ApplicationCore.detectOS();
-                osTabbedPane.setEnabledAt(0, os.equals("Windows"));
-                osTabbedPane.setEnabledAt(1, os.equals("macOS"));
-                osTabbedPane.setEnabledAt(2, os.equals("Unix"));
-                osTabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
 
+                enableTabbedPaneWithOS(osTabbedPane);
                 osTabbedPane.addChangeListener(e -> SwingGUI.setHandCursorToClickableComponents(osTabbedPane));
+
+                osTabbedPane.setBorder(new CollapsableTitledBorder(
+                        osTabbedPane, "OS Specific Options", false, exclusive,
+                        520, 50, this::enableTabbedPaneWithOS,
+                        new Font(fontName, Font.PLAIN, fontSize + 2))
+                );
 
             }
 
@@ -229,244 +215,12 @@ public class MainWindow extends JFrame {
         }
     }
 
-    public static class GenericOptionsPanel extends JPanel {
-        private LeftGenericPanel leftGenericPanel;
-        private RightGenericPanel rightGenericPanel;
-
-        public GenericOptionsPanel() {
-            setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 1;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.insets = new Insets(4, 4, 4, 4);
-
-            add((leftGenericPanel = new LeftGenericPanel()), gbc);
-            gbc.gridx++;
-            add((rightGenericPanel = new RightGenericPanel()), gbc);
-        }
+    private void enableTabbedPaneWithOS(JTabbedPane tabbedPane) {
+        String os = ApplicationCore.detectOS();
+//        tabbedPane.setEnabledAt(0, os.equals("Windows")); TODO: re-enable when done with panels
+//        tabbedPane.setEnabledAt(1, os.equals("macOS"));
+//        tabbedPane.setEnabledAt(2, os.equals("Unix"));
+        tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
     }
 
-    public static class LeftGenericPanel extends JPanel {
-        private JLabel nameLabel;
-        private JTextField nameTextField;
-        private JLabel descriptionLabel;
-        private JTextField descriptionTextField;
-        private JLabel iconLabel;
-        private JTextField iconPathTextField;
-        private JLabel vendorLabel;
-        private JTextField vendorTextField;
-        private JLabel versionLabel;
-        private JTextField versionTextField;
-        private JLabel copyrightLabel;
-        private JTextField copyRightTextField;
-
-        public LeftGenericPanel() {
-            setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 1;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.VERTICAL;
-            gbc.insets = new Insets(4, 4, 4, 4);
-
-            add((nameLabel = new JLabel("Name:")), gbc);
-            gbc.gridy++;
-            add((descriptionLabel = new JLabel("Description:")), gbc);
-            gbc.gridy++;
-            add((iconLabel = new JLabel("Icon Path:")), gbc);
-            gbc.gridy++;
-            add((vendorLabel = new JLabel("Vendor:")), gbc);
-            gbc.gridy++;
-            add((versionLabel = new JLabel("Version:")), gbc);
-            gbc.gridy++;
-            add((copyrightLabel = new JLabel("Copyright:")), gbc);
-
-            gbc.gridx = 1;
-            gbc.gridy = 0;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            add((nameTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((descriptionTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((iconPathTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((vendorTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((versionTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((copyRightTextField = new JTextField()), gbc);
-
-            for (Component component : getComponents()) {
-                if (component instanceof JTextField || component instanceof JLabel) {
-                    component.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                }
-            }
-        }
-
-        // getters and setters
-        public String getNameText() {
-            return nameTextField.getText();
-        }
-
-        public String getDescriptionText() {
-            return descriptionTextField.getText();
-        }
-
-        public String getIconPathText() {
-            return iconPathTextField.getText();
-        }
-
-        public String getVendorText() {
-            return vendorTextField.getText();
-        }
-
-        public String getVersionText() {
-            return versionTextField.getText();
-        }
-
-        public String getCopyRightText() {
-            return copyRightTextField.getText();
-        }
-
-        public void setNameText(String text) {
-            nameTextField.setText(text);
-        }
-
-        public void setDescriptionText(String text) {
-            descriptionTextField.setText(text);
-        }
-
-        public void setIconPathText(String text) {
-            iconPathTextField.setText(text);
-        }
-
-        public void setVendorText(String text) {
-            vendorTextField.setText(text);
-        }
-
-        public void setVersionText(String text) {
-            versionTextField.setText(text);
-        }
-
-        public void setCopyRightText(String text) {
-            copyRightTextField.setText(text);
-        }
-    }
-
-    public static class RightGenericPanel extends JPanel {
-        private JLabel typeLabel;
-        private JComboBox<String> typeComboBox;
-        private JLabel inputLabel; // path is jar or directory
-        private JTextField inputPathTextField;
-        private JLabel outputLabel;
-        private JTextField outputPathTextField;
-        private JLabel mainJarLabel;
-        private JTextField mainJarTextField;
-        private JLabel licenseLabel;
-        private JTextField licenseTextField;
-        private JLabel aboutLabel;
-        private JTextField aboutTextField;
-
-        public RightGenericPanel() {
-            setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 1;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.VERTICAL;
-            gbc.insets = new Insets(4, 4, 4, 4);
-
-            add((typeLabel = new JLabel("Type:")), gbc);
-            gbc.gridy++;
-            add((inputLabel = new JLabel("Input Path:")), gbc);
-            gbc.gridy++;
-            add((outputLabel = new JLabel("Output Path:")), gbc);
-            gbc.gridy++;
-            add((mainJarLabel = new JLabel("Main Jar:")), gbc);
-            gbc.gridy++;
-            add((licenseLabel = new JLabel("License URL:")), gbc);
-            gbc.gridy++;
-            add((aboutLabel = new JLabel("About URL:")), gbc);
-
-            gbc.gridx = 1;
-            gbc.gridy = 0;
-            gbc.weightx = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            add((typeComboBox = new JComboBox<>(getSubsetOSTypeArray())), gbc);
-            gbc.gridy++;
-            add((inputPathTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((outputPathTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((mainJarTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((licenseTextField = new JTextField()), gbc);
-            gbc.gridy++;
-            add((aboutTextField = new JTextField()), gbc);
-
-            for (Component component : getComponents()) {
-                if (component.getFont() != null) {
-                    component.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                }
-            }
-        }
-
-        // getters and setters
-        public String getTypeText() {
-            return (String) typeComboBox.getSelectedItem();
-        }
-
-        public String getInputPathText() {
-            return inputPathTextField.getText();
-        }
-
-        public String getOutputPathText() {
-            return outputPathTextField.getText();
-        }
-
-        public String getMainJarText() {
-            return mainJarTextField.getText();
-        }
-
-        public String getLicenseText() {
-            return licenseTextField.getText();
-        }
-
-        public String getAboutText() {
-            return aboutTextField.getText();
-        }
-
-        public void setTypeText(String text) {
-            typeComboBox.setSelectedItem(text);
-        }
-
-        public void setInputPathText(String text) {
-            inputPathTextField.setText(text);
-        }
-
-        public void setOutputPathText(String text) {
-            outputPathTextField.setText(text);
-        }
-
-        public void setMainJarText(String text) {
-            mainJarTextField.setText(text);
-        }
-
-        public void setLicenseText(String text) {
-            licenseTextField.setText(text);
-        }
-
-        public void setAboutText(String text) {
-            aboutTextField.setText(text);
-        }
-    }
 }

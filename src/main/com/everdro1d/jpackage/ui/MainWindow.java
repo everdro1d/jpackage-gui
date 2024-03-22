@@ -148,11 +148,11 @@ public class MainWindow extends JFrame {
                 genericOptionsPanel.setFont(new Font(fontName, Font.PLAIN, fontSize));
                 centerPanel.add(genericOptionsPanel);
 
-                genericOptionsPanel.setBorder(new CollapsableTitledBorder(
+                CollapsableTitledBorder b = new CollapsableTitledBorder(
                         genericOptionsPanel, "Generic Options", true,
-                        exclusive, 270, 50,
-                        new Font(fontName, Font.PLAIN, fontSize + 2))
-                );
+                        exclusive, 270, 50);
+                b.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
+                genericOptionsPanel.setBorder(b);
 
                 // Add components to centerPanel
                 osTabbedPane = new JTabbedPane();
@@ -175,11 +175,11 @@ public class MainWindow extends JFrame {
                 enableTabbedPaneWithOS(osTabbedPane);
                 osTabbedPane.addChangeListener(e -> SwingGUI.setHandCursorToClickableComponents(osTabbedPane));
 
-                osTabbedPane.setBorder(new CollapsableTitledBorder(
-                        osTabbedPane, "OS Specific Options", false, exclusive,
-                        520, 50, this::enableTabbedPaneWithOS,
-                        new Font(fontName, Font.PLAIN, fontSize + 2))
-                );
+                CollapsableTitledBorder b2 = new CollapsableTitledBorder(
+                        osTabbedPane, "OS Specific Options", false,
+                        exclusive, 520, 50);
+                b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
+                osTabbedPane.setBorder(b2);
 
             }
 

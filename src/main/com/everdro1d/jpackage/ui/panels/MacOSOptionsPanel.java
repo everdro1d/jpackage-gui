@@ -62,13 +62,13 @@ public class MacOSOptionsPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 4, 4, 4);
         int widthPx = 290;
 
-        // Col 1
-        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>An identifier that uniquely identifies the application for macOS: </div></html>");
+        // Col 0
+        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>An identifier that uniquely identifies the application for macOS:</div></html>");
         add(macPackageIdentifierLabel, gbc);
         gbc.gridy++;
 
@@ -100,14 +100,16 @@ public class MacOSOptionsPanel extends JPanel {
         add(macEntitlementsLabel, gbc);
         gbc.gridy++;
 
+        gbc.weighty = 1;
         macAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>String used to construct LSApplicationCategoryType in application plist: </div></html>");
         add(macAppCategoryLabel, gbc);
 
+        // Col 1
         gbc.gridx++;
         gbc.gridy = 0;
         gbc.weightx = 1;
+        gbc.weighty = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        // Col 2
 
         add((macPackageNameTextField = new JTextField()), gbc);
         gbc.gridy++;
@@ -133,6 +135,7 @@ public class MacOSOptionsPanel extends JPanel {
         add((macEntitlementsTextField = new JTextField()), gbc);
         gbc.gridy++;
 
+        gbc.weighty = 1;
         add((macAppCategoryTextField = new JTextField()), gbc);
 
         for (Component component : getComponents()) {

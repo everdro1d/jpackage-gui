@@ -59,10 +59,8 @@ public class WindowsOptionsPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0;
-        gbc.weighty = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 4, 4, 4);
         int widthPx = 290;
 
@@ -103,6 +101,7 @@ public class WindowsOptionsPanel extends JPanel {
         add(winUpdateUrlLabel, gbc);
         gbc.gridy++;
 
+        gbc.weighty = 1;
         winUpgradeUuidLabel = new JLabel("<html><div style='width:"+widthPx+"px'>UUID associated with upgrades for this package: </div></html>");
         add(winUpgradeUuidLabel, gbc);
 
@@ -110,25 +109,37 @@ public class WindowsOptionsPanel extends JPanel {
         gbc.gridx++;
         gbc.gridy = 0;
         gbc.weightx = 1;
+        gbc.weighty = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
         add((winConsoleCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winDirChooserCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winHelpUrlTextField = new JTextField()), gbc);
         gbc.gridy++;
+
         add((winMenuCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winMenuGroupTextField = new JTextField()), gbc);
         gbc.gridy++;
+
         add((winPerUserInstallCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winShortcutCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winShortcutPromptCheckBox = new JCheckBox()), gbc);
         gbc.gridy++;
+
         add((winUpdateUrlTextField = new JTextField()), gbc);
         gbc.gridy++;
+
+        gbc.weighty = 1;
         add((winUpgradeUuidTextField = new JTextField()), gbc);
 
         for (Component component : getComponents()) {

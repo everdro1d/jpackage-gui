@@ -21,7 +21,7 @@ public class GenericOptionsPanel extends JPanel {
         gbc.gridy = 0;
         gbc.weightx = 1;
         gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(4, 4, 4, 4);
 
@@ -51,8 +51,6 @@ public class GenericOptionsPanel extends JPanel {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 1;
             gbc.anchor = GridBagConstraints.WEST;
             gbc.fill = GridBagConstraints.VERTICAL;
             gbc.insets = new Insets(4, 4, 4, 4);
@@ -70,25 +68,35 @@ public class GenericOptionsPanel extends JPanel {
             gbc.gridy++;
             add((copyrightLabel = new JLabel("Copyright:")), gbc);
             gbc.gridy++;
+            gbc.weighty = 1;
             add((licenseLabel = new JLabel("License Path:")), gbc);
 
             // Col 1
             gbc.gridx++;
             gbc.gridy = 0;
             gbc.weightx = 1;
+            gbc.weighty = 0;
             gbc.fill = GridBagConstraints.HORIZONTAL;
+
             add((nameTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((descriptionTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((iconPathTextField = new TextFieldFileChooser(localeManager)), gbc);
             gbc.gridy++;
+
             add((vendorTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((versionTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((copyRightTextField = new JTextField()), gbc);
             gbc.gridy++;
+
+            gbc.weighty = 1;
             add((licenseTextField = new TextFieldFileChooser(localeManager)), gbc);
 
             for (Component component : getComponents()) {
@@ -177,44 +185,58 @@ public class GenericOptionsPanel extends JPanel {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 1;
             gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.VERTICAL;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(4, 4, 4, 4);
 
             // Col 0
             add((typeLabel = new JLabel("Type:")), gbc);
             gbc.gridy++;
+
             add((inputLabel = new JLabel("Input Path:")), gbc);
             gbc.gridy++;
+
             add((outputLabel = new JLabel("Output Path:")), gbc);
             gbc.gridy++;
+
             add((mainJarLabel = new JLabel("Main Jar:")), gbc);
             gbc.gridy++;
+
             add((mainClassLabel = new JLabel("Main Class:")), gbc);
             gbc.gridy++;
+
             add((argumentsLabel = new JLabel("Arguments:")), gbc);
             gbc.gridy++;
+
+            gbc.weighty = 1;
             add((aboutLabel = new JLabel("About URL:")), gbc);
 
             // Col 1
             gbc.gridx++;
             gbc.gridy = 0;
             gbc.weightx = 1;
+            gbc.weighty = 0;
             gbc.fill = GridBagConstraints.HORIZONTAL;
+
             add((typeComboBox = new JComboBox<>(getSubsetOSTypeArray())), gbc);
             gbc.gridy++;
+
             add((inputPathTextField = new TextFieldFileChooser(localeManager)), gbc);
             gbc.gridy++;
+
             add((outputPathTextField = new TextFieldFileChooser(localeManager)), gbc);
             gbc.gridy++;
+
             add((argumentsTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((mainJarTextField = new JTextField()), gbc);
             gbc.gridy++;
+
             add((mainClassTextField = new JTextField()), gbc);
             gbc.gridy++;
+
+            gbc.weighty = 1;
             add((aboutTextField = new JTextField()), gbc);
 
             for (Component component : getComponents()) {

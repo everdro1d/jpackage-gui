@@ -7,6 +7,7 @@ package main.com.everdro1d.jpackage.ui;
 import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
+import com.everdro1d.libs.swing.components.TextFieldFileChooser;
 import main.com.everdro1d.jpackage.ui.panels.*;
 
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class MainWindow extends JFrame {
     private JPanel mainPanel;
         private JPanel northPanel;
             private JLabel titleLabel;
+            private JSeparator titleSeparator;
         private JPanel centerPanel;
             private JPanel genericOptionsPanel;
             public static JTabbedPane osTabbedPane;
@@ -132,9 +134,9 @@ public class MainWindow extends JFrame {
                 northPanel.add(titleLabel, gbc);
 
                 gbc.gridy++;
-                JSeparator separator = new JSeparator();
-                separator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
-                northPanel.add(separator, gbc);
+                titleSeparator = new JSeparator();
+                titleSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
+                northPanel.add(titleSeparator, gbc);
 
             }
 

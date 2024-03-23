@@ -39,9 +39,11 @@ public class MainWindow extends JFrame {
                 private JPanel macOSPanel;
                 private JPanel unixPanel;
         private JPanel southPanel;
-            private JButton saveSettingsButton;
-            private JButton loadSettingsButton;
-            private JButton runCommandButton;
+            private JSeparator buttonSeparator;
+            private JPanel buttonPanel;
+                private JButton saveSettingsButton;
+                private JButton loadSettingsButton;
+                private JButton runCommandButton;
         private JPanel eastPanel;
         private JPanel westPanel;
 
@@ -215,25 +217,51 @@ public class MainWindow extends JFrame {
             }
 
             southPanel = new JPanel();
-            southPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 55));
+            southPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 50));
+            southPanel.setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = 0;
+            c.gridy = 0;
+            c.weightx = 0;
+            c.weighty = 1;
             mainPanel.add(southPanel, BorderLayout.SOUTH);
             {
-                // Add components to southPanel
-                // save settings to file
-                saveSettingsButton = new JButton("Save Settings");
-                saveSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                southPanel.add(saveSettingsButton);
+                buttonSeparator = new JSeparator();
+                buttonSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
+                southPanel.add(buttonSeparator, c);
 
-                // load settings from file
-                loadSettingsButton = new JButton("Load Settings");
-                loadSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                southPanel.add(loadSettingsButton);
+                c.gridy++;
+                buttonPanel = new JPanel();
+                buttonPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 40));
+                buttonPanel.setLayout(new GridBagLayout());
+                GridBagConstraints gbc2 = new GridBagConstraints();
+                gbc2.gridx = 0;
+                gbc2.gridy = 0;
+                gbc2.weightx = 0.5;
+                gbc2.weighty = 0;
+                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.fill = GridBagConstraints.HORIZONTAL;
+                gbc2.insets = new Insets(4, 4, 4, 4);
+                southPanel.add(buttonPanel, c);
+                {
+                    // Add components to southPanel
+                    // save settings to file
+                    saveSettingsButton = new JButton("Save Settings");
+                    saveSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                    buttonPanel.add(saveSettingsButton, gbc2);
 
-                // run command
-                runCommandButton = new JButton("Create Installer");
-                runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                southPanel.add(runCommandButton);
+                    gbc2.gridx++;
+                    // load settings from file
+                    loadSettingsButton = new JButton("Load Settings");
+                    loadSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                    buttonPanel.add(loadSettingsButton, gbc2);
 
+                    gbc2.gridx++;
+                    // run command
+                    runCommandButton = new JButton("Create Installer");
+                    runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                    buttonPanel.add(runCommandButton, gbc2);
+                }
             }
 
             eastPanel = new JPanel();

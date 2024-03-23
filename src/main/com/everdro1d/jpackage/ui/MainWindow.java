@@ -30,6 +30,9 @@ public class MainWindow extends JFrame {
             private JLabel titleLabel;
             private JSeparator titleSeparator;
         private JPanel centerPanel;
+            private JPanel jdkBinPanel;
+                private JLabel jdkBinLabel;
+                private TextFieldFileChooser jdkBinTextField;
             private JPanel genericOptionsPanel;
             public static JTabbedPane osTabbedPane;
                 private JPanel windowsPanel;
@@ -143,6 +146,32 @@ public class MainWindow extends JFrame {
             centerPanel = new JPanel();
             mainPanel.add(centerPanel, BorderLayout.CENTER);
             {
+                // Path to jdk bin
+                jdkBinPanel = new JPanel();
+                jdkBinPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 40));
+                jdkBinPanel.setLayout(new GridBagLayout());
+                GridBagConstraints c = new GridBagConstraints();
+                c.gridx = 0;
+                c.gridy = 0;
+                c.weightx = 0.05;
+                c.weighty = 0;
+                c.anchor = GridBagConstraints.WEST;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.insets = new Insets(4, 4, 4, 4);
+                centerPanel.add(jdkBinPanel);
+                {
+                    jdkBinLabel = new JLabel("Path to JDK /bin directory:");
+                    jdkBinLabel.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                    jdkBinPanel.add(jdkBinLabel, c);
+
+                    c.gridx++;
+                    c.weightx = 0.95;
+                    jdkBinTextField = new TextFieldFileChooser(localeManager, false, true);
+                    jdkBinTextField.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                    jdkBinPanel.add(jdkBinTextField, c);
+                }
+
+                // Option Panels
                 boolean exclusive = true;
 
                 genericOptionsPanel = new GenericOptionsPanel();

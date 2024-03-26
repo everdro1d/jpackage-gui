@@ -20,13 +20,13 @@ public class GenericOptionsPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
-        gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(4, 4, 4, 4);
 
         add((leftGenericPanel = new LeftGenericPanel()), gbc);
         gbc.gridx++;
+        gbc.weighty = 1;
         add((rightGenericPanel = new RightGenericPanel()), gbc);
     }
 
@@ -51,8 +51,8 @@ public class GenericOptionsPanel extends JPanel {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.VERTICAL;
+            gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(4, 4, 4, 4);
 
             // Col 0
@@ -185,7 +185,7 @@ public class GenericOptionsPanel extends JPanel {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+            gbc.anchor = GridBagConstraints.FIRST_LINE_START;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(4, 4, 4, 4);
 

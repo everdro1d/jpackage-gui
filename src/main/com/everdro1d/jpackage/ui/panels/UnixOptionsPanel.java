@@ -127,4 +127,72 @@ public class UnixOptionsPanel extends JPanel {
             }
         }
     }
+
+    // Getters and Setters --------------------------------------------------------------------------------------------|
+
+    public String getLinuxPackageName() {
+        return linuxPackageNameTextField.getText();
+    }
+
+    public String getLinuxDebMaintainer() {
+        return linuxDebMaintainerTextField.getText();
+    }
+
+    public String getLinuxMenuGroup() {
+        return linuxMenuGroupTextField.getText();
+    }
+
+    public String getLinuxPackageDeps() {
+        return linuxPackageDepsTextField.getText();
+    }
+
+    public String getLinuxRpmLicenseType() {
+        return linuxRpmLicenseTypeTextField.getText();
+    }
+
+    public String getLinuxAppRelease() {
+        return linuxAppReleaseTextField.getText();
+    }
+
+    public String getLinuxAppCategory() {
+        return linuxAppCategoryTextField.getText();
+    }
+
+    public boolean isLinuxShortcut() {
+        return linuxShortcutCheckBox.isSelected();
+    }
+
+    public void setLinuxPackageName(String linuxPackageName) {
+        linuxPackageNameTextField.setText(linuxPackageName);
+    }
+
+    public void setLinuxDebMaintainer(String linuxDebMaintainer) {
+        linuxDebMaintainerTextField.setText(linuxDebMaintainer);
+    }
+
+    public void setLinuxMenuGroup(String linuxMenuGroup) {
+        linuxMenuGroupTextField.setText(linuxMenuGroup);
+    }
+
+    public void setLinuxPackageDeps(String linuxPackageDeps) {
+        linuxPackageDepsTextField.setText(linuxPackageDeps);
+    }
+
+    public void setLinuxRpmLicenseType(String linuxRpmLicenseType) {
+        linuxRpmLicenseTypeTextField.setText(linuxRpmLicenseType);
+    }
+
+    public void setLinuxAppRelease(String linuxAppRelease) {
+        linuxAppReleaseTextField.setText(linuxAppRelease);
+    }
+
+    public void setLinuxAppCategory(String linuxAppCategory) {
+        linuxAppCategoryTextField.setText(linuxAppCategory);
+    }
+
+    public void setLinuxShortcut(boolean linuxShortcut) {
+        linuxShortcutCheckBox.setSelected(linuxShortcut);
+    }
+
+    // End of Getters and Setters -------------------------------------------------------------------------------------|
 }

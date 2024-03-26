@@ -246,7 +246,7 @@ public class GenericOptionsPanel extends JPanel {
             }
         }
 
-        // getters and setters
+        // Getters and Setters ----------------------------------------------------------------------------------------|
         public String getTypeText() {
             return (String) typeComboBox.getSelectedItem();
         }
@@ -259,12 +259,16 @@ public class GenericOptionsPanel extends JPanel {
             return outputPathTextField.getText();
         }
 
+        public String getArgumentsText() {
+            return argumentsTextField.getText();
+        }
+
         public String getMainJarText() {
             return mainJarTextField.getText();
         }
 
-        public String getArgumentsText() {
-            return argumentsTextField.getText();
+        public String getMainClassText() {
+            return mainClassTextField.getText();
         }
 
         public String getAboutText() {
@@ -283,12 +287,16 @@ public class GenericOptionsPanel extends JPanel {
             outputPathTextField.setText(text);
         }
 
+        public void setArgumentsText(String text) {
+            argumentsTextField.setText(text);
+        }
+
         public void setMainJarText(String text) {
             mainJarTextField.setText(text);
         }
 
-        public void setArgumentsText(String text) {
-            argumentsTextField.setText(text);
+        public void setMainClassText(String text) {
+            mainClassTextField.setText(text);
         }
 
         public void setAboutText(String text) {

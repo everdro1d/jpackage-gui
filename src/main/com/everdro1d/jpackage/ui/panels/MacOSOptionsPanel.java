@@ -143,6 +143,80 @@ public class MacOSOptionsPanel extends JPanel {
                 component.setFont(new Font(MainWindow.fontName, Font.PLAIN, MainWindow.fontSize));
             }
         }
-
     }
+
+    // Getters and Setters --------------------------------------------------------------------------------------------|
+    public String getMacPackageIdentifierText() {
+        return macPackageIdentifierTextField.getText();
+    }
+
+    public String getMacPackageNameText() {
+        return macPackageNameTextField.getText();
+    }
+
+    public String getMacPackageSigningPrefixText() {
+        return macPackageSigningPrefixTextField.getText();
+    }
+
+    public boolean isMacSignChecked() {
+        return macSignCheckBox.isSelected();
+    }
+
+    public String getMacSigningKeychainText() {
+        return macSigningKeychainTextField.getText();
+    }
+
+    public String getMacSigningKeyUserNameText() {
+        return macSigningKeyUserNameTextField.getText();
+    }
+
+    public boolean isMacAppStoreChecked() {
+        return macAppStoreCheckBox.isSelected();
+    }
+
+    public String getMacEntitlementsText() {
+        return macEntitlementsTextField.getText();
+    }
+
+    public String getMacAppCategoryText() {
+        return macAppCategoryTextField.getText();
+    }
+
+    public void setMacPackageIdentifierText(String text) {
+        macPackageIdentifierTextField.setText(text);
+    }
+
+    public void setMacPackageNameText(String text) {
+        macPackageNameTextField.setText(text);
+    }
+
+    public void setMacPackageSigningPrefixText(String text) {
+        macPackageSigningPrefixTextField.setText(text);
+    }
+
+    public void setMacSignChecked(boolean checked) {
+        macSignCheckBox.setSelected(checked);
+    }
+
+    public void setMacSigningKeychainText(String text) {
+        macSigningKeychainTextField.setText(text);
+    }
+
+    public void setMacSigningKeyUserNameText(String text) {
+        macSigningKeyUserNameTextField.setText(text);
+    }
+
+    public void setMacAppStoreChecked(boolean checked) {
+        macAppStoreCheckBox.setSelected(checked);
+    }
+
+    public void setMacEntitlementsText(String text) {
+        macEntitlementsTextField.setText(text);
+    }
+
+    public void setMacAppCategoryText(String text) {
+        macAppCategoryTextField.setText(text);
+    }
+
+    // End of Getters and Setters -------------------------------------------------------------------------------------|
 }

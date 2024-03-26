@@ -150,7 +150,7 @@ public class WindowsOptionsPanel extends JPanel {
 
     }
 
-    // Getter and Setter Methods --------------------------------------------------------------------------------------|
+    // Getter and Setters ---------------------------------------------------------------------------------------------|
 
     public JCheckBox getWinConsoleCheckBox() {
         return winConsoleCheckBox;
@@ -272,5 +272,5 @@ public class WindowsOptionsPanel extends JPanel {
         winUpgradeUuidTextField.setText(text);
     }
 
-    // End of Getter and Setter Methods -------------------------------------------------------------------------------|
+    // End of Getter and Setters --------------------------------------------------------------------------------------|
 }

@@ -213,7 +213,6 @@ public class MainWindow extends JFrame {
                         exclusive, OS_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
                 b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 osTabbedPane.setBorder(b2);
-
             }
 
             southPanel = new JPanel();
@@ -281,5 +280,4 @@ public class MainWindow extends JFrame {
         tabbedPane.setEnabledAt(2, os.equals("Unix"));
         tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
     }
-
 }

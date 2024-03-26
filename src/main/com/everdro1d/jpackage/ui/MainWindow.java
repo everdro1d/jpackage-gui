@@ -58,6 +58,8 @@ public class MainWindow extends JFrame {
     private final int WINDOW_WIDTH = 800;
     private final int EDGE_PADDING = 15;
     private final int WINDOW_HEIGHT = 750;
+    private final int GENERIC_OPTION_PANEL_HEIGHT = 500; // expanded height
+    private final int OS_OPTION_PANEL_HEIGHT = 500; // expanded height
 
 
     // End of variables -----------------------------------------------------------------------------------------------|
@@ -175,17 +177,15 @@ public class MainWindow extends JFrame {
 
                 // Option Panels
                 boolean exclusive = true;
-                int genOptPanelHeight = 280; //
-                int osOptPanelHeight = 500; // expanded heights
 
                 genericOptionsPanel = new GenericOptionsPanel();
-                genericOptionsPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), genOptPanelHeight));
+                genericOptionsPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), GENERIC_OPTION_PANEL_HEIGHT));
                 genericOptionsPanel.setFont(new Font(fontName, Font.PLAIN, fontSize));
                 centerPanel.add(genericOptionsPanel);
 
                 CollapsableTitledBorder b = new CollapsableTitledBorder(
                         genericOptionsPanel, "Generic Options", true,
-                        exclusive, 50, this::enableTabbedPaneWithOS);
+                        exclusive, GENERIC_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
                 b.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 genericOptionsPanel.setBorder(b);
 
@@ -193,7 +193,7 @@ public class MainWindow extends JFrame {
                 osTabbedPane = new JTabbedPane();
                 osTabbedPane.setTabPlacement(JTabbedPane.TOP);
                 osTabbedPane.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                osTabbedPane.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), osOptPanelHeight));
+                osTabbedPane.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), OS_OPTION_PANEL_HEIGHT));
                 osTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
                 centerPanel.add(osTabbedPane);
                 {
@@ -210,7 +210,7 @@ public class MainWindow extends JFrame {
 
                 CollapsableTitledBorder b2 = new CollapsableTitledBorder(
                         osTabbedPane, "OS Specific Options", false,
-                        exclusive, 50, this::enableTabbedPaneWithOS);
+                        exclusive, OS_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
                 b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 osTabbedPane.setBorder(b2);
 

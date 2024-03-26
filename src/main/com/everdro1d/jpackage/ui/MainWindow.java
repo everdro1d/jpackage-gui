@@ -185,7 +185,7 @@ public class MainWindow extends JFrame {
 
                 CollapsableTitledBorder b = new CollapsableTitledBorder(
                         genericOptionsPanel, "Generic Options", true,
-                        exclusive, genOptPanelHeight, 50);
+                        exclusive, 50, this::enableTabbedPaneWithOS);
                 b.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 genericOptionsPanel.setBorder(b);
 
@@ -206,13 +206,11 @@ public class MainWindow extends JFrame {
                     unixPanel = new UnixOptionsPanel();
                     osTabbedPane.addTab("Unix", unixPanel);
                 }
-
-                enableTabbedPaneWithOS(osTabbedPane);
                 osTabbedPane.addChangeListener(e -> SwingGUI.setHandCursorToClickableComponents(osTabbedPane));
 
                 CollapsableTitledBorder b2 = new CollapsableTitledBorder(
                         osTabbedPane, "OS Specific Options", false,
-                        exclusive, osOptPanelHeight, 50);
+                        exclusive, 50, this::enableTabbedPaneWithOS);
                 b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 osTabbedPane.setBorder(b2);
 
@@ -278,9 +276,9 @@ public class MainWindow extends JFrame {
 
     private void enableTabbedPaneWithOS(JTabbedPane tabbedPane) {
         String os = ApplicationCore.detectOS();
-//        tabbedPane.setEnabledAt(0, os.equals("Windows")); TODO: re-enable when done with panels
-//        tabbedPane.setEnabledAt(1, os.equals("macOS"));
-//        tabbedPane.setEnabledAt(2, os.equals("Unix"));
+        tabbedPane.setEnabledAt(0, os.equals("Windows"));
+        tabbedPane.setEnabledAt(1, os.equals("macOS"));
+        tabbedPane.setEnabledAt(2, os.equals("Unix"));
         tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
     }
 

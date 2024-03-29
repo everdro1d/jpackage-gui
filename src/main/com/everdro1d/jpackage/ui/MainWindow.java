@@ -61,14 +61,13 @@ public class MainWindow extends JFrame {
     private final int GENERIC_OPTION_PANEL_HEIGHT = 500; // expanded height
     private final int OS_OPTION_PANEL_HEIGHT = 500; // expanded height
 
-
     // End of variables -----------------------------------------------------------------------------------------------|
 
     public MainWindow() {
         // if the locale does not contain the class, add it and it's components
 //        if (!localeManager.getClassesInLocaleMap().contains("MainWindow")) {
 //            addClassToLocale();
-//        } TODO re-enable when done with gui
+//        } TODO: re-enable when done with gui, and localize panels.
 //        useLocale();
 
         initializeWindowProperties();

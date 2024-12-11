@@ -32,25 +32,25 @@ public class GenericOptionsPanel extends JPanel {
 
     public static class LeftGenericPanel extends JPanel {
         private JLabel nameLabel;
-            private String nameText = "Name:";
+            private String nameLabelText = "Name:";
             private JTextField nameTextField;
         private JLabel descriptionLabel;
-            private String descriptionText = "Description:";
+            private String descriptionLabelText = "Description:";
             private JTextField descriptionTextField;
         private JLabel iconLabel;
-            private String iconText = "Icon Path:";
+            private String iconLabelText = "Icon Path:";
             private TextFieldFileChooser iconPathTextField;
         private JLabel vendorLabel;
-            private String vendorText = "Vendor:";
+            private String vendorLabelText = "Vendor:";
             private JTextField vendorTextField;
         private JLabel versionLabel;
-            private String versionText = "Version:";
+            private String versionLabelText = "Version:";
             private JTextField versionTextField;
         private JLabel copyrightLabel;
-            private String copyRightText = "CopyRight:";
-            private JTextField copyRightTextField;
+            private String copyrightLabelText = "Copyright:";
+            private JTextField copyrightTextField;
         private JLabel licenseLabel;
-            private String licenseText = "License Path:";
+            private String licenseLabelText = "License Path:";
             private TextFieldFileChooser licenseTextField;
 
         public LeftGenericPanel() {
@@ -63,20 +63,20 @@ public class GenericOptionsPanel extends JPanel {
             gbc.insets = new Insets(4, 4, 4, 4);
 
             // Col 0
-            add((nameLabel = new JLabel(nameText)), gbc);
+            add((nameLabel = new JLabel(nameLabelText)), gbc);
             gbc.gridy++;
-            add((descriptionLabel = new JLabel(descriptionText)), gbc);
+            add((descriptionLabel = new JLabel(descriptionLabelText)), gbc);
             gbc.gridy++;
-            add((iconLabel = new JLabel(iconText)), gbc);
+            add((iconLabel = new JLabel(iconLabelText)), gbc);
             gbc.gridy++;
-            add((vendorLabel = new JLabel(vendorText)), gbc);
+            add((vendorLabel = new JLabel(vendorLabelText)), gbc);
             gbc.gridy++;
-            add((versionLabel = new JLabel(versionText)), gbc);
+            add((versionLabel = new JLabel(versionLabelText)), gbc);
             gbc.gridy++;
-            add((copyrightLabel = new JLabel(copyRightText)), gbc);
+            add((copyrightLabel = new JLabel(copyrightLabelText)), gbc);
             gbc.gridy++;
             gbc.weighty = 1;
-            add((licenseLabel = new JLabel(licenseText)), gbc);
+            add((licenseLabel = new JLabel(licenseLabelText)), gbc);
 
             // Col 1
             gbc.gridx++;
@@ -100,7 +100,7 @@ public class GenericOptionsPanel extends JPanel {
             add((versionTextField = new JTextField()), gbc);
             gbc.gridy++;
 
-            add((copyRightTextField = new JTextField()), gbc);
+            add((copyrightTextField = new JTextField()), gbc);
             gbc.gridy++;
 
             gbc.weighty = 1;
@@ -114,11 +114,11 @@ public class GenericOptionsPanel extends JPanel {
         }
 
         // getters and setters
-        public String getNameText() {
+        public String getNameLabelText() {
             return nameTextField.getText();
         }
 
-        public String getDescriptionText() {
+        public String getDescriptionLabelText() {
             return descriptionTextField.getText();
         }
 
@@ -126,27 +126,27 @@ public class GenericOptionsPanel extends JPanel {
             return iconPathTextField.getText();
         }
 
-        public String getVendorText() {
+        public String getVendorLabelText() {
             return vendorTextField.getText();
         }
 
-        public String getVersionText() {
+        public String getVersionLabelText() {
             return versionTextField.getText();
         }
 
         public String getCopyRightText() {
-            return copyRightTextField.getText();
+            return copyrightTextField.getText();
         }
 
-        public String getLicenseText() {
+        public String getLicenseLabelText() {
             return licenseTextField.getText();
         }
 
-        public void setNameText(String text) {
+        public void setNameLabelText(String text) {
             nameTextField.setText(text);
         }
 
-        public void setDescriptionText(String text) {
+        public void setDescriptionLabelText(String text) {
             descriptionTextField.setText(text);
         }
 
@@ -154,44 +154,44 @@ public class GenericOptionsPanel extends JPanel {
             iconPathTextField.setText(text);
         }
 
-        public void setVendorText(String text) {
+        public void setVendorLabelText(String text) {
             vendorTextField.setText(text);
         }
 
-        public void setVersionText(String text) {
+        public void setVersionLabelText(String text) {
             versionTextField.setText(text);
         }
 
         public void setCopyRightText(String text) {
-            copyRightTextField.setText(text);
+            copyrightTextField.setText(text);
         }
 
-        public void setLicenseText(String text) {
+        public void setLicenseLabelText(String text) {
             licenseTextField.setText(text);
         }
     }
 
     public static class RightGenericPanel extends JPanel {
         private JLabel typeLabel;
-            private String typeText = "Type:";
+            private String typeLabelText = "Type:";
             private JComboBox<String> typeComboBox;
         private JLabel inputLabel; // path is jar or directory
-            private String inputText = "Input Path:";
+            private String inputLabelText = "Input Path:";
             private TextFieldFileChooser inputPathTextField;
         private JLabel outputLabel;
-            private String outputText = "Output Path:";
+            private String outputLabelText = "Output Path:";
             private TextFieldFileChooser outputPathTextField;
         private JLabel mainJarLabel;
-            private String mainJarText = "Main Jar:";
+            private String mainJarLabelText = "Main Jar:";
             private JTextField mainJarTextField;
         private JLabel mainClassLabel;
-            private String mainClassText = "Main Class:";
+            private String mainClassLabelText = "Main Class:";
             private JTextField mainClassTextField;
         private JLabel argumentsLabel;
-            private String argumentsText = "Arguments:";
+            private String argumentsLabelText = "Arguments:";
             private JTextField argumentsTextField;
         private JLabel aboutLabel;
-            private String aboutText = "About URL:";
+            private String aboutLabelText = "About URL:";
             private JTextField aboutTextField;
 
         public RightGenericPanel() {
@@ -204,26 +204,26 @@ public class GenericOptionsPanel extends JPanel {
             gbc.insets = new Insets(4, 4, 4, 4);
 
             // Col 0
-            add((typeLabel = new JLabel(typeText)), gbc);
+            add((typeLabel = new JLabel(typeLabelText)), gbc);
             gbc.gridy++;
 
-            add((inputLabel = new JLabel(inputText)), gbc);
+            add((inputLabel = new JLabel(inputLabelText)), gbc);
             gbc.gridy++;
 
-            add((outputLabel = new JLabel(outputText)), gbc);
+            add((outputLabel = new JLabel(outputLabelText)), gbc);
             gbc.gridy++;
 
-            add((mainJarLabel = new JLabel(mainJarText)), gbc);
+            add((mainJarLabel = new JLabel(mainJarLabelText)), gbc);
             gbc.gridy++;
 
-            add((mainClassLabel = new JLabel(mainClassText)), gbc);
+            add((mainClassLabel = new JLabel(mainClassLabelText)), gbc);
             gbc.gridy++;
 
-            add((argumentsLabel = new JLabel(argumentsText)), gbc);
+            add((argumentsLabel = new JLabel(argumentsLabelText)), gbc);
             gbc.gridy++;
 
             gbc.weighty = 1;
-            add((aboutLabel = new JLabel(aboutText)), gbc);
+            add((aboutLabel = new JLabel(aboutLabelText)), gbc);
 
             // Col 1
             gbc.gridx++;
@@ -261,7 +261,7 @@ public class GenericOptionsPanel extends JPanel {
         }
 
         // Getters and Setters ----------------------------------------------------------------------------------------|
-        public String getTypeText() {
+        public String getTypeLabelText() {
             return (String) typeComboBox.getSelectedItem();
         }
 
@@ -273,23 +273,23 @@ public class GenericOptionsPanel extends JPanel {
             return outputPathTextField.getText();
         }
 
-        public String getArgumentsText() {
+        public String getArgumentsLabelText() {
             return argumentsTextField.getText();
         }
 
-        public String getMainJarText() {
+        public String getMainJarLabelText() {
             return mainJarTextField.getText();
         }
 
-        public String getMainClassText() {
+        public String getMainClassLabelText() {
             return mainClassTextField.getText();
         }
 
-        public String getAboutText() {
+        public String getAboutLabelText() {
             return aboutTextField.getText();
         }
 
-        public void setTypeText(String text) {
+        public void setTypeLabelText(String text) {
             typeComboBox.setSelectedItem(text);
         }
 
@@ -301,19 +301,19 @@ public class GenericOptionsPanel extends JPanel {
             outputPathTextField.setText(text);
         }
 
-        public void setArgumentsText(String text) {
+        public void setArgumentsLabelText(String text) {
             argumentsTextField.setText(text);
         }
 
-        public void setMainJarText(String text) {
+        public void setMainJarLabelText(String text) {
             mainJarTextField.setText(text);
         }
 
-        public void setMainClassText(String text) {
+        public void setMainClassLabelText(String text) {
             mainClassTextField.setText(text);
         }
 
-        public void setAboutText(String text) {
+        public void setAboutLabelText(String text) {
             aboutTextField.setText(text);
         }
     }

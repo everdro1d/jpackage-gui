@@ -28,21 +28,29 @@ public class UnixOptionsPanel extends JPanel {
      */
     // Variables ------------------------------------------------------------------------------------------------------|
     private JLabel linuxPackageNameLabel;
-    private JTextField linuxPackageNameTextField;
+        private String linuxPackageNameLabelText = "Name of Linux package:";
+        private JTextField linuxPackageNameTextField;
     private JLabel linuxDebMaintainerLabel;
-    private JTextField linuxDebMaintainerTextField;
+        private String linuxDebMaintainerLabelText = "Maintainer of .deb bundle:";
+        private JTextField linuxDebMaintainerTextField;
     private JLabel linuxMenuGroupLabel;
-    private JTextField linuxMenuGroupTextField;
-    private JLabel linuxPackageDepsLabel;
-    private JTextField linuxPackageDepsTextField;
+        private String linuxMenuGroupLabelText = "Menu group this application is placed in:";
+        private JTextField linuxMenuGroupTextField;
+    private JLabel linuxPackageDependenciesLabel;
+        private String linuxPackageDependenciesLabelText = "Required packages or capabilities for the application:";
+        private JTextField linuxPackageDependenciesTextField;
     private JLabel linuxRpmLicenseTypeLabel;
-    private JTextField linuxRpmLicenseTypeTextField;
+        private String linuxRpmLicenseTypeLabelText = "License type:";
+        private JTextField linuxRpmLicenseTypeTextField;
     private JLabel linuxAppReleaseLabel;
-    private JTextField linuxAppReleaseTextField;
+        private String linuxAppReleaseLabelText = "Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:";
+        private JTextField linuxAppReleaseTextField;
     private JLabel linuxAppCategoryLabel;
-    private JTextField linuxAppCategoryTextField;
+        private String linuxAppCategoryLabelText = "Group value of the RPM /.spec file or Section value of DEB control file:";
+        private JTextField linuxAppCategoryTextField;
     private JLabel linuxShortcutLabel;
-    private JCheckBox linuxShortcutCheckBox;
+        private String linuxShortcutLabelText = "Whether to create a shortcut for the application:";
+        private JCheckBox linuxShortcutCheckBox;
 
     // End of Variables -----------------------------------------------------------------------------------------------|
 
@@ -58,36 +66,68 @@ public class UnixOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        linuxPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name for Linux package:</div></html>");
+        linuxPackageNameLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxPackageNameLabelText +
+                        "</div></html>"
+        );
         add(linuxPackageNameLabel, gbc);
         gbc.gridy++;
 
-        linuxDebMaintainerLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Maintainer for .deb bundle:</div></html>");
+        linuxDebMaintainerLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxDebMaintainerLabelText +
+                        "</div></html>"
+        );
         add(linuxDebMaintainerLabel, gbc);
         gbc.gridy++;
 
-        linuxMenuGroupLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Menu group this application is placed in:</div></html>");
+        linuxMenuGroupLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxMenuGroupLabelText +
+                        "</div></html>"
+        );
         add(linuxMenuGroupLabel, gbc);
         gbc.gridy++;
 
-        linuxPackageDepsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Required packages or capabilities for the application:</div></html>");
-        add(linuxPackageDepsLabel, gbc);
+        linuxPackageDependenciesLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxPackageDependenciesLabelText +
+                        "</div></html>"
+        );
+        add(linuxPackageDependenciesLabel, gbc);
         gbc.gridy++;
 
-        linuxRpmLicenseTypeLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Type of the license:</div></html>");
+        linuxRpmLicenseTypeLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxRpmLicenseTypeLabelText +
+                        "</div></html>"
+        );
         add(linuxRpmLicenseTypeLabel, gbc);
         gbc.gridy++;
 
-        linuxAppReleaseLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:</div></html>");
+        linuxAppReleaseLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxAppReleaseLabelText +
+                        "</div></html>"
+        );
         add(linuxAppReleaseLabel, gbc);
         gbc.gridy++;
 
-        linuxAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Group value of the RPM /.spec file or Section value of DEB control file:</div></html>");
+        linuxAppCategoryLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxAppCategoryLabelText +
+                        "</div></html>"
+        );
         add(linuxAppCategoryLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        linuxShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Creates a shortcut for the application:</div></html>");
+        linuxShortcutLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        linuxShortcutLabelText +
+                        "</div></html>"
+        );
         add(linuxShortcutLabel, gbc);
 
         // Col 1
@@ -106,7 +146,7 @@ public class UnixOptionsPanel extends JPanel {
         add((linuxMenuGroupTextField = new JTextField()), gbc);
         gbc.gridy++;
 
-        add((linuxPackageDepsTextField = new JTextField()), gbc);
+        add((linuxPackageDependenciesTextField = new JTextField()), gbc);
         gbc.gridy++;
 
         add((linuxRpmLicenseTypeTextField = new JTextField()), gbc);
@@ -130,31 +170,31 @@ public class UnixOptionsPanel extends JPanel {
 
     // Getters and Setters --------------------------------------------------------------------------------------------|
 
-    public String getLinuxPackageName() {
+    public String getLinuxPackageNameText() {
         return linuxPackageNameTextField.getText();
     }
 
-    public String getLinuxDebMaintainer() {
+    public String getLinuxDebMaintainerText() {
         return linuxDebMaintainerTextField.getText();
     }
 
-    public String getLinuxMenuGroup() {
+    public String getLinuxMenuGroupText() {
         return linuxMenuGroupTextField.getText();
     }
 
-    public String getLinuxPackageDeps() {
-        return linuxPackageDepsTextField.getText();
+    public String getLinuxPackageDependenciesText() {
+        return linuxPackageDependenciesTextField.getText();
     }
 
-    public String getLinuxRpmLicenseType() {
+    public String getLinuxRpmLicenseTypeText() {
         return linuxRpmLicenseTypeTextField.getText();
     }
 
-    public String getLinuxAppRelease() {
+    public String getLinuxAppReleaseText() {
         return linuxAppReleaseTextField.getText();
     }
 
-    public String getLinuxAppCategory() {
+    public String getLinuxAppCategoryText() {
         return linuxAppCategoryTextField.getText();
     }
 
@@ -162,31 +202,31 @@ public class UnixOptionsPanel extends JPanel {
         return linuxShortcutCheckBox.isSelected();
     }
 
-    public void setLinuxPackageName(String linuxPackageName) {
+    public void setLinuxPackageNameText(String linuxPackageName) {
         linuxPackageNameTextField.setText(linuxPackageName);
     }
 
-    public void setLinuxDebMaintainer(String linuxDebMaintainer) {
+    public void setLinuxDebMaintainerText(String linuxDebMaintainer) {
         linuxDebMaintainerTextField.setText(linuxDebMaintainer);
     }
 
-    public void setLinuxMenuGroup(String linuxMenuGroup) {
+    public void setLinuxMenuGroupText(String linuxMenuGroup) {
         linuxMenuGroupTextField.setText(linuxMenuGroup);
     }
 
-    public void setLinuxPackageDeps(String linuxPackageDeps) {
-        linuxPackageDepsTextField.setText(linuxPackageDeps);
+    public void setLinuxPackageDependenciesText(String linuxPackageDependencies) {
+        linuxPackageDependenciesTextField.setText(linuxPackageDependencies);
     }
 
-    public void setLinuxRpmLicenseType(String linuxRpmLicenseType) {
+    public void setLinuxRpmLicenseTypeText(String linuxRpmLicenseType) {
         linuxRpmLicenseTypeTextField.setText(linuxRpmLicenseType);
     }
 
-    public void setLinuxAppRelease(String linuxAppRelease) {
+    public void setLinuxAppReleaseText(String linuxAppRelease) {
         linuxAppReleaseTextField.setText(linuxAppRelease);
     }
 
-    public void setLinuxAppCategory(String linuxAppCategory) {
+    public void setLinuxAppCategoryText(String linuxAppCategory) {
         linuxAppCategoryTextField.setText(linuxAppCategory);
     }
 

@@ -31,24 +31,34 @@ public class WindowsOptionsPanel extends JPanel {
      */
     // Variables ------------------------------------------------------------------------------------------------------|
     private JLabel winConsoleLabel;
+        private String winConsoleLabelText = "Launch with console window:";
         private JCheckBox winConsoleCheckBox;
     private JLabel winDirChooserLabel;
+        private String winDirChooserLabelText = "Adds a dialog to enable the user to choose a directory in which the product is installed.";
         private JCheckBox winDirChooserCheckBox;
     private JLabel winHelpUrlLabel;
+        private String winHelpUrlLabelText = "URL where user can obtain further information or technical support:";
         private JTextField winHelpUrlTextField;
     private JLabel winMenuLabel;
+        private String winMenuLabelText = "Request to add a Start Menu shortcut for this application:";
         private JCheckBox winMenuCheckBox;
     private JLabel winMenuGroupLabel;
+        private String winMenuGroupLabelText = "Start Menu group this application is placed in:";
         private JTextField winMenuGroupTextField;
     private JLabel winPerUserInstallLabel;
+        private String winPerUserInstallLabelText = "Request to perform an install on a per-user basis:";
         private JCheckBox winPerUserInstallCheckBox;
     private JLabel winShortcutLabel;
+        private String winShortcutLabelText = "Request to create a desktop shortcut for this application:";
         private JCheckBox winShortcutCheckBox;
     private JLabel winShortcutPromptLabel;
+        private String winShortcutPromptLabelText = "Adds a dialog to enable the user to choose if shortcuts will be created by installer:";
         private JCheckBox winShortcutPromptCheckBox;
     private JLabel winUpdateUrlLabel;
+        private String winUpdateUrlLabelText = "URL of available application update information:";
         private JTextField winUpdateUrlTextField;
     private JLabel winUpgradeUuidLabel;
+        private String winUpgradeUuidLabelText = "UUID associated with upgrades for this package:";
         private JTextField winUpgradeUuidTextField;
 
     // End of Variables -----------------------------------------------------------------------------------------------|
@@ -65,44 +75,84 @@ public class WindowsOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        winConsoleLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Launch with console window: </div></html>");
+        winConsoleLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winConsoleLabelText +
+                        "</div></html>"
+        );
         add(winConsoleLabel, gbc);
         gbc.gridy++;
 
-        winDirChooserLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Allow the user to choose a directory in which the product is installed: </div></html>");
+        winDirChooserLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winDirChooserLabelText +
+                        "</div></html>"
+        );
         add(winDirChooserLabel, gbc);
         gbc.gridy++;
 
-        winHelpUrlLabel = new JLabel("<html><div style='width:"+widthPx+"px'>URL where user can obtain further information or support: </div></html>");
+        winHelpUrlLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winHelpUrlLabelText +
+                        "</div></html>"
+        );
         add(winHelpUrlLabel, gbc);
         gbc.gridy++;
 
-        winMenuLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to add a Start Menu shortcut for this application: </div></html>");
+        winMenuLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winMenuLabelText +
+                        "</div></html>"
+        );
         add(winMenuLabel, gbc);
         gbc.gridy++;
 
-        winMenuGroupLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Start Menu group this application is placed in: </div></html>");
+        winMenuGroupLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winMenuGroupLabelText +
+                        "</div></html>"
+        );
         add(winMenuGroupLabel, gbc);
         gbc.gridy++;
 
-        winPerUserInstallLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to perform an install on a per-user basis: </div></html>");
+        winPerUserInstallLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winPerUserInstallLabelText +
+                        "</div></html>"
+        );
         add(winPerUserInstallLabel, gbc);
         gbc.gridy++;
 
-        winShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to create a desktop shortcut for this application: </div></html>");
+        winShortcutLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winShortcutLabelText +
+                        "</div></html>"
+        );
         add(winShortcutLabel, gbc);
         gbc.gridy++;
 
-        winShortcutPromptLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Allow the user to choose if shortcuts will be created by installer: </div></html>");
+        winShortcutPromptLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winShortcutPromptLabelText +
+                        "</div></html>"
+        );
         add(winShortcutPromptLabel, gbc);
         gbc.gridy++;
 
-        winUpdateUrlLabel = new JLabel("<html><div style='width:"+widthPx+"px'>URL of available application update information: </div></html>");
+        winUpdateUrlLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winUpdateUrlLabelText +
+                        "</div></html>"
+        );
         add(winUpdateUrlLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        winUpgradeUuidLabel = new JLabel("<html><div style='width:"+widthPx+"px'>UUID associated with upgrades for this package: </div></html>");
+        winUpgradeUuidLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        winUpgradeUuidLabelText +
+                        "</div></html>"
+        );
         add(winUpgradeUuidLabel, gbc);
 
         // Col 1
@@ -152,123 +202,83 @@ public class WindowsOptionsPanel extends JPanel {
 
     // Getter and Setters ---------------------------------------------------------------------------------------------|
 
-    public JCheckBox getWinConsoleCheckBox() {
-        return winConsoleCheckBox;
-    }
-
-    public JCheckBox getWinDirChooserCheckBox() {
-        return winDirChooserCheckBox;
-    }
-
-    public JTextField getWinHelpUrlTextField() {
-        return winHelpUrlTextField;
-    }
-
-    public JCheckBox getWinMenuCheckBox() {
-        return winMenuCheckBox;
-    }
-
-    public JTextField getWinMenuGroupTextField() {
-        return winMenuGroupTextField;
-    }
-
-    public JCheckBox getWinPerUserInstallCheckBox() {
-        return winPerUserInstallCheckBox;
-    }
-
-    public JCheckBox getWinShortcutCheckBox() {
-        return winShortcutCheckBox;
-    }
-
-    public JCheckBox getWinShortcutPromptCheckBox() {
-        return winShortcutPromptCheckBox;
-    }
-
-    public JTextField getWinUpdateUrlTextField() {
-        return winUpdateUrlTextField;
-    }
-
-    public JTextField getWinUpgradeUuidTextField() {
-        return winUpgradeUuidTextField;
-    }
-
-    public boolean getWinConsoleCheckBoxSelected() {
+    public boolean isWinConsole() {
         return winConsoleCheckBox.isSelected();
     }
 
-    public boolean getWinDirChooserCheckBoxSelected() {
+    public boolean isWinDirChooser() {
         return winDirChooserCheckBox.isSelected();
     }
 
-    public String getWinHelpUrlTextFieldText() {
+    public String getWinHelpUrlText() {
         return winHelpUrlTextField.getText();
     }
 
-    public boolean getWinMenuCheckBoxSelected() {
+    public boolean isWinMenu() {
         return winMenuCheckBox.isSelected();
     }
 
-    public String getWinMenuGroupTextFieldText() {
+    public String getWinMenuGroupText() {
         return winMenuGroupTextField.getText();
     }
 
-    public boolean getWinPerUserInstallCheckBoxSelected() {
+    public boolean isWinPerUserInstall() {
         return winPerUserInstallCheckBox.isSelected();
     }
 
-    public boolean getWinShortcutCheckBoxSelected() {
+    public boolean isWinShortcut() {
         return winShortcutCheckBox.isSelected();
     }
 
-    public boolean getWinShortcutPromptCheckBoxSelected() {
+    public boolean isWinShortcutPrompt() {
         return winShortcutPromptCheckBox.isSelected();
     }
 
-    public String getWinUpdateUrlTextFieldText() {
+    public String getWinUpdateUrlText() {
         return winUpdateUrlTextField.getText();
     }
 
-    public String getWinUpgradeUuidTextFieldText() {
+    public String getWinUpgradeUuidText() {
         return winUpgradeUuidTextField.getText();
     }
 
-    public void setWinConsoleCheckBoxSelected(boolean selected) {
+    public void setWinConsole(boolean selected) {
         winConsoleCheckBox.setSelected(selected);
     }
 
-    public void setWinDirChooserCheckBoxSelected(boolean selected) {
+    public void setWinDirChooser(boolean selected) {
         winDirChooserCheckBox.setSelected(selected);
     }
 
-    public void setWinHelpUrlTextFieldText(String text) {
+    public void setWinHelpUrlText(String text) {
         winHelpUrlTextField.setText(text);
     }
 
-    public void setWinMenuCheckBoxSelected(boolean selected) {
+    public void setWinMenu(boolean selected) {
         winMenuCheckBox.setSelected(selected);
     }
 
-    public void setWinMenuGroupTextFieldText(String text) {
+    public void setWinMenuGroupText(String text) {
         winMenuGroupTextField.setText(text);
     }
 
-    public void setWinPerUserInstallCheckBoxSelected(boolean selected) {
+    public void setWinPerUserInstall(boolean selected) {
         winPerUserInstallCheckBox.setSelected(selected);
     }
 
-    public void setWinShortcutCheckBoxSelected(boolean selected) {
+    public void setWinShortcut(boolean selected) {
         winShortcutCheckBox.setSelected(selected);
     }
 
-    public void setWinShortcutPromptCheckBoxSelected(boolean selected) {
+    public void setWinShortcutPrompt(boolean selected) {
         winShortcutPromptCheckBox.setSelected(selected);
     }
 
-    public void setWinUpdateUrlTextFieldText(String text) {
+    public void setWinUpdateUrlText(String text) {
         winUpdateUrlTextField.setText(text);
     }
 
-    public void setWinUpgradeUuidTextFieldText(String text) {
+    public void setWinUpgradeUuidText(String text) {
         winUpgradeUuidTextField.setText(text);
     }
 

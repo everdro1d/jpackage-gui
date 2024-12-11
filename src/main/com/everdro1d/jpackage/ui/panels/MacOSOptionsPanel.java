@@ -36,22 +36,31 @@ public class MacOSOptionsPanel extends JPanel {
 
     // Variables ------------------------------------------------------------------------------------------------------|
     private JLabel macPackageIdentifierLabel;
+        private String macPackageIdentifierLabelText = "An identifier that uniquely identifies the application for macOS:";
         private JTextField macPackageIdentifierTextField;
     private JLabel macPackageNameLabel;
+        private String macPackageNameLabelText = "Name of the application as it appears in the Menu Bar:";
         private JTextField macPackageNameTextField;
     private JLabel macPackageSigningPrefixLabel;
+        private String macPackageSigningPrefixLabelText = "Component package identifier prefix:";
         private JTextField macPackageSigningPrefixTextField;
     private JLabel macSignLabel;
+        private String macSignLabelText = "Request that the package be signed:";
         private JCheckBox macSignCheckBox;
     private JLabel macSigningKeychainLabel;
+        private String macSigningKeychainLabelText = "Name of the keychain to search for the signing identity:";
         private JTextField macSigningKeychainTextField;
     private JLabel macSigningKeyUserNameLabel;
+        private String macSigningKeyUserNameLabelText = "Team or username portion in Apple signing identities:";
         private JTextField macSigningKeyUserNameTextField;
     private JLabel macAppStoreLabel;
+        private String macAppStoreLabelText = "Indicates that the jpackage output is intended for the Mac App Store:";
         private JCheckBox macAppStoreCheckBox;
     private JLabel macEntitlementsLabel;
+        private String macEntitlementsLabelText = "Path to file containing entitlements to use:";
         private JTextField macEntitlementsTextField;
     private JLabel macAppCategoryLabel;
+        private String macAppCategoryLabelText = "String used to construct LSApplicationCategoryType in application plist:";
         private JTextField macAppCategoryTextField;
 
     // End of Variables -----------------------------------------------------------------------------------------------|
@@ -68,40 +77,74 @@ public class MacOSOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>An identifier that uniquely identifies the application for macOS:</div></html>");
+        macPackageIdentifierLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macPackageIdentifierLabelText +
+                        "</div></html>"
+        );
         add(macPackageIdentifierLabel, gbc);
         gbc.gridy++;
 
-        macPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name of the application as it appears in the Menu Bar: </div></html>");
+        macPackageNameLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macPackageNameLabelText +
+                        "</div></html>"
+        );
         add(macPackageNameLabel, gbc);
         gbc.gridy++;
 
-        macPackageSigningPrefixLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Component package identifier prefix: </div></html>");
+        macPackageSigningPrefixLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macPackageSigningPrefixLabelText +
+                        "</div></html>"
+        );
         add(macPackageSigningPrefixLabel, gbc);
         gbc.gridy++;
 
-        macSignLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request that the package be signed: </div></html>");
+        macSignLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macSignLabelText +
+                        "</div></html>"
+        );
         add(macSignLabel, gbc);
         gbc.gridy++;
 
-        macSigningKeychainLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name of the keychain to search for the signing identity: </div></html>");
+        macSigningKeychainLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macSigningKeychainLabelText +
+                        "</div></html>"
+        );
         add(macSigningKeychainLabel, gbc);
         gbc.gridy++;
 
-        macSigningKeyUserNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Team or username portion in Apple signing identities: </div></html>");
+        macSigningKeyUserNameLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macSigningKeyUserNameLabelText +
+                        "</div></html>");
         add(macSigningKeyUserNameLabel, gbc);
         gbc.gridy++;
 
-        macAppStoreLabel = new JLabel("<html><div style='width:"+widthPx+"px'> Indicates that the jpackage output is intended for the Mac App Store: </div></html>");
+        macAppStoreLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macAppStoreLabelText +
+                        "</div></html>");
         add(macAppStoreLabel, gbc);
         gbc.gridy++;
 
-        macEntitlementsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Path to file containing entitlements to use: </div></html>");
+        macEntitlementsLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macEntitlementsLabelText +
+                        "</div></html>"
+        );
         add(macEntitlementsLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        macAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>String used to construct LSApplicationCategoryType in application plist: </div></html>");
+        macAppCategoryLabel = new JLabel(
+                "<html><div style='width:"+widthPx+"px'>" +
+                        macAppCategoryLabelText +
+                        "</div></html>"
+        );
         add(macAppCategoryLabel, gbc);
 
         // Col 1
@@ -158,7 +201,7 @@ public class MacOSOptionsPanel extends JPanel {
         return macPackageSigningPrefixTextField.getText();
     }
 
-    public boolean isMacSignChecked() {
+    public boolean isMacSign() {
         return macSignCheckBox.isSelected();
     }
 
@@ -170,7 +213,7 @@ public class MacOSOptionsPanel extends JPanel {
         return macSigningKeyUserNameTextField.getText();
     }
 
-    public boolean isMacAppStoreChecked() {
+    public boolean isMacAppStore() {
         return macAppStoreCheckBox.isSelected();
     }
 
@@ -194,7 +237,7 @@ public class MacOSOptionsPanel extends JPanel {
         macPackageSigningPrefixTextField.setText(text);
     }
 
-    public void setMacSignChecked(boolean checked) {
+    public void setMacSign(boolean checked) {
         macSignCheckBox.setSelected(checked);
     }
 
@@ -206,7 +249,7 @@ public class MacOSOptionsPanel extends JPanel {
         macSigningKeyUserNameTextField.setText(text);
     }
 
-    public void setMacAppStoreChecked(boolean checked) {
+    public void setMacAppStore(boolean checked) {
         macAppStoreCheckBox.setSelected(checked);
     }
 

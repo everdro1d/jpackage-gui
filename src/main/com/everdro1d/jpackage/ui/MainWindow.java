@@ -8,6 +8,7 @@ import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
+import main.com.everdro1d.jpackage.core.ButtonAction;
 import main.com.everdro1d.jpackage.ui.panels.*;
 
 import javax.swing.*;
@@ -247,18 +248,21 @@ public class MainWindow extends JFrame {
                     saveSettingsButton = new JButton("Save Settings");
                     saveSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(saveSettingsButton, gbc2);
+                    saveSettingsButton.addActionListener((e) -> ButtonAction.saveSettingsToFile());
 
                     gbc2.gridx++;
                     // load settings from file
                     loadSettingsButton = new JButton("Load Settings");
                     loadSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(loadSettingsButton, gbc2);
+                    loadSettingsButton.addActionListener((e) -> ButtonAction.loadSettingsFromFile());
 
                     gbc2.gridx++;
                     // run command
                     runCommandButton = new JButton("Create Installer");
                     runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(runCommandButton, gbc2);
+                    runCommandButton.addActionListener((e) -> ButtonAction.assembleAndRunJPackageCommand());
                 }
             }
 

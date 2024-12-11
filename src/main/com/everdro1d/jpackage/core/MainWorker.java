@@ -1,5 +1,9 @@
 /* dro1dDev SwingGUI Templates - MainWorker.java
- *
+ * TODO
+ *  - Detect and autofill jdk bin directory
+ *  - save jdk directory to preferences
+ *  - actually let buttons do something
+ *  - add command assembly line
  */
 
 package main.com.everdro1d.jpackage.core;

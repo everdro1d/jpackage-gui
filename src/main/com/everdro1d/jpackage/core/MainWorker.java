@@ -1,4 +1,5 @@
 /* dro1dDev SwingGUI Templates - MainWorker.java
+ * requires everdro1dCoreLib, flatlaf, and json libraries
  * TODO
  *  - Detect and autofill jdk bin directory
  *  - save jdk directory to preferences
@@ -49,6 +50,11 @@ public class MainWorker {
     // End of variables -----------------------------------------------------------------------------------------------|
 
     public static void main(String[] args) {
+        startUpActions(args);
+        startMainWindow();
+    }
+
+    private static void startUpActions(String[] args) {
         ApplicationCore.checkCLIArgs(args, commandManager);
         checkOSCompatibility();
 
@@ -61,8 +67,6 @@ public class MainWorker {
 
         localeManager.loadLocaleFromFile("locale_" + currentLocale);
         if (debug) showDebugConsole();
-
-        startMainWindow();
     }
 
     /**

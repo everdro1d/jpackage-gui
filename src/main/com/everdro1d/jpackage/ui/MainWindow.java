@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
     // End of Swing components --------------------------------------------|
 
     public static String titleText = "JPackage GUI";
-    public static String jdkBinLabelText = "Path to JDK /bin directory:";
+    public static String jdkBinLabelText = "Path to JDK \"/bin\" directory:";
     public static String genericOptionsPanelTitleText = "Generic Options";
     public static String windowsTabText = "Windows";
     public static String macOSTabText = "MacOS";

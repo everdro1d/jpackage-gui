@@ -46,8 +46,8 @@ public class UnixOptionsPanel extends JPanel {
     private JTextField linuxDebMaintainerTextField;
     private JLabel linuxMenuGroupLabel;
     private JTextField linuxMenuGroupTextField;
-    private JLabel linuxPackageDepsLabel;
-    private JTextField linuxPackageDepsTextField;
+    private JLabel linuxPackageDependenciesLabel;
+    private JTextField linuxPackageDependenciesTextField;
     private JLabel linuxRpmLicenseTypeLabel;
     private JTextField linuxRpmLicenseTypeTextField;
     private JLabel linuxAppReleaseLabel;
@@ -97,11 +97,11 @@ public class UnixOptionsPanel extends JPanel {
         add(linuxMenuGroupLabel, gbc);
         gbc.gridy++;
 
-        linuxPackageDepsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+        linuxPackageDependenciesLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
                 linuxPackageDepsLabelText +
                 "</div></html>"
         );
-        add(linuxPackageDepsLabel, gbc);
+        add(linuxPackageDependenciesLabel, gbc);
         gbc.gridy++;
 
         linuxRpmLicenseTypeLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
@@ -215,7 +215,7 @@ public class UnixOptionsPanel extends JPanel {
     }
 
     public String getLinuxPackageDeps() {
-        return linuxPackageDepsTextField.getText();
+        return linuxPackageDependenciesTextField.getText();
     }
 
     public String getLinuxRpmLicenseType() {
@@ -247,7 +247,7 @@ public class UnixOptionsPanel extends JPanel {
     }
 
     public void setLinuxPackageDeps(String linuxPackageDeps) {
-        linuxPackageDepsTextField.setText(linuxPackageDeps);
+        linuxPackageDependenciesTextField.setText(linuxPackageDeps);
     }
 
     public void setLinuxRpmLicenseType(String linuxRpmLicenseType) {

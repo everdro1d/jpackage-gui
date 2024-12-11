@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ButtonAction {
-
+    //TODO update the get method names here to match actual
     private static final String[][] genericSettingKeyMethodPairs = new String[][] {
             {"gen_name","getNameText"},
             {"gen_description","getDescriptionText"},
@@ -66,7 +66,7 @@ public class ButtonAction {
 
     private static Map<String,String> commandSettingsMap = new HashMap<>() {
         {
-            // TODO example values for testing
+            // TODO - example values for testing
             put("main_jdkBinPath", "getJdkBinPathText");
             put("gen_name", "getNameText");
             put("gen_description", "getDescriptionText");
@@ -122,7 +122,7 @@ public class ButtonAction {
     }
 
     private static void loadIntoCommandSettingsMap() {
-        // Load the settings from file into the commandSettingsMap
+        // TODO Load the settings from file into the commandSettingsMap
 
     }
 

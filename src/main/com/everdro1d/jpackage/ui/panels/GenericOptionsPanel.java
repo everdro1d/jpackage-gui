@@ -114,11 +114,11 @@ public class GenericOptionsPanel extends JPanel {
         }
 
         // getters and setters
-        public String getNameLabelText() {
+        public String getNameText() {
             return nameTextField.getText();
         }
 
-        public String getDescriptionLabelText() {
+        public String getDescriptionText() {
             return descriptionTextField.getText();
         }
 
@@ -126,27 +126,27 @@ public class GenericOptionsPanel extends JPanel {
             return iconPathTextField.getText();
         }
 
-        public String getVendorLabelText() {
+        public String getVendorText() {
             return vendorTextField.getText();
         }
 
-        public String getVersionLabelText() {
+        public String getVersionText() {
             return versionTextField.getText();
         }
 
-        public String getCopyRightText() {
+        public String getCopyrightText() {
             return copyrightTextField.getText();
         }
 
-        public String getLicenseLabelText() {
+        public String getLicenseText() {
             return licenseTextField.getText();
         }
 
-        public void setNameLabelText(String text) {
+        public void setNameText(String text) {
             nameTextField.setText(text);
         }
 
-        public void setDescriptionLabelText(String text) {
+        public void setDescriptionText(String text) {
             descriptionTextField.setText(text);
         }
 
@@ -154,11 +154,11 @@ public class GenericOptionsPanel extends JPanel {
             iconPathTextField.setText(text);
         }
 
-        public void setVendorLabelText(String text) {
+        public void setVendorText(String text) {
             vendorTextField.setText(text);
         }
 
-        public void setVersionLabelText(String text) {
+        public void setVersionText(String text) {
             versionTextField.setText(text);
         }
 
@@ -166,7 +166,7 @@ public class GenericOptionsPanel extends JPanel {
             copyrightTextField.setText(text);
         }
 
-        public void setLicenseLabelText(String text) {
+        public void setLicenseText(String text) {
             licenseTextField.setText(text);
         }
     }
@@ -261,7 +261,7 @@ public class GenericOptionsPanel extends JPanel {
         }
 
         // Getters and Setters ----------------------------------------------------------------------------------------|
-        public String getTypeLabelText() {
+        public String getFileTypeText() {
             return (String) typeComboBox.getSelectedItem();
         }
 
@@ -273,23 +273,23 @@ public class GenericOptionsPanel extends JPanel {
             return outputPathTextField.getText();
         }
 
-        public String getArgumentsLabelText() {
+        public String getArgumentsText() {
             return argumentsTextField.getText();
         }
 
-        public String getMainJarLabelText() {
+        public String getMainJarText() {
             return mainJarTextField.getText();
         }
 
-        public String getMainClassLabelText() {
+        public String getMainClassText() {
             return mainClassTextField.getText();
         }
 
-        public String getAboutLabelText() {
+        public String getAboutText() {
             return aboutTextField.getText();
         }
 
-        public void setTypeLabelText(String text) {
+        public void setTypeText(String text) {
             typeComboBox.setSelectedItem(text);
         }
 
@@ -301,19 +301,19 @@ public class GenericOptionsPanel extends JPanel {
             outputPathTextField.setText(text);
         }
 
-        public void setArgumentsLabelText(String text) {
+        public void setArgumentsText(String text) {
             argumentsTextField.setText(text);
         }
 
-        public void setMainJarLabelText(String text) {
+        public void setMainJarText(String text) {
             mainJarTextField.setText(text);
         }
 
-        public void setMainClassLabelText(String text) {
+        public void setMainClassText(String text) {
             mainClassTextField.setText(text);
         }
 
-        public void setAboutLabelText(String text) {
+        public void setAboutText(String text) {
             aboutTextField.setText(text);
         }
     }

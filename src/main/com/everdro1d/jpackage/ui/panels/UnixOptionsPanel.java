@@ -198,7 +198,7 @@ public class UnixOptionsPanel extends JPanel {
         return linuxAppCategoryTextField.getText();
     }
 
-    public boolean isLinuxShortcut() {
+    public boolean isLinuxDesktopShortcut() {
         return linuxShortcutCheckBox.isSelected();
     }
 
@@ -230,7 +230,7 @@ public class UnixOptionsPanel extends JPanel {
         linuxAppCategoryTextField.setText(linuxAppCategory);
     }
 
-    public void setLinuxShortcut(boolean linuxShortcut) {
+    public void setLinuxDesktopShortcut(boolean linuxShortcut) {
         linuxShortcutCheckBox.setSelected(linuxShortcut);
     }
 

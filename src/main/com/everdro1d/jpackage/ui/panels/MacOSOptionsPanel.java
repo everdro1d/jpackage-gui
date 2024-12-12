@@ -201,7 +201,7 @@ public class MacOSOptionsPanel extends JPanel {
         return macPackageSigningPrefixTextField.getText();
     }
 
-    public boolean isMacSign() {
+    public boolean isMacSignPackage() {
         return macSignCheckBox.isSelected();
     }
 
@@ -237,7 +237,7 @@ public class MacOSOptionsPanel extends JPanel {
         macPackageSigningPrefixTextField.setText(text);
     }
 
-    public void setMacSign(boolean checked) {
+    public void setMacSignPackage(boolean checked) {
         macSignCheckBox.setSelected(checked);
     }
 

@@ -164,7 +164,7 @@ public class MainWindow extends JFrame {
                 c.insets = new Insets(4, 4, 4, 4);
                 centerPanel.add(jdkBinPanel);
                 {
-                    jdkBinLabel = new JLabel("Path to JDK /bin directory:");
+                    jdkBinLabel = new JLabel("Path to the JDK's \"/bin\" directory:");
                     jdkBinLabel.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     jdkBinPanel.add(jdkBinLabel, c);
 
@@ -282,5 +282,13 @@ public class MainWindow extends JFrame {
         tabbedPane.setEnabledAt(1, os.equals("macOS"));
         tabbedPane.setEnabledAt(2, os.equals("Unix"));
         tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
+    }
+
+    public String getJdkBinPathText() {
+        return jdkBinTextField.getText();
+    }
+
+    public void setJdkBinPathText(String text) {
+        jdkBinTextField.setText(text);
     }
 }

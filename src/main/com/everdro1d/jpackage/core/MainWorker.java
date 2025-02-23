@@ -18,6 +18,7 @@ import com.everdro1d.libs.swing.components.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
+import javax.management.ObjectInstance;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;

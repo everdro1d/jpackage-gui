@@ -18,6 +18,7 @@ import com.everdro1d.libs.swing.components.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
+import javax.management.ObjectInstance;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
@@ -46,6 +47,8 @@ public class MainWorker {
 
     public static int[] windowPosition = {0, 0, 0};
     // Default window position
+
+    private static MainWindow mainWindow;
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -145,7 +148,7 @@ public class MainWorker {
     private static void startMainWindow() {
         EventQueue.invokeLater(() -> {
             try {
-                new MainWindow();
+                mainWindow = new MainWindow();
                 SwingGUI.setFramePosition(
                         MainWindow.topFrame,
                         windowPosition[0], windowPosition[1], windowPosition[2]
@@ -168,5 +171,9 @@ public class MainWorker {
         } else {
             if (debug) System.out.println("Debug console already open.");
         }
+    }
+
+    public static MainWindow getInstanceOfMainWindow() {
+        return mainWindow;
     }
 }

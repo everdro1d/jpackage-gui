@@ -18,8 +18,7 @@ import java.awt.event.ComponentEvent;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
-import static main.com.everdro1d.jpackage.core.MainWorker.windowPosition;
+import static main.com.everdro1d.jpackage.core.MainWorker.*;
 
 public class MainWindow extends JFrame {
     // Variables ------------------------------------------------------------------------------------------------------|
@@ -34,8 +33,8 @@ public class MainWindow extends JFrame {
             private JPanel jdkBinPanel;
                 private JLabel jdkBinLabel;
                 private TextFieldFileChooser jdkBinTextField;
-            private JPanel genericOptionsPanel;
-            public static JTabbedPane osTabbedPane;
+                private JPanel genericOptionsPanel;
+            private JTabbedPane osTabbedPane;
                 private JPanel windowsPanel;
                 private JPanel macOSPanel;
                 private JPanel unixPanel;

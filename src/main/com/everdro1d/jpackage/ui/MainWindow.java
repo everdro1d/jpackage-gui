@@ -290,4 +290,24 @@ public class MainWindow extends JFrame {
     public void setJdkBinPathText(String text) {
         jdkBinTextField.setText(text);
     }
+
+    public Object getInstanceOf(Class<?> clazz, MainWindow instance) {
+        switch(clazz.getName()) {
+            case "main.com.everdro1d.jpackage.ui.panels.GenericOptionsPanel" -> {
+                return instance.genericOptionsPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.WindowsOptionsPanel" -> {
+                return instance.windowsPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.MacOSOptionsPanel" -> {
+                return instance.macOSPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.UnixOptionsPanel" -> {
+                return instance.unixPanel;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 }

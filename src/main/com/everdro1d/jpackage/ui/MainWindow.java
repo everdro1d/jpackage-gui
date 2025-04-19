@@ -64,8 +64,8 @@ public class MainWindow extends JFrame {
     private final int WINDOW_WIDTH = 800;
     private final int EDGE_PADDING = 15;
     private final int WINDOW_HEIGHT = 750;
-    private final int GENERIC_OPTION_PANEL_HEIGHT = 500; // expanded height
-    private final int OS_OPTION_PANEL_HEIGHT = 500; // expanded height
+    private final int GENERIC_OPTION_PANEL_HEIGHT = 475; // expanded height
+    private final int OS_OPTION_PANEL_HEIGHT = 475; // expanded height
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -198,7 +198,9 @@ public class MainWindow extends JFrame {
                 boolean exclusive = true;
 
                 genericOptionsPanel = new GenericOptionsPanel();
-                genericOptionsPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), GENERIC_OPTION_PANEL_HEIGHT));
+                genericOptionsPanel.setPreferredSize(new Dimension(
+                        WINDOW_WIDTH - (EDGE_PADDING * 4), GENERIC_OPTION_PANEL_HEIGHT)
+                );
                 genericOptionsPanel.setFont(new Font(fontName, Font.PLAIN, fontSize));
                 centerPanel.add(genericOptionsPanel);
 
@@ -212,7 +214,9 @@ public class MainWindow extends JFrame {
                 osTabbedPane = new JTabbedPane();
                 osTabbedPane.setTabPlacement(JTabbedPane.TOP);
                 osTabbedPane.setFont(new Font(fontName, Font.PLAIN, fontSize));
-                osTabbedPane.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), OS_OPTION_PANEL_HEIGHT));
+                osTabbedPane.setPreferredSize(new Dimension(
+                        WINDOW_WIDTH - (EDGE_PADDING * 4), OS_OPTION_PANEL_HEIGHT)
+                );
                 osTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
                 centerPanel.add(osTabbedPane);
                 {

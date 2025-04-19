@@ -4,6 +4,10 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
+import java.util.TreeMap;
+
+import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
 
 public class UnixOptionsPanel extends JPanel {
     // Unix Options Panel ---------------------------------------------------------------------------------------------|
@@ -27,6 +31,15 @@ public class UnixOptionsPanel extends JPanel {
      *   Creates a shortcut for the application.
      */
     // Variables ------------------------------------------------------------------------------------------------------|
+    public static String linuxPackageNameLabelText = "Name for Linux package:";
+    public static String linuxDebMaintainerLabelText = "Maintainer for .deb bundle:";
+    public static String linuxMenuGroupLabelText = "Menu group this application is placed in:";
+    public static String linuxPackageDepsLabelText = "Required packages or capabilities for the application:";
+    public static String linuxRpmLicenseTypeLabelText = "Type of the license:";
+    public static String linuxAppReleaseLabelText = "Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:";
+    public static String linuxAppCategoryLabelText = "Group value of the RPM /.spec file or Section value of DEB control file:";
+    public static String linuxShortcutLabelText = "Creates a shortcut for the application:";
+
     private JLabel linuxPackageNameLabel;
     private JTextField linuxPackageNameTextField;
     private JLabel linuxDebMaintainerLabel;
@@ -48,6 +61,11 @@ public class UnixOptionsPanel extends JPanel {
 
     // Constructors ---------------------------------------------------------------------------------------------------|
     public UnixOptionsPanel() {
+        if (!localeManager.getComponentsInClassMap("MainWindow").contains("UnixOptionsPanel")) {
+            addClassToLocale();
+        }
+        useLocale();
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -58,36 +76,60 @@ public class UnixOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        linuxPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name for Linux package:</div></html>");
+        linuxPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxPackageNameLabelText +
+                "</div></html>"
+        );
         add(linuxPackageNameLabel, gbc);
         gbc.gridy++;
 
-        linuxDebMaintainerLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Maintainer for .deb bundle:</div></html>");
+        linuxDebMaintainerLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxDebMaintainerLabelText +
+                "</div></html>"
+        );
         add(linuxDebMaintainerLabel, gbc);
         gbc.gridy++;
 
-        linuxMenuGroupLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Menu group this application is placed in:</div></html>");
+        linuxMenuGroupLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxMenuGroupLabelText +
+                "</div></html>"
+        );
         add(linuxMenuGroupLabel, gbc);
         gbc.gridy++;
 
-        linuxPackageDepsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Required packages or capabilities for the application:</div></html>");
+        linuxPackageDepsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxPackageDepsLabelText +
+                "</div></html>"
+        );
         add(linuxPackageDepsLabel, gbc);
         gbc.gridy++;
 
-        linuxRpmLicenseTypeLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Type of the license:</div></html>");
+        linuxRpmLicenseTypeLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxRpmLicenseTypeLabelText +
+                "</div></html>"
+        );
         add(linuxRpmLicenseTypeLabel, gbc);
         gbc.gridy++;
 
-        linuxAppReleaseLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:</div></html>");
+        linuxAppReleaseLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxAppReleaseLabelText +
+                "</div></html>"
+        );
         add(linuxAppReleaseLabel, gbc);
         gbc.gridy++;
 
-        linuxAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Group value of the RPM /.spec file or Section value of DEB control file:</div></html>");
+        linuxAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxAppCategoryLabelText +
+                "</div></html>"
+        );
         add(linuxAppCategoryLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        linuxShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Creates a shortcut for the application:</div></html>");
+        linuxShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxShortcutLabelText +
+                "</div></html>"
+        );
         add(linuxShortcutLabel, gbc);
 
         // Col 1
@@ -126,6 +168,36 @@ public class UnixOptionsPanel extends JPanel {
                 component.setFont(new Font(MainWindow.fontName, Font.PLAIN, MainWindow.fontSize));
             }
         }
+    }
+
+    private void addClassToLocale() {
+        Map<String, String> map = new TreeMap<>();
+        // left generic panel
+        map.put("linuxPackageNameLabelText", linuxPackageNameLabelText);
+        map.put("linuxDebMaintainerLabelText", linuxDebMaintainerLabelText);
+        map.put("linuxMenuGroupLabelText", linuxMenuGroupLabelText);
+        map.put("linuxPackageDepsLabelText", linuxPackageDepsLabelText);
+        map.put("linuxRpmLicenseTypeLabelText", linuxRpmLicenseTypeLabelText);
+        map.put("linuxAppReleaseLabelText", linuxAppReleaseLabelText);
+        map.put("linuxAppCategoryLabelText", linuxAppCategoryLabelText);
+        map.put("linuxShortcutLabelText", linuxShortcutLabelText);
+
+        localeManager.addComponentSpecificMap("MainWindow","UnixOptionsPanel", map);
+    }
+
+    private void useLocale() {
+        Map<String, String> varMap =
+                localeManager.getComponentSpecificMap("MainWindow","UnixOptionsPanel");
+
+        linuxPackageNameLabelText = varMap.getOrDefault("linuxPackageNameLabelText", linuxPackageNameLabelText);
+        linuxDebMaintainerLabelText = varMap.getOrDefault("linuxDebMaintainerLabelText", linuxDebMaintainerLabelText);
+        linuxMenuGroupLabelText = varMap.getOrDefault("linuxMenuGroupLabelText", linuxMenuGroupLabelText);
+        linuxPackageDepsLabelText = varMap.getOrDefault("linuxPackageDepsLabelText", linuxPackageDepsLabelText);
+        linuxRpmLicenseTypeLabelText = varMap.getOrDefault("linuxRpmLicenseTypeLabelText", linuxRpmLicenseTypeLabelText);
+        linuxAppReleaseLabelText = varMap.getOrDefault("linuxAppReleaseLabelText", linuxAppReleaseLabelText);
+        linuxAppCategoryLabelText = varMap.getOrDefault("linuxAppCategoryLabelText", linuxAppCategoryLabelText);
+        linuxShortcutLabelText = varMap.getOrDefault("linuxShortcutLabelText", linuxShortcutLabelText);
+
     }
 
     // Getters and Setters --------------------------------------------------------------------------------------------|

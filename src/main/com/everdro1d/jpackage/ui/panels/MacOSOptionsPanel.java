@@ -4,6 +4,10 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
+import java.util.TreeMap;
+
+import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
 
 public class MacOSOptionsPanel extends JPanel {
     // macOS Options Panel --------------------------------------------------------------------------------------------|
@@ -35,6 +39,25 @@ public class MacOSOptionsPanel extends JPanel {
      */
 
     // Variables ------------------------------------------------------------------------------------------------------|
+    public static String macPackageIdentifierLabelText =
+            "An identifier that uniquely identifies the application for macOS:";
+    public static String macPackageNameLabelText =
+            "Name of the application as it appears in the Menu Bar:";
+    public static String macPackageSigningPrefixLabelText =
+            "Component package identifier prefix:";
+    public static String macSignLabelText =
+            "Request that the package be signed:";
+    public static String macSigningKeychainLabelText =
+            "Name of the keychain to search for the signing identity:";
+    public static String macSigningKeyUserNameLabelText =
+            "Team or username portion in Apple signing identities:";
+    public static String macAppStoreLabelText =
+            "Indicates that the jpackage output is intended for the Mac App Store:";
+    public static String macEntitlementsLabelText =
+            "Path to file containing entitlements to use:";
+    public static String macAppCategoryLabelText =
+            "String used to construct LSApplicationCategoryType in application plist:";
+
     private JLabel macPackageIdentifierLabel;
         private JTextField macPackageIdentifierTextField;
     private JLabel macPackageNameLabel;
@@ -58,6 +81,11 @@ public class MacOSOptionsPanel extends JPanel {
 
     // Constructors ---------------------------------------------------------------------------------------------------|
     public MacOSOptionsPanel() {
+        if (!localeManager.getComponentsInClassMap("MainWindow").contains("MacOSOptionsPanel")) {
+            addClassToLocale();
+        }
+        useLocale();
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -68,40 +96,67 @@ public class MacOSOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>An identifier that uniquely identifies the application for macOS:</div></html>");
+        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macPackageIdentifierLabelText +
+                "</div></html>"
+        );
         add(macPackageIdentifierLabel, gbc);
         gbc.gridy++;
 
-        macPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name of the application as it appears in the Menu Bar: </div></html>");
+        macPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macPackageNameLabelText +
+                "</div></html>"
+        );
         add(macPackageNameLabel, gbc);
         gbc.gridy++;
 
-        macPackageSigningPrefixLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Component package identifier prefix: </div></html>");
+        macPackageSigningPrefixLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macPackageSigningPrefixLabelText +
+                "</div></html>"
+        );
         add(macPackageSigningPrefixLabel, gbc);
         gbc.gridy++;
 
-        macSignLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request that the package be signed: </div></html>");
+        macSignLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macSignLabelText +
+                "</div></html>"
+        );
         add(macSignLabel, gbc);
         gbc.gridy++;
 
-        macSigningKeychainLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Name of the keychain to search for the signing identity: </div></html>");
+        macSigningKeychainLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macSigningKeychainLabelText +
+                "</div></html>"
+        );
         add(macSigningKeychainLabel, gbc);
         gbc.gridy++;
 
-        macSigningKeyUserNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Team or username portion in Apple signing identities: </div></html>");
+        macSigningKeyUserNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macSigningKeyUserNameLabelText +
+                "</div></html>"
+        );
         add(macSigningKeyUserNameLabel, gbc);
         gbc.gridy++;
 
-        macAppStoreLabel = new JLabel("<html><div style='width:"+widthPx+"px'> Indicates that the jpackage output is intended for the Mac App Store: </div></html>");
+        macAppStoreLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macAppStoreLabelText +
+                "</div></html>"
+        );
         add(macAppStoreLabel, gbc);
         gbc.gridy++;
 
-        macEntitlementsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Path to file containing entitlements to use: </div></html>");
+        macEntitlementsLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macEntitlementsLabelText +
+                "</div></html>"
+        );
         add(macEntitlementsLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        macAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>String used to construct LSApplicationCategoryType in application plist: </div></html>");
+        macAppCategoryLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macAppCategoryLabelText +
+                "</div></html>"
+        );
         add(macAppCategoryLabel, gbc);
 
         // Col 1
@@ -143,6 +198,38 @@ public class MacOSOptionsPanel extends JPanel {
                 component.setFont(new Font(MainWindow.fontName, Font.PLAIN, MainWindow.fontSize));
             }
         }
+    }
+
+    private void addClassToLocale() {
+        Map<String, String> map = new TreeMap<>();
+        // left generic panel
+        map.put("macPackageIdentifierLabelText", macPackageIdentifierLabelText);
+        map.put("macPackageNameLabelText", macPackageNameLabelText);
+        map.put("macPackageSigningPrefixLabelText", macPackageSigningPrefixLabelText);
+        map.put("macSignLabelText", macSignLabelText);
+        map.put("macSigningKeychainLabelText", macSigningKeychainLabelText);
+        map.put("macSigningKeyUserNameLabelText", macSigningKeyUserNameLabelText);
+        map.put("macAppStoreLabelText", macAppStoreLabelText);
+        map.put("macEntitlementsLabelText", macEntitlementsLabelText);
+        map.put("macAppCategoryLabelText", macAppCategoryLabelText);
+
+        localeManager.addComponentSpecificMap("MainWindow","MacOSOptionsPanel", map);
+    }
+
+    private void useLocale() {
+        Map<String, String> varMap =
+                localeManager.getComponentSpecificMap("MainWindow","MacOSOptionsPanel");
+
+        macPackageIdentifierLabelText = varMap.getOrDefault("macPackageIdentifierLabelText", macPackageIdentifierLabelText);
+        macPackageNameLabelText = varMap.getOrDefault("macPackageNameLabelText", macPackageNameLabelText);
+        macPackageSigningPrefixLabelText = varMap.getOrDefault("macPackageSigningPrefixLabelText", macPackageSigningPrefixLabelText);
+        macSignLabelText = varMap.getOrDefault("macSignLabelText", macSignLabelText);
+        macSigningKeychainLabelText = varMap.getOrDefault("macSigningKeychainLabelText", macSigningKeychainLabelText);
+        macSigningKeyUserNameLabelText = varMap.getOrDefault("macSigningKeyUserNameLabelText", macSigningKeyUserNameLabelText);
+        macAppStoreLabelText = varMap.getOrDefault("macAppStoreLabelText", macAppStoreLabelText);
+        macEntitlementsLabelText = varMap.getOrDefault("macEntitlementsLabelText", macEntitlementsLabelText);
+        macAppCategoryLabelText = varMap.getOrDefault("macAppCategoryLabelText", macAppCategoryLabelText);
+
     }
 
     // Getters and Setters --------------------------------------------------------------------------------------------|

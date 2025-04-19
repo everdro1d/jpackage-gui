@@ -4,6 +4,10 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
+import java.util.TreeMap;
+
+import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
 
 public class WindowsOptionsPanel extends JPanel {
     // Windows Options Panel ------------------------------------------------------------------------------------------|
@@ -30,6 +34,17 @@ public class WindowsOptionsPanel extends JPanel {
      *   UUID associated with upgrades for this package
      */
     // Variables ------------------------------------------------------------------------------------------------------|
+    public static String winConsoleLabelText = "Launch with console window:";
+    public static String winDirChooserLabelText = "Allow the user to choose a directory in which the product is installed:";
+    public static String winHelpUrlLabelText = "URL where user can obtain further information or support:";
+    public static String winMenuLabelText = "Request to add a Start Menu shortcut for this application:";
+    public static String winMenuGroupLabelText = "Start Menu group this application is placed in:";
+    public static String winPerUserInstallLabelText = "Request to perform an install on a per-user basis:";
+    public static String winShortcutLabelText = "Request to create a desktop shortcut for this application:";
+    public static String winShortcutPromptLabelText = "Allow the user to choose if shortcuts will be created by installer:";
+    public static String winUpdateUrlLabelText = "URL of available application update information:";
+    public static String winUpgradeUuidLabelText = "UUID associated with upgrades for this package:";
+
     private JLabel winConsoleLabel;
         private JCheckBox winConsoleCheckBox;
     private JLabel winDirChooserLabel;
@@ -55,6 +70,11 @@ public class WindowsOptionsPanel extends JPanel {
 
     // Constructors ---------------------------------------------------------------------------------------------------|
     public WindowsOptionsPanel() {
+        if (!localeManager.getComponentsInClassMap("MainWindow").contains("WindowsOptionsPanel")) {
+            addClassToLocale();
+        }
+        useLocale();
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -65,44 +85,74 @@ public class WindowsOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        winConsoleLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Launch with console window: </div></html>");
+        winConsoleLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winConsoleLabelText +
+                "</div></html>"
+        );
         add(winConsoleLabel, gbc);
         gbc.gridy++;
 
-        winDirChooserLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Allow the user to choose a directory in which the product is installed: </div></html>");
+        winDirChooserLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winDirChooserLabelText +
+                "</div></html>"
+        );
         add(winDirChooserLabel, gbc);
         gbc.gridy++;
 
-        winHelpUrlLabel = new JLabel("<html><div style='width:"+widthPx+"px'>URL where user can obtain further information or support: </div></html>");
+        winHelpUrlLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winHelpUrlLabelText +
+                "</div></html>"
+        );
         add(winHelpUrlLabel, gbc);
         gbc.gridy++;
 
-        winMenuLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to add a Start Menu shortcut for this application: </div></html>");
+        winMenuLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winMenuLabelText +
+                "</div></html>"
+        );
         add(winMenuLabel, gbc);
         gbc.gridy++;
 
-        winMenuGroupLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Start Menu group this application is placed in: </div></html>");
+        winMenuGroupLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winMenuGroupLabelText +
+                "</div></html>"
+        );
         add(winMenuGroupLabel, gbc);
         gbc.gridy++;
 
-        winPerUserInstallLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to perform an install on a per-user basis: </div></html>");
+        winPerUserInstallLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winPerUserInstallLabelText +
+                "</div></html>"
+        );
         add(winPerUserInstallLabel, gbc);
         gbc.gridy++;
 
-        winShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Request to create a desktop shortcut for this application: </div></html>");
+        winShortcutLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winShortcutLabelText +
+                "</div></html>"
+        );
         add(winShortcutLabel, gbc);
         gbc.gridy++;
 
-        winShortcutPromptLabel = new JLabel("<html><div style='width:"+widthPx+"px'>Allow the user to choose if shortcuts will be created by installer: </div></html>");
+        winShortcutPromptLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winShortcutPromptLabelText +
+                "</div></html>"
+        );
         add(winShortcutPromptLabel, gbc);
         gbc.gridy++;
 
-        winUpdateUrlLabel = new JLabel("<html><div style='width:"+widthPx+"px'>URL of available application update information: </div></html>");
+        winUpdateUrlLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winUpdateUrlLabelText +
+                "</div></html>"
+        );
         add(winUpdateUrlLabel, gbc);
         gbc.gridy++;
 
         gbc.weighty = 1;
-        winUpgradeUuidLabel = new JLabel("<html><div style='width:"+widthPx+"px'>UUID associated with upgrades for this package: </div></html>");
+        winUpgradeUuidLabel = new JLabel("<html><div style='width:" + widthPx + "px'>" +
+                winUpgradeUuidLabelText +
+                "</div></html>"
+        );
         add(winUpgradeUuidLabel, gbc);
 
         // Col 1
@@ -148,6 +198,39 @@ public class WindowsOptionsPanel extends JPanel {
             }
         }
 
+    }
+
+    private void addClassToLocale() {
+        Map<String, String> map = new TreeMap<>();
+        // left generic panel
+        map.put("winConsoleLabelText", winConsoleLabelText);
+        map.put("winDirChooserLabelText", winDirChooserLabelText);
+        map.put("winHelpUrlLabelText", winHelpUrlLabelText);
+        map.put("winMenuLabelText", winMenuLabelText);
+        map.put("winMenuGroupLabelText", winMenuGroupLabelText);
+        map.put("winPerUserInstallLabelText", winPerUserInstallLabelText);
+        map.put("winShortcutLabelText", winShortcutLabelText);
+        map.put("winShortcutPromptLabelText", winShortcutPromptLabelText);
+        map.put("winUpdateUrlLabelText", winUpdateUrlLabelText);
+        map.put("winUpgradeUuidLabelText", winUpgradeUuidLabelText);
+
+        localeManager.addComponentSpecificMap("MainWindow","WindowsOptionsPanel", map);
+    }
+
+    private void useLocale() {
+        Map<String, String> varMap =
+                localeManager.getComponentSpecificMap("MainWindow","WindowsOptionsPanel");
+
+        winConsoleLabelText = varMap.getOrDefault("winConsoleLabelText", winConsoleLabelText);
+        winDirChooserLabelText = varMap.getOrDefault("winDirChooserLabelText", winDirChooserLabelText);
+        winHelpUrlLabelText = varMap.getOrDefault("winHelpUrlLabelText", winHelpUrlLabelText);
+        winMenuLabelText = varMap.getOrDefault("winMenuLabelText", winMenuLabelText);
+        winMenuGroupLabelText = varMap.getOrDefault("winMenuGroupLabelText", winMenuGroupLabelText);
+        winPerUserInstallLabelText = varMap.getOrDefault("winPerUserInstallLabelText", winPerUserInstallLabelText);
+        winShortcutLabelText = varMap.getOrDefault("winShortcutLabelText", winShortcutLabelText);
+        winShortcutPromptLabelText = varMap.getOrDefault("winShortcutPromptLabelText", winShortcutPromptLabelText);
+        winUpdateUrlLabelText = varMap.getOrDefault("winUpdateUrlLabelText", winUpdateUrlLabelText);
+        winUpgradeUuidLabelText = varMap.getOrDefault("winUpgradeUuidLabelText", winUpgradeUuidLabelText);
     }
 
     // Getter and Setters ---------------------------------------------------------------------------------------------|

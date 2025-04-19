@@ -49,7 +49,17 @@ public class MainWindow extends JFrame {
 
     // End of Swing components --------------------------------------------|
 
-    private String titleText = "JPackage GUI";
+    public static String titleText = "JPackage GUI";
+    public static String jdkBinLabelText = "Path to JDK /bin directory:";
+    public static String genericOptionsPanelTitleText = "Generic Options";
+    public static String windowsTabText = "Windows";
+    public static String macOSTabText = "MacOS";
+    public static String unixTabText = "Unix";
+    public static String osTabbedPaneTitleText = "OS Specific Options";
+    public static String saveSettingsButtonText = "Save Settings";
+    public static String loadSettingsButtonText = "Load Settings";
+    public static String runCommandButtonText = "Create Installer";
+
     public static String fontName = "Tahoma";
     // Font name for the application
     public static int fontSize = 16;
@@ -65,10 +75,10 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         // if the locale does not contain the class, add it and it's components
-//        if (!localeManager.getClassesInLocaleMap().contains("MainWindow")) {
-//            addClassToLocale();
-//        } TODO: re-enable when done with gui, and localize panels.
-//        useLocale();
+        if (!localeManager.getClassesInLocaleMap().contains("MainWindow")) {
+            addClassToLocale();
+        }
+        useLocale();
 
         initializeWindowProperties();
         initializeGUIComponents();
@@ -83,6 +93,15 @@ public class MainWindow extends JFrame {
         map.put("Main", new TreeMap<>());
         Map<String, String> mainMap = map.get("Main");
         mainMap.put("titleText", titleText);
+        mainMap.put("jdkBinLabelText", jdkBinLabelText);
+        mainMap.put("genericOptionsPanelTitleText", genericOptionsPanelTitleText);
+        mainMap.put("windowsTabText", windowsTabText);
+        mainMap.put("macOSTabText", macOSTabText);
+        mainMap.put("unixTabText", unixTabText);
+        mainMap.put("osTabbedPaneTitleText", osTabbedPaneTitleText);
+        mainMap.put("saveSettingsButtonText", saveSettingsButtonText);
+        mainMap.put("loadSettingsButtonText", loadSettingsButtonText);
+        mainMap.put("runCommandButtonText", runCommandButtonText);
 
         localeManager.addClassSpecificMap("MainWindow", map);
     }
@@ -90,6 +109,18 @@ public class MainWindow extends JFrame {
     private void useLocale() {
         Map<String, String> varMap = localeManager.getAllVariablesWithinClassSpecificMap("MainWindow");
         titleText = varMap.getOrDefault("titleText", titleText);
+        jdkBinLabelText = varMap.getOrDefault("jdkBinLabelText", jdkBinLabelText);
+        genericOptionsPanelTitleText = varMap.getOrDefault(
+                "genericOptionsPanelTitleText", genericOptionsPanelTitleText
+        );
+        windowsTabText = varMap.getOrDefault("windowsTabText", windowsTabText);
+        macOSTabText = varMap.getOrDefault("macOSTabText", macOSTabText);
+        unixTabText = varMap.getOrDefault("unixTabText", unixTabText);
+        osTabbedPaneTitleText = varMap.getOrDefault("osTabbedPaneTitleText", osTabbedPaneTitleText);
+        saveSettingsButtonText = varMap.getOrDefault("saveSettingsButtonText", saveSettingsButtonText);
+        loadSettingsButtonText = varMap.getOrDefault("loadSettingsButtonText", loadSettingsButtonText);
+        runCommandButtonText = varMap.getOrDefault("runCommandButtonText", runCommandButtonText);
+
     }
 
     /**
@@ -163,7 +194,7 @@ public class MainWindow extends JFrame {
                 c.insets = new Insets(4, 4, 4, 4);
                 centerPanel.add(jdkBinPanel);
                 {
-                    jdkBinLabel = new JLabel("Path to JDK /bin directory:");
+                    jdkBinLabel = new JLabel(jdkBinLabelText);
                     jdkBinLabel.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     jdkBinPanel.add(jdkBinLabel, c);
 
@@ -183,8 +214,8 @@ public class MainWindow extends JFrame {
                 centerPanel.add(genericOptionsPanel);
 
                 CollapsableTitledBorder b = new CollapsableTitledBorder(
-                        genericOptionsPanel, "Generic Options", true,
                         exclusive, GENERIC_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
+                        genericOptionsPanel, genericOptionsPanelTitleText, true,
                 b.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 genericOptionsPanel.setBorder(b);
 
@@ -197,19 +228,19 @@ public class MainWindow extends JFrame {
                 centerPanel.add(osTabbedPane);
                 {
                     windowsPanel = new WindowsOptionsPanel();
-                    osTabbedPane.addTab("Windows", windowsPanel);
+                    osTabbedPane.addTab(windowsTabText, windowsPanel);
 
                     macOSPanel = new MacOSOptionsPanel();
-                    osTabbedPane.addTab("macOS", macOSPanel);
+                    osTabbedPane.addTab(macOSTabText, macOSPanel);
 
                     unixPanel = new UnixOptionsPanel();
-                    osTabbedPane.addTab("Unix", unixPanel);
+                    osTabbedPane.addTab(unixTabText, unixPanel);
                 }
                 osTabbedPane.addChangeListener(e -> SwingGUI.setHandCursorToClickableComponents(osTabbedPane));
 
                 CollapsableTitledBorder b2 = new CollapsableTitledBorder(
-                        osTabbedPane, "OS Specific Options", false,
                         exclusive, OS_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
+                        osTabbedPane, osTabbedPaneTitleText, false,
                 b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 osTabbedPane.setBorder(b2);
             }
@@ -244,19 +275,19 @@ public class MainWindow extends JFrame {
                 {
                     // Add components to southPanel
                     // save settings to file
-                    saveSettingsButton = new JButton("Save Settings");
+                    saveSettingsButton = new JButton(saveSettingsButtonText);
                     saveSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(saveSettingsButton, gbc2);
 
                     gbc2.gridx++;
                     // load settings from file
-                    loadSettingsButton = new JButton("Load Settings");
+                    loadSettingsButton = new JButton(loadSettingsButtonText);
                     loadSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(loadSettingsButton, gbc2);
 
                     gbc2.gridx++;
                     // run command
-                    runCommandButton = new JButton("Create Installer");
+                    runCommandButton = new JButton(runCommandButtonText);
                     runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(runCommandButton, gbc2);
                 }

@@ -192,6 +192,7 @@ public class MainWindow extends JFrame {
                     jdkBinTextField = new TextFieldFileChooser(localeManager, false, true);
                     jdkBinTextField.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     jdkBinPanel.add(jdkBinTextField, c);
+                    //TODO implement locale manager for this TextFieldFileChooser in libs
                 }
 
                 // Option Panels

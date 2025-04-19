@@ -1,3 +1,10 @@
+/* requires everdro1dCoreLib, flatlaf, and json libraries
+ * TODO
+ *  - Detect and autofill jdk bin directory
+ *  - save jdk directory to preferences
+ *  - actually let buttons do something
+ *  - add command assembly line
+ */
 package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.commands.CommandInterface;
@@ -10,6 +17,8 @@ import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
+import javax.management.ObjectInstance;
+import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
@@ -30,9 +39,16 @@ public class MainWorker {
     static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);
     public static int[] windowPosition = {0, 0, 0};
 
+    private static MainWindow mainWindow;
+
     // End of variables -----------------------------------------------------------------------------------------------|
 
     public static void main(String[] args) {
+        startUpActions(args);
+        startMainWindow();
+    }
+
+    private static void startUpActions(String[] args) {
         ApplicationCore.checkCLIArgs(args, commandManager);
         checkOSCompatibility();
 
@@ -123,7 +139,7 @@ public class MainWorker {
     private static void startMainWindow() {
         EventQueue.invokeLater(() -> {
             try {
-                new MainWindow();
+                mainWindow = new MainWindow();
                 SwingGUI.setFramePosition(
                         MainWindow.topFrame,
                         windowPosition[0],
@@ -154,6 +170,10 @@ public class MainWorker {
             EventQueue.invokeLater(() -> debugConsoleWindow.toFront());
             if (debug) System.out.println("Debug console already open.");
         }
+    }
+
+    public static MainWindow getInstanceOfMainWindow() {
+        return mainWindow;
     }
 
     public static void checkUpdate() {

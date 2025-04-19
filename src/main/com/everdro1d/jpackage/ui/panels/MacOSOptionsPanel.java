@@ -245,7 +245,7 @@ public class MacOSOptionsPanel extends JPanel {
         return macPackageSigningPrefixTextField.getText();
     }
 
-    public boolean isMacSignChecked() {
+    public boolean isMacSignPackage() {
         return macSignCheckBox.isSelected();
     }
 
@@ -257,7 +257,7 @@ public class MacOSOptionsPanel extends JPanel {
         return macSigningKeyUserNameTextField.getText();
     }
 
-    public boolean isMacAppStoreChecked() {
+    public boolean isMacAppStore() {
         return macAppStoreCheckBox.isSelected();
     }
 
@@ -281,7 +281,7 @@ public class MacOSOptionsPanel extends JPanel {
         macPackageSigningPrefixTextField.setText(text);
     }
 
-    public void setMacSignChecked(boolean checked) {
+    public void setMacSignPackage(boolean checked) {
         macSignCheckBox.setSelected(checked);
     }
 
@@ -293,7 +293,7 @@ public class MacOSOptionsPanel extends JPanel {
         macSigningKeyUserNameTextField.setText(text);
     }
 
-    public void setMacAppStoreChecked(boolean checked) {
+    public void setMacAppStore(boolean checked) {
         macAppStoreCheckBox.setSelected(checked);
     }
 

@@ -4,6 +4,7 @@ import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
+import main.com.everdro1d.jpackage.core.ButtonAction;
 import main.com.everdro1d.jpackage.ui.panels.*;
 
 import javax.swing.*;
@@ -13,8 +14,7 @@ import java.awt.event.ComponentEvent;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
-import static main.com.everdro1d.jpackage.core.MainWorker.windowPosition;
+import static main.com.everdro1d.jpackage.core.MainWorker.*;
 
 public class MainWindow extends JFrame {
     // Variables ------------------------------------------------------------------------------------------------------|
@@ -29,8 +29,8 @@ public class MainWindow extends JFrame {
             private JPanel jdkBinPanel;
                 private JLabel jdkBinLabel;
                 private TextFieldFileChooser jdkBinTextField;
-            private JPanel genericOptionsPanel;
-            public static JTabbedPane osTabbedPane;
+                private JPanel genericOptionsPanel;
+            private JTabbedPane osTabbedPane;
                 private JPanel windowsPanel;
                 private JPanel macOSPanel;
                 private JPanel unixPanel;
@@ -272,18 +272,21 @@ public class MainWindow extends JFrame {
                     saveSettingsButton = new JButton(saveSettingsButtonText);
                     saveSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(saveSettingsButton, gbc2);
+                    saveSettingsButton.addActionListener((e) -> ButtonAction.saveSettingsToFile());
 
                     gbc2.gridx++;
                     // load settings from file
                     loadSettingsButton = new JButton(loadSettingsButtonText);
                     loadSettingsButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(loadSettingsButton, gbc2);
+                    loadSettingsButton.addActionListener((e) -> ButtonAction.loadSettingsFromFile());
 
                     gbc2.gridx++;
                     // run command
                     runCommandButton = new JButton(runCommandButtonText);
                     runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(runCommandButton, gbc2);
+                    runCommandButton.addActionListener((e) -> ButtonAction.assembleAndRunJPackageCommand());
                 }
             }
 
@@ -303,5 +306,33 @@ public class MainWindow extends JFrame {
         tabbedPane.setEnabledAt(1, os.equals("macOS"));
         tabbedPane.setEnabledAt(2, os.equals("Unix"));
         tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
+    }
+
+    public String getJdkBinPathText() {
+        return jdkBinTextField.getText();
+    }
+
+    public void setJdkBinPathText(String text) {
+        jdkBinTextField.setText(text);
+    }
+
+    public Object getInstanceOf(Class<?> clazz, MainWindow instance) {
+        switch(clazz.getName()) {
+            case "main.com.everdro1d.jpackage.ui.panels.GenericOptionsPanel" -> {
+                return instance.genericOptionsPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.WindowsOptionsPanel" -> {
+                return instance.windowsPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.MacOSOptionsPanel" -> {
+                return instance.macOSPanel;
+            }
+            case "main.com.everdro1d.jpackage.ui.panels.UnixOptionsPanel" -> {
+                return instance.unixPanel;
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 }

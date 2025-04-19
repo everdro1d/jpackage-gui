@@ -148,7 +148,7 @@ public class UnixOptionsPanel extends JPanel {
         add((linuxMenuGroupTextField = new JTextField()), gbc);
         gbc.gridy++;
 
-        add((linuxPackageDepsTextField = new JTextField()), gbc);
+        add((linuxPackageDependenciesTextField = new JTextField()), gbc);
         gbc.gridy++;
 
         add((linuxRpmLicenseTypeTextField = new JTextField()), gbc);
@@ -262,7 +262,7 @@ public class UnixOptionsPanel extends JPanel {
         linuxAppCategoryTextField.setText(linuxAppCategory);
     }
 
-    public void setLinuxShortcut(boolean linuxShortcut) {
+    public void setLinuxDesktopShortcut(boolean linuxShortcut) {
         linuxShortcutCheckBox.setSelected(linuxShortcut);
     }
 

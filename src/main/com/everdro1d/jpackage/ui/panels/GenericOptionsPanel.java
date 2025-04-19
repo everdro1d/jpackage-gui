@@ -109,7 +109,7 @@ public class GenericOptionsPanel extends JPanel {
         private JLabel versionLabel;
         private JTextField versionTextField;
         private JLabel copyrightLabel;
-        private JTextField copyRightTextField;
+        private JTextField copyrightTextField;
         private JLabel licenseLabel;
         private TextFieldFileChooser licenseTextField;
 
@@ -160,7 +160,7 @@ public class GenericOptionsPanel extends JPanel {
             add((versionTextField = new JTextField()), gbc);
             gbc.gridy++;
 
-            add((copyRightTextField = new JTextField()), gbc);
+            add((copyrightTextField = new JTextField()), gbc);
             gbc.gridy++;
 
             gbc.weighty = 1;
@@ -194,8 +194,8 @@ public class GenericOptionsPanel extends JPanel {
             return versionTextField.getText();
         }
 
-        public String getCopyRightText() {
-            return copyRightTextField.getText();
+        public String getCopyrightText() {
+            return copyrightTextField.getText();
         }
 
         public String getLicenseText() {
@@ -222,8 +222,8 @@ public class GenericOptionsPanel extends JPanel {
             versionTextField.setText(text);
         }
 
-        public void setCopyRightText(String text) {
-            copyRightTextField.setText(text);
+        public void setCopyrightText(String text) {
+            copyrightTextField.setText(text);
         }
 
         public void setLicenseText(String text) {
@@ -308,7 +308,7 @@ public class GenericOptionsPanel extends JPanel {
         }
 
         // Getters and Setters ----------------------------------------------------------------------------------------|
-        public String getTypeText() {
+        public String getFileTypeText() {
             return (String) typeComboBox.getSelectedItem();
         }
 

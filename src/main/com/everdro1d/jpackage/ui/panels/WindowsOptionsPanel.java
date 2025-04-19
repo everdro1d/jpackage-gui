@@ -235,123 +235,83 @@ public class WindowsOptionsPanel extends JPanel {
 
     // Getter and Setters ---------------------------------------------------------------------------------------------|
 
-    public JCheckBox getWinConsoleCheckBox() {
-        return winConsoleCheckBox;
-    }
-
-    public JCheckBox getWinDirChooserCheckBox() {
-        return winDirChooserCheckBox;
-    }
-
-    public JTextField getWinHelpUrlTextField() {
-        return winHelpUrlTextField;
-    }
-
-    public JCheckBox getWinMenuCheckBox() {
-        return winMenuCheckBox;
-    }
-
-    public JTextField getWinMenuGroupTextField() {
-        return winMenuGroupTextField;
-    }
-
-    public JCheckBox getWinPerUserInstallCheckBox() {
-        return winPerUserInstallCheckBox;
-    }
-
-    public JCheckBox getWinShortcutCheckBox() {
-        return winShortcutCheckBox;
-    }
-
-    public JCheckBox getWinShortcutPromptCheckBox() {
-        return winShortcutPromptCheckBox;
-    }
-
-    public JTextField getWinUpdateUrlTextField() {
-        return winUpdateUrlTextField;
-    }
-
-    public JTextField getWinUpgradeUuidTextField() {
-        return winUpgradeUuidTextField;
-    }
-
-    public boolean getWinConsoleCheckBoxSelected() {
+    public boolean isWinConsole() {
         return winConsoleCheckBox.isSelected();
     }
 
-    public boolean getWinDirChooserCheckBoxSelected() {
+    public boolean isWinDirChooser() {
         return winDirChooserCheckBox.isSelected();
     }
 
-    public String getWinHelpUrlTextFieldText() {
+    public String getWinHelpUrlText() {
         return winHelpUrlTextField.getText();
     }
 
-    public boolean getWinMenuCheckBoxSelected() {
+    public boolean isWinMenu() {
         return winMenuCheckBox.isSelected();
     }
 
-    public String getWinMenuGroupTextFieldText() {
+    public String getWinMenuGroup() {
         return winMenuGroupTextField.getText();
     }
 
-    public boolean getWinPerUserInstallCheckBoxSelected() {
+    public boolean isWinPerUserInstall() {
         return winPerUserInstallCheckBox.isSelected();
     }
 
-    public boolean getWinShortcutCheckBoxSelected() {
+    public boolean isWinShortcut() {
         return winShortcutCheckBox.isSelected();
     }
 
-    public boolean getWinShortcutPromptCheckBoxSelected() {
+    public boolean isWinShortcutPrompt() {
         return winShortcutPromptCheckBox.isSelected();
     }
 
-    public String getWinUpdateUrlTextFieldText() {
+    public String getWinUpdateUrl() {
         return winUpdateUrlTextField.getText();
     }
 
-    public String getWinUpgradeUuidTextFieldText() {
+    public String getWinUpgradeUuid() {
         return winUpgradeUuidTextField.getText();
     }
 
-    public void setWinConsoleCheckBoxSelected(boolean selected) {
+    public void setWinConsole(boolean selected) {
         winConsoleCheckBox.setSelected(selected);
     }
 
-    public void setWinDirChooserCheckBoxSelected(boolean selected) {
+    public void setWinDirChooser(boolean selected) {
         winDirChooserCheckBox.setSelected(selected);
     }
 
-    public void setWinHelpUrlTextFieldText(String text) {
+    public void setWinHelpUrl(String text) {
         winHelpUrlTextField.setText(text);
     }
 
-    public void setWinMenuCheckBoxSelected(boolean selected) {
+    public void setWinMenu(boolean selected) {
         winMenuCheckBox.setSelected(selected);
     }
 
-    public void setWinMenuGroupTextFieldText(String text) {
+    public void setWinMenuGroup(String text) {
         winMenuGroupTextField.setText(text);
     }
 
-    public void setWinPerUserInstallCheckBoxSelected(boolean selected) {
+    public void setWinPerUserInstall(boolean selected) {
         winPerUserInstallCheckBox.setSelected(selected);
     }
 
-    public void setWinShortcutCheckBoxSelected(boolean selected) {
+    public void setWinShortcut(boolean selected) {
         winShortcutCheckBox.setSelected(selected);
     }
 
-    public void setWinShortcutPromptCheckBoxSelected(boolean selected) {
+    public void setWinShortcutPrompt(boolean selected) {
         winShortcutPromptCheckBox.setSelected(selected);
     }
 
-    public void setWinUpdateUrlTextFieldText(String text) {
+    public void setWinUpdateUrl(String text) {
         winUpdateUrlTextField.setText(text);
     }
 
-    public void setWinUpgradeUuidTextFieldText(String text) {
+    public void setWinUpgradeUuid(String text) {
         winUpgradeUuidTextField.setText(text);
     }
 

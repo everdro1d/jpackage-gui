@@ -14,7 +14,6 @@ import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;

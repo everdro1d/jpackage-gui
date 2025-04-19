@@ -86,7 +86,7 @@ public class MainWorker {
                 // Unix specific code
             }
             default -> {
-                System.out.println("Unknown OS detected. Exiting.");
+                System.out.println("Unknown OS detected. Cannot guarantee functionality. Exiting.");
                 System.exit(1);
             }
         }

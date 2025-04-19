@@ -9,6 +9,7 @@ import com.everdro1d.libs.commands.CommandManager;
 import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.core.LocaleManager;
 import com.everdro1d.libs.swing.SwingGUI;
+import com.everdro1d.libs.swing.dialogs.UpdateCheckerDialog;
 import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
@@ -16,10 +17,13 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.prefs.Preferences;
 
 public class MainWorker {
     // Variables ------------------------------------------------------------------------------------------------------|
+    public static final String dro1dDevWebsite = "https://everdro1d.github.io/";
+    public static final String currentVersion = "0.0.1"; //TODO: update this with each release
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
             "-debug", new DebugCommand()
     );
@@ -64,12 +68,23 @@ public class MainWorker {
         }
 
         startMainWindow();
+
+        //checkUpdate(); TODO re-enable when ready for release
+
+        if (!localeManager.getClassesInLocaleMap().contains("!head")) {
+            addVersionToLocale();
+        }
     }
 
-    /**
-     * Detects the OS to determine compat with application and dependencies.
-     * @see #executeOSSpecificCode(String)
-     */
+    private static void addVersionToLocale() {
+        Map<String, Map<String, String>> classMap = new TreeMap<>();
+        classMap.put("version", new TreeMap<>());
+        Map<String, String> mainMap = classMap.get("version");
+        mainMap.put("currentVersion", currentVersion);
+
+        localeManager.addClassSpecificMap("!head", classMap);
+    }
+
     public static void checkOSCompatibility() {
         String detectedOS = ApplicationCore.detectOS();
         executeOSSpecificCode(detectedOS);
@@ -98,9 +113,6 @@ public class MainWorker {
         }
     }
 
-    /**
-     * Load the user settings from the preferences. And save the settings on exit.
-     */
     private static void loadPreferencesAndQueueSave() {
         loadWindowPosition();
         currentLocale = prefs.get("currentLocale", "eng");
@@ -169,5 +181,13 @@ public class MainWorker {
             EventQueue.invokeLater(() -> debugConsoleWindow.toFront());
             if (debug) System.out.println("Debug console already open.");
         }
+    }
+
+    public static void checkUpdate() {
+        // checks project GitHub for the latest version at launch
+        new Thread(() -> UpdateCheckerDialog.showUpdateCheckerDialog(currentVersion, null, debug,
+                "https://github.com/everdro1d/jpackage-gui/releases/latest/",
+                dro1dDevWebsite + "posts/jpackage-gui/", prefs, localeManager
+        )).start(); //TODO webpage doesn't exist yet
     }
 }

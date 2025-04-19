@@ -129,7 +129,6 @@ public class MainWindow extends JFrame {
     private void initializeWindowProperties() {
         topFrame = this;
         topFrame.setTitle(titleText);
-        SwingGUI.setFrameIcon(topFrame, "images/icon32.png", this.getClass());
         topFrame.setMinimumSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         topFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topFrame.setResizable(false);
@@ -214,8 +213,8 @@ public class MainWindow extends JFrame {
                 centerPanel.add(genericOptionsPanel);
 
                 CollapsableTitledBorder b = new CollapsableTitledBorder(
-                        exclusive, GENERIC_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
                         genericOptionsPanel, genericOptionsPanelTitleText, true,
+                        exclusive, GENERIC_OPTION_PANEL_HEIGHT);
                 b.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 genericOptionsPanel.setBorder(b);
 
@@ -239,8 +238,8 @@ public class MainWindow extends JFrame {
                 osTabbedPane.addChangeListener(e -> SwingGUI.setHandCursorToClickableComponents(osTabbedPane));
 
                 CollapsableTitledBorder b2 = new CollapsableTitledBorder(
-                        exclusive, OS_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS);
                         osTabbedPane, osTabbedPaneTitleText, false,
+                        exclusive, OS_OPTION_PANEL_HEIGHT, this::enableTabbedPaneWithOS, true);
                 b2.setTitleFont(new Font(fontName, Font.PLAIN, fontSize + 2));
                 osTabbedPane.setBorder(b2);
             }

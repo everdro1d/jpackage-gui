@@ -9,7 +9,7 @@ import com.everdro1d.libs.commands.CommandManager;
 import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.core.LocaleManager;
 import com.everdro1d.libs.swing.SwingGUI;
-import com.everdro1d.libs.swing.components.DebugConsoleWindow;
+import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
@@ -48,15 +48,20 @@ public class MainWorker {
         ApplicationCore.checkCLIArgs(args, commandManager);
         checkOSCompatibility();
 
-        SwingGUI.setLookAndFeel(true, false);
-        SwingGUI.lightOrDarkMode(false, new JFrame[]{MainWindow.topFrame});
-        // include all non-modal frames in the array. these frames will be updated when the mode is changed
+        SwingGUI.setupLookAndFeel(true, false);
 
-        SwingGUI.uiSetup(false, MainWindow.fontName, MainWindow.fontSize);
-        loadPreferences();
+        SwingGUI.uiSetup(MainWindow.fontName, MainWindow.fontSize);
+
+        loadPreferencesAndQueueSave();
 
         localeManager.loadLocaleFromFile("locale_" + currentLocale);
-        if (debug) showDebugConsole();
+
+        if (debug) {
+            showDebugConsole();
+            if (debug) System.out.println("Loaded locale: locale_" + currentLocale);
+            System.out.println("Starting " + MainWindow.titleText + " v" + currentVersion + "...");
+            System.out.println("Detected OS: " + ApplicationCore.detectOS());
+        }
 
         startMainWindow();
     }
@@ -96,7 +101,7 @@ public class MainWorker {
     /**
      * Load the user settings from the preferences. And save the settings on exit.
      */
-    private static void loadPreferences() {
+    private static void loadPreferencesAndQueueSave() {
         loadWindowPosition();
         currentLocale = prefs.get("currentLocale", "eng");
 
@@ -142,6 +147,7 @@ public class MainWorker {
                         MainWindow.topFrame,
                         windowPosition[0], windowPosition[1], windowPosition[2]
                 );
+                SwingGUI.setFrameIcon(MainWindow.topFrame, "images/icon32.png", MainWorker.class);
             } catch (Exception ex) {
                 if (debug) ex.printStackTrace(System.err);
                 System.err.println("Failed to start MainWindow.");
@@ -152,12 +158,15 @@ public class MainWorker {
     public static void showDebugConsole() {
         if (debugConsoleWindow == null) {
             debugConsoleWindow = new DebugConsoleWindow(
-                    MainWindow.topFrame, MainWindow.fontName, MainWindow.fontSize - 2, prefs, debug, localeManager);
+                    MainWindow.topFrame, MainWindow.fontName,
+                    MainWindow.fontSize - 2, prefs, debug, localeManager
+            );
             if (debug) System.out.println("Debug console created.");
         } else if (!debugConsoleWindow.isVisible()) {
             debugConsoleWindow.setVisible(true);
             if (debug) System.out.println("Debug console shown.");
         } else {
+            EventQueue.invokeLater(() -> debugConsoleWindow.toFront());
             if (debug) System.out.println("Debug console already open.");
         }
     }

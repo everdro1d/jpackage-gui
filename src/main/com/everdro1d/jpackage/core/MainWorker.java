@@ -1,7 +1,3 @@
-/* dro1dDev SwingGUI Templates - MainWorker.java
- *
- */
-
 package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.commands.CommandInterface;
@@ -27,23 +23,12 @@ public class MainWorker {
             "-debug", new DebugCommand()
     );
     public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP);
-    // CommandManager object for handling CLI commands
-
     private static String currentLocale = "eng";
-
     public static final LocaleManager localeManager = new LocaleManager(MainWorker.class);
-    // LocaleManager object for handling locale changes. loads default locale on creation
-
     public static boolean debug = false;
-    // Boolean to enable debug logging output all 'sout' statements must be wrapped in 'if (debug)'
-
     public static DebugConsoleWindow debugConsoleWindow;
-
     static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);
-    // Preferences object for saving and loading user settings
-
     public static int[] windowPosition = {0, 0, 0};
-    // Default window position
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -89,11 +74,6 @@ public class MainWorker {
         executeOSSpecificCode(detectedOS);
     }
 
-    /**
-     * Execute OS specific code.
-     * @param detectedOS the detected OS
-     * @see #checkOSCompatibility()
-     */
     public static void executeOSSpecificCode(String detectedOS) {
         switch (detectedOS) {
             case "Windows" -> {
@@ -114,49 +94,41 @@ public class MainWorker {
 
     private static void loadPreferencesAndQueueSave() {
         loadWindowPosition();
+
         currentLocale = prefs.get("currentLocale", "eng");
 
         savePreferencesOnExit();
     }
 
-    /**
-     * Save the user settings on exit.
-     */
     private static void savePreferencesOnExit() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             saveWindowPosition();
+
             prefs.put("currentLocale", currentLocale);
         }));
     }
 
-    /**
-     * Load the window position from the preferences. And save the position on exit.
-     */
     private static void loadWindowPosition() {
         windowPosition[0] = prefs.getInt("framePosX", 0);
         windowPosition[1] = prefs.getInt("framePosY", 0);
         windowPosition[2] = prefs.getInt("activeMonitor", 0);
     }
 
-    /**
-     * Save the window position to the preferences.
-     */
     private static void saveWindowPosition() {
         prefs.putInt("framePosX", windowPosition[0]);
         prefs.putInt("framePosY", windowPosition[1]);
         prefs.putInt("activeMonitor", windowPosition[2]);
     }
 
-    /**
-     * Start the MainWindow.
-     */
     private static void startMainWindow() {
         EventQueue.invokeLater(() -> {
             try {
                 new MainWindow();
                 SwingGUI.setFramePosition(
                         MainWindow.topFrame,
-                        windowPosition[0], windowPosition[1], windowPosition[2]
+                        windowPosition[0],
+                        windowPosition[1],
+                        windowPosition[2]
                 );
                 SwingGUI.setFrameIcon(MainWindow.topFrame, "images/icon32.png", MainWorker.class);
             } catch (Exception ex) {
@@ -173,9 +145,11 @@ public class MainWorker {
                     MainWindow.fontSize - 2, prefs, debug, localeManager
             );
             if (debug) System.out.println("Debug console created.");
+
         } else if (!debugConsoleWindow.isVisible()) {
             debugConsoleWindow.setVisible(true);
             if (debug) System.out.println("Debug console shown.");
+
         } else {
             EventQueue.invokeLater(() -> debugConsoleWindow.toFront());
             if (debug) System.out.println("Debug console already open.");

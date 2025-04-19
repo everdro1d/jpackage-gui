@@ -1,7 +1,3 @@
-/* dro1dDev SwingGUI Templates - MainWindow.java
- *
- */
-
 package main.com.everdro1d.jpackage.ui;
 
 import com.everdro1d.libs.core.ApplicationCore;
@@ -123,9 +119,6 @@ public class MainWindow extends JFrame {
 
     }
 
-    /**
-     * Initialize the window.
-     */
     private void initializeWindowProperties() {
         topFrame = this;
         topFrame.setTitle(titleText);
@@ -142,9 +135,6 @@ public class MainWindow extends JFrame {
         });
     }
 
-    /**
-     * Initialize the GUI components.
-     */
     private void initializeGUIComponents() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());

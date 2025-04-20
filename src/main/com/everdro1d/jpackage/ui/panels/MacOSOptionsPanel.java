@@ -233,15 +233,15 @@ public class MacOSOptionsPanel extends JPanel {
     }
 
     // Getters and Setters --------------------------------------------------------------------------------------------|
-    public String getMacPackageIdentifierText() {
+    public String getMacPackageIdentifier() {
         return macPackageIdentifierTextField.getText();
     }
 
-    public String getMacPackageNameText() {
+    public String getMacPackageName() {
         return macPackageNameTextField.getText();
     }
 
-    public String getMacPackageSigningPrefixText() {
+    public String getMacPackageSigningPrefix() {
         return macPackageSigningPrefixTextField.getText();
     }
 
@@ -249,35 +249,35 @@ public class MacOSOptionsPanel extends JPanel {
         return macSignCheckBox.isSelected();
     }
 
-    public String getMacSigningKeychainText() {
+    public String getMacSigningKeychain() {
         return macSigningKeychainTextField.getText();
     }
 
-    public String getMacSigningKeyUserNameText() {
-        return macSigningKeyUserNameTextField.getText();
+    public String getMacSigningKeyUsername() {
+        return macSigningKeyUsernameTextField.getText();
     }
 
     public boolean isMacAppStore() {
         return macAppStoreCheckBox.isSelected();
     }
 
-    public String getMacEntitlementsText() {
+    public String getMacEntitlements() {
         return macEntitlementsTextField.getText();
     }
 
-    public String getMacAppCategoryText() {
+    public String getMacAppCategory() {
         return macAppCategoryTextField.getText();
     }
 
-    public void setMacPackageIdentifierText(String text) {
+    public void setMacPackageIdentifier(String text) {
         macPackageIdentifierTextField.setText(text);
     }
 
-    public void setMacPackageNameText(String text) {
+    public void setMacPackageName(String text) {
         macPackageNameTextField.setText(text);
     }
 
-    public void setMacPackageSigningPrefixText(String text) {
+    public void setMacPackageSigningPrefix(String text) {
         macPackageSigningPrefixTextField.setText(text);
     }
 
@@ -285,11 +285,11 @@ public class MacOSOptionsPanel extends JPanel {
         macSignCheckBox.setSelected(checked);
     }
 
-    public void setMacSigningKeychainText(String text) {
+    public void setMacSigningKeychain(String text) {
         macSigningKeychainTextField.setText(text);
     }
 
-    public void setMacSigningKeyUserNameText(String text) {
+    public void setMacSigningKeyUsername(String text) {
         macSigningKeyUsernameTextField.setText(text);
     }
 
@@ -297,11 +297,11 @@ public class MacOSOptionsPanel extends JPanel {
         macAppStoreCheckBox.setSelected(checked);
     }
 
-    public void setMacEntitlementsText(String text) {
+    public void setMacEntitlements(String text) {
         macEntitlementsTextField.setText(text);
     }
 
-    public void setMacAppCategoryText(String text) {
+    public void setMacAppCategory(String text) {
         macAppCategoryTextField.setText(text);
     }
 

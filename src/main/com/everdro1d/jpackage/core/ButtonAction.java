@@ -152,8 +152,6 @@ public class ButtonAction {
         }
     }
 
-    private static Map<String, String> getCommandSettingsMap() {
-        return commandSettingsMap;
     }
 
     private static String getAndInvokeMethod(String className, String methodName, String... optionalValue) {
@@ -175,4 +173,9 @@ public class ButtonAction {
             throw new RuntimeException(e);
         }
     }
+
+    private static Map<String, String> getCommandSettingsMap() {
+        return commandSettingsMap;
+    }
+
 }

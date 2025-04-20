@@ -38,7 +38,7 @@ public class UnixOptionsPanel extends JPanel {
     public static String linuxRpmLicenseTypeLabelText = "Type of the license:";
     public static String linuxAppReleaseLabelText = "Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:";
     public static String linuxAppCategoryLabelText = "Group value of the RPM /.spec file or Section value of DEB control file:";
-    public static String linuxShortcutLabelText = "Creates a shortcut for the application:";
+    public static String linuxDesktopShortcutLabelText = "Creates a shortcut for the application:";
 
     private JLabel linuxPackageNameLabel;
     private JTextField linuxPackageNameTextField;
@@ -54,8 +54,8 @@ public class UnixOptionsPanel extends JPanel {
     private JTextField linuxAppReleaseTextField;
     private JLabel linuxAppCategoryLabel;
     private JTextField linuxAppCategoryTextField;
-    private JLabel linuxShortcutLabel;
-    private JCheckBox linuxShortcutCheckBox;
+    private JLabel linuxDesktopShortcutLabel;
+    private JCheckBox linuxDesktopShortcutCheckBox;
 
     // End of Variables -----------------------------------------------------------------------------------------------|
 
@@ -126,11 +126,11 @@ public class UnixOptionsPanel extends JPanel {
         gbc.gridy++;
 
         gbc.weighty = 1;
-        linuxShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
-                linuxShortcutLabelText +
+        linuxDesktopShortcutLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                linuxDesktopShortcutLabelText +
                 "</div></html>"
         );
-        add(linuxShortcutLabel, gbc);
+        add(linuxDesktopShortcutLabel, gbc);
 
         // Col 1
         gbc.gridx++;
@@ -161,7 +161,7 @@ public class UnixOptionsPanel extends JPanel {
         gbc.gridy++;
 
         gbc.weighty = 1;
-        add((linuxShortcutCheckBox = new JCheckBox()), gbc);
+        add((linuxDesktopShortcutCheckBox = new JCheckBox()), gbc);
 
         for (Component component : getComponents()) {
             if (component.getFont() != null) {
@@ -180,7 +180,7 @@ public class UnixOptionsPanel extends JPanel {
         map.put("linuxRpmLicenseTypeLabelText", linuxRpmLicenseTypeLabelText);
         map.put("linuxAppReleaseLabelText", linuxAppReleaseLabelText);
         map.put("linuxAppCategoryLabelText", linuxAppCategoryLabelText);
-        map.put("linuxShortcutLabelText", linuxShortcutLabelText);
+        map.put("linuxShortcutLabelText", linuxDesktopShortcutLabelText);
 
         localeManager.addComponentSpecificMap("MainWindow","UnixOptionsPanel", map);
     }
@@ -196,7 +196,7 @@ public class UnixOptionsPanel extends JPanel {
         linuxRpmLicenseTypeLabelText = varMap.getOrDefault("linuxRpmLicenseTypeLabelText", linuxRpmLicenseTypeLabelText);
         linuxAppReleaseLabelText = varMap.getOrDefault("linuxAppReleaseLabelText", linuxAppReleaseLabelText);
         linuxAppCategoryLabelText = varMap.getOrDefault("linuxAppCategoryLabelText", linuxAppCategoryLabelText);
-        linuxShortcutLabelText = varMap.getOrDefault("linuxShortcutLabelText", linuxShortcutLabelText);
+        linuxDesktopShortcutLabelText = varMap.getOrDefault("linuxShortcutLabelText", linuxDesktopShortcutLabelText);
 
     }
 
@@ -214,7 +214,7 @@ public class UnixOptionsPanel extends JPanel {
         return linuxMenuGroupTextField.getText();
     }
 
-    public String getLinuxPackageDeps() {
+    public String getLinuxPackageDependencies() {
         return linuxPackageDependenciesTextField.getText();
     }
 
@@ -230,8 +230,8 @@ public class UnixOptionsPanel extends JPanel {
         return linuxAppCategoryTextField.getText();
     }
 
-    public boolean isLinuxShortcut() {
-        return linuxShortcutCheckBox.isSelected();
+    public boolean isLinuxDesktopShortcut() {
+        return linuxDesktopShortcutCheckBox.isSelected();
     }
 
     public void setLinuxPackageName(String linuxPackageName) {
@@ -246,7 +246,7 @@ public class UnixOptionsPanel extends JPanel {
         linuxMenuGroupTextField.setText(linuxMenuGroup);
     }
 
-    public void setLinuxPackageDeps(String linuxPackageDeps) {
+    public void setLinuxPackageDependencies(String linuxPackageDeps) {
         linuxPackageDependenciesTextField.setText(linuxPackageDeps);
     }
 
@@ -263,7 +263,7 @@ public class UnixOptionsPanel extends JPanel {
     }
 
     public void setLinuxDesktopShortcut(boolean linuxShortcut) {
-        linuxShortcutCheckBox.setSelected(linuxShortcut);
+        linuxDesktopShortcutCheckBox.setSelected(linuxShortcut);
     }
 
     // End of Getters and Setters -------------------------------------------------------------------------------------|

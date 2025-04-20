@@ -308,11 +308,11 @@ public class MainWindow extends JFrame {
         tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
     }
 
-    public String getJdkBinPathText() {
+    public String getJdkBinPath() {
         return jdkBinTextField.getText();
     }
 
-    public void setJdkBinPathText(String text) {
+    public void setJdkBinPath(String text) {
         jdkBinTextField.setText(text);
     }
 

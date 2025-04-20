@@ -5,6 +5,7 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -174,9 +175,26 @@ public class ButtonAction {
                 clazz = Class.forName("main.com.everdro1d.jpackage.ui." + className);
                 instance = instanceOfMainWindow;
             }
-            System.out.println("Class: " + clazz);
-            Method method = clazz.getMethod(methodName); // TODO idk why but instance cant find the panels to get.
-            return (String) method.invoke(instance, (Object[]) optionalValue);
+
+            // checkboxes need to pass bools, everything else needs a str
+            Class<?>[] parameterTypes = Arrays.stream(optionalValue)
+                    .map(value -> (value.equals("true") || value.equals("false")) ? boolean.class : String.class)
+                    .toArray(Class<?>[]::new);
+            // convert the optional value to a bool if necessary
+            Object[] parsedValues = Arrays.stream(optionalValue)
+                    .map(value -> (value.equals("true") || value.equals("false")) ? Boolean.parseBoolean(value) : value)
+                    .toArray();
+
+            // setter methods require a parameter to pass getters dont
+            Method method;
+            method = methodName.startsWith("set")
+                    ? clazz.getMethod(methodName, parameterTypes)
+                    : clazz.getMethod(methodName);
+
+            Object returnValue = method.invoke(instance, (methodName.startsWith("set") ? parsedValues : null) );
+            if (returnValue == null) return null;
+            return returnValue.toString();
+
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }

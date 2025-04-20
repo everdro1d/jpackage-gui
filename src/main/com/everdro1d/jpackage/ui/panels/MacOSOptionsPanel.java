@@ -49,7 +49,7 @@ public class MacOSOptionsPanel extends JPanel {
             "Request that the package be signed:";
     public static String macSigningKeychainLabelText =
             "Name of the keychain to search for the signing identity:";
-    public static String macSigningKeyUserNameLabelText =
+    public static String macSigningKeyUsernameLabelText =
             "Team or username portion in Apple signing identities:";
     public static String macAppStoreLabelText =
             "Indicates that the jpackage output is intended for the Mac App Store:";
@@ -68,8 +68,8 @@ public class MacOSOptionsPanel extends JPanel {
         private JCheckBox macSignCheckBox;
     private JLabel macSigningKeychainLabel;
         private JTextField macSigningKeychainTextField;
-    private JLabel macSigningKeyUserNameLabel;
-        private JTextField macSigningKeyUserNameTextField;
+    private JLabel macSigningKeyUsernameLabel;
+        private JTextField macSigningKeyUsernameTextField;
     private JLabel macAppStoreLabel;
         private JCheckBox macAppStoreCheckBox;
     private JLabel macEntitlementsLabel;
@@ -131,11 +131,11 @@ public class MacOSOptionsPanel extends JPanel {
         add(macSigningKeychainLabel, gbc);
         gbc.gridy++;
 
-        macSigningKeyUserNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
-                macSigningKeyUserNameLabelText +
+        macSigningKeyUsernameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macSigningKeyUsernameLabelText +
                 "</div></html>"
         );
-        add(macSigningKeyUserNameLabel, gbc);
+        add(macSigningKeyUsernameLabel, gbc);
         gbc.gridy++;
 
         macAppStoreLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
@@ -181,7 +181,7 @@ public class MacOSOptionsPanel extends JPanel {
         add((macSigningKeychainTextField = new JTextField()), gbc);
         gbc.gridy++;
 
-        add((macSigningKeyUserNameTextField = new JTextField()), gbc);
+        add((macSigningKeyUsernameTextField = new JTextField()), gbc);
         gbc.gridy++;
 
         add((macAppStoreCheckBox = new JCheckBox()), gbc);
@@ -208,7 +208,7 @@ public class MacOSOptionsPanel extends JPanel {
         map.put("macPackageSigningPrefixLabelText", macPackageSigningPrefixLabelText);
         map.put("macSignLabelText", macSignLabelText);
         map.put("macSigningKeychainLabelText", macSigningKeychainLabelText);
-        map.put("macSigningKeyUserNameLabelText", macSigningKeyUserNameLabelText);
+        map.put("macSigningKeyUserNameLabelText", macSigningKeyUsernameLabelText);
         map.put("macAppStoreLabelText", macAppStoreLabelText);
         map.put("macEntitlementsLabelText", macEntitlementsLabelText);
         map.put("macAppCategoryLabelText", macAppCategoryLabelText);
@@ -225,7 +225,7 @@ public class MacOSOptionsPanel extends JPanel {
         macPackageSigningPrefixLabelText = varMap.getOrDefault("macPackageSigningPrefixLabelText", macPackageSigningPrefixLabelText);
         macSignLabelText = varMap.getOrDefault("macSignLabelText", macSignLabelText);
         macSigningKeychainLabelText = varMap.getOrDefault("macSigningKeychainLabelText", macSigningKeychainLabelText);
-        macSigningKeyUserNameLabelText = varMap.getOrDefault("macSigningKeyUserNameLabelText", macSigningKeyUserNameLabelText);
+        macSigningKeyUsernameLabelText = varMap.getOrDefault("macSigningKeyUserNameLabelText", macSigningKeyUsernameLabelText);
         macAppStoreLabelText = varMap.getOrDefault("macAppStoreLabelText", macAppStoreLabelText);
         macEntitlementsLabelText = varMap.getOrDefault("macEntitlementsLabelText", macEntitlementsLabelText);
         macAppCategoryLabelText = varMap.getOrDefault("macAppCategoryLabelText", macAppCategoryLabelText);
@@ -290,7 +290,7 @@ public class MacOSOptionsPanel extends JPanel {
     }
 
     public void setMacSigningKeyUserNameText(String text) {
-        macSigningKeyUserNameTextField.setText(text);
+        macSigningKeyUsernameTextField.setText(text);
     }
 
     public void setMacAppStore(boolean checked) {

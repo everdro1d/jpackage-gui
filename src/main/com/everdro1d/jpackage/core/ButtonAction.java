@@ -9,71 +9,70 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ButtonAction {
-    //TODO update the get method names here to match actual
+    private static final String[][] mainSettingKeyMethodPair = new String[][] {
+            // MainWindow
+            {"main_jdkBinPath","getJdkBinPath"}
+    };
+
     private static final String[][] genericSettingKeyMethodPairs = new String[][] {
-            {"gen_name","getNameText"},
-            {"gen_description","getDescriptionText"},
-            {"gen_iconPath","getIconPathText"},
-            {"gen_vendorName","getVendorText"},
-            {"gen_version","getVersionText"},
-            {"gen_copyright","getCopyRightText"},
-            {"gen_license","getLicenseText"},
-            {"gen_fileType","getFileTypeText"},
-            {"gen_inputPath","getInputPathText"},
-            {"gen_outputPath","getOutputPathText"},
-            {"gen_arguments","getArgumentsText"},
-            {"gen_mainJarName","getMainJarText"},
-            {"gen_mainClassName","getMainClassText"},
-            {"gen_aboutURL","getAboutURLText"}
+            // GenericOptionsPanel
+            {"gen_name","getNameField"},
+            {"gen_description","getDescription"},
+            {"gen_iconPath","getIconPath"},
+            {"gen_vendorName","getVendor"},
+            {"gen_version","getVersion"},
+            {"gen_copyright","getCopyright"},
+            {"gen_license","getLicense"},
+            {"gen_fileType","getFileType"},
+            {"gen_inputPath","getInputPath"},
+            {"gen_outputPath","getOutputPath"},
+            {"gen_arguments","getArguments"},
+            {"gen_mainJarName","getMainJar"},
+            {"gen_mainClassName","getMainClass"},
+            {"gen_aboutURL","getAboutURL"}
     };
 
     private static final String[][] winSettingKeyMethodPairs = new String[][] {
+            // WindowsOptionsPanel
             {"win_console","isWinConsole"},
             {"win_dirChooser","isWinDirChooser"},
-            {"win_helpURL","getWinHelpUrlText"},
+            {"win_helpURL","getWinHelpURL"},
             {"win_startMenu","isWinMenu"},
-            {"win_startMenuGroupName","getWinMenuGroupText"},
+            {"win_startMenuGroupName","getWinMenuGroup"},
             {"win_installPerUser","isWinPerUserInstall"},
             {"win_createShortcut","isWinShortcut"},
             {"win_promptCreateShortcutOption","isWinShortcutPrompt"},
-            {"win_updateURL","getWinUpdateUrlText"},
-            {"win_upgradeUUID","getWinUpgradeUuidText"}
+            {"win_updateURL","getWinUpdateURL"},
+            {"win_upgradeUUID","getWinUpgradeUuid"}
 
     };
 
     private static final String[][] macSettingKeyMethodPairs = new String[][] {
-            {"mac_packageIdentifier","getMacPackageIdentifierText"},
-            {"mac_packageName","getMacPackageNameText"},
-            {"mac_packageSigningPrefix","getMacPackageSigningPrefixText"},
+            // MacOSOptionsPanel
+            {"mac_packageIdentifier","getMacPackageIdentifier"},
+            {"mac_packageName","getMacPackageName"},
+            {"mac_packageSigningPrefix","getMacPackageSigningPrefix"},
             {"mac_willPackageSign","isMacSignPackage"},
-            {"mac_signingKeychain","getMacSigningKeychainText"},
-            {"mac_signingKeyUsername","getMacSigningKeyUserNameText"},
+            {"mac_signingKeychain","getMacSigningKeychain"},
+            {"mac_signingKeyUsername","getMacSigningKeyUsername"},
             {"mac_appStore","isMacAppStore"},
-            {"mac_entitlements","getMacEntitlementsText"},
-            {"mac_appCategory","getMacAppCategoryText"}
+            {"mac_entitlements","getMacEntitlements"},
+            {"mac_appCategory","getMacAppCategory"}
     };
 
     private static final String[][] nixSettingKeyMethodPairs = new String[][] {
-            {"nix_packageName","getLinuxPackageNameText"},
-            {"nix_debMaintainer","getLinuxDebMaintainerText"},
-            {"nix_menuGroupText","getLinuxMenuGroupText"},
-            {"nix_packageDependencies","getLinuxPackageDependenciesText"},
-            {"nix_rpmLicenseType","getLinuxRpmLicenseTypeText"},
-            {"nix_releaseValue","getLinuxAppReleaseText"},
-            {"nix_appCategory","getLinuxAppCategoryText"},
+            // UnixOptionsPanel
+            {"nix_packageName","getLinuxPackageName"},
+            {"nix_debMaintainer","getLinuxDebMaintainer"},
+            {"nix_menuGroup","getLinuxMenuGroup"},
+            {"nix_packageDependencies","getLinuxPackageDependencies"},
+            {"nix_rpmLicenseType","getLinuxRpmLicenseType"},
+            {"nix_releaseValue","getLinuxAppRelease"},
+            {"nix_appCategory","getLinuxAppCategory"},
             {"nix_desktopShortcut","isLinuxDesktopShortcut"}
     };
 
-    private static Map<String,String> commandSettingsMap = new HashMap<>() {
-        {
-            // TODO - example values for testing
-            put("main_jdkBinPath", "getJdkBinPathText");
-            put("gen_name", "getNameText");
-            put("gen_description", "getDescriptionText");
-            put("gen_iconPath", "getIconPathText");
-            put("gen_vendorName", "getVendorText");
-        }
-    };
+    private static Map<String,String> commandSettingsMap = new HashMap<>() {};
 
     public static void saveSettingsToFile() {
         putIntoCommandSettingsMap();
@@ -93,7 +92,7 @@ public class ButtonAction {
     // private methods ------------------------------------------------------------------------------------------------|
 
     private static void putIntoCommandSettingsMap() {
-        commandSettingsMap.put("main_jdkBinPath", getAndInvokeMethod("MainWindow", "getJdkBinPathText"));
+        commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
 
         for (String[] keyPair: genericSettingKeyMethodPairs) {
             commandSettingsMap.put(keyPair[0], getAndInvokeMethod("GenericOptionsPanel", keyPair[1]));

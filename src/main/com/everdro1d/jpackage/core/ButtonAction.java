@@ -101,7 +101,7 @@ public class ButtonAction {
 
     }
 
-    // private methods ------------------------------------------------------------------------------------------------|
+    // worker methods -------------------------------------------------------------------------------------------------|
 
     private static void getSettingsFromUI() {
         commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
@@ -171,9 +171,11 @@ public class ButtonAction {
             Class<?> clazz;
             MainWindow instanceOfMainWindow = MainWorker.getInstanceOfMainWindow();
             Object instance;
+
             if (!className.equals("MainWindow")) {
                 clazz = Class.forName("main.com.everdro1d.jpackage.ui.panels." + className);
                 instance = instanceOfMainWindow.getInstanceOf(clazz, instanceOfMainWindow);
+
             } else {
                 clazz = Class.forName("main.com.everdro1d.jpackage.ui." + className);
                 instance = instanceOfMainWindow;

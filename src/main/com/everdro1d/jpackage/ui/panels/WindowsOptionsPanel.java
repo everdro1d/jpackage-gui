@@ -243,7 +243,7 @@ public class WindowsOptionsPanel extends JPanel {
         return winDirChooserCheckBox.isSelected();
     }
 
-    public String getWinHelpUrlText() {
+    public String getWinHelpURL() {
         return winHelpUrlTextField.getText();
     }
 
@@ -267,7 +267,7 @@ public class WindowsOptionsPanel extends JPanel {
         return winShortcutPromptCheckBox.isSelected();
     }
 
-    public String getWinUpdateUrl() {
+    public String getWinUpdateURL() {
         return winUpdateUrlTextField.getText();
     }
 
@@ -283,7 +283,7 @@ public class WindowsOptionsPanel extends JPanel {
         winDirChooserCheckBox.setSelected(selected);
     }
 
-    public void setWinHelpUrl(String text) {
+    public void setWinHelpURL(String text) {
         winHelpUrlTextField.setText(text);
     }
 
@@ -307,7 +307,7 @@ public class WindowsOptionsPanel extends JPanel {
         winShortcutPromptCheckBox.setSelected(selected);
     }
 
-    public void setWinUpdateUrl(String text) {
+    public void setWinUpdateURL(String text) {
         winUpdateUrlTextField.setText(text);
     }
 

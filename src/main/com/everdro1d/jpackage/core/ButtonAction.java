@@ -106,29 +106,18 @@ public class ButtonAction {
     private static void getSettingsFromUI() {
         commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
 
-        for (String[] keyPair: genericSettingKeyMethodPairs) {
-            commandSettingsMap.put(keyPair[0], getAndInvokeMethod("GenericOptionsPanel", keyPair[1]));
-        }
+        addSettingsToMapFromPanel("Generic", genericSettingKeyMethodPairs);
 
         switch (ApplicationCore.detectOS()) {
-            case "Windows" -> {
-                // Windows specific code
-                for (String[] keyPair : winSettingKeyMethodPairs) {
-                    commandSettingsMap.put(keyPair[0], getAndInvokeMethod("WindowsOptionsPanel", keyPair[1]));
-                }
-            }
-            case "macOS" -> {
-                // macOS specific code
-                for (String[] keyPair : macSettingKeyMethodPairs) {
-                    commandSettingsMap.put(keyPair[0], getAndInvokeMethod("MacOptionsPanel", keyPair[1]));
-                }
-            }
-            case "Unix" -> {
-                // Unix specific code
-                for (String[] keyPair : nixSettingKeyMethodPairs) {
-                    commandSettingsMap.put(keyPair[0], getAndInvokeMethod("LinuxOptionsPanel", keyPair[1]));
-                }
-            }
+            case "Windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
+            case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
+            case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
+        }
+    }
+
+    private static void addSettingsToMapFromPanel(String panel, String[][] settingKeyMethodPairs) {
+        for (String[] keyPair : settingKeyMethodPairs) {
+            commandSettingsMap.put(keyPair[0], getAndInvokeMethod(panel + "OptionsPanel", keyPair[1]));
         }
     }
 
@@ -142,25 +131,39 @@ public class ButtonAction {
         for (Map.Entry<String, String> entry : commandSettingsMap.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (value.contains("get")) {
-                value = value.replace("get", "set");
+
+            if (value == null) { value = ""; }
+
+            // this is the jdk "/bin" dir
+            if (key.equals(mainSettingKeyMethodPair[0][0])) {
+                getAndInvokeMethod("MainWindow", convertMethodPrefix(mainSettingKeyMethodPair[0][1]), value);
             }
 
-            if (key.equals("main_jdkBinPath")) {
-                // Set the JDK bin path
-                getAndInvokeMethod("MainWindow", value);
-            }
+            setSettingsFromMapToPanel("Generic", genericSettingKeyMethodPairs, key, value);
 
-            for (String[] keyPair : genericSettingKeyMethodPairs) {
-                if (key.equals(keyPair[0])) {
-                    // Set the generic settings
-                    getAndInvokeMethod("GenericOptionsPanel", keyPair[1], value);
-                    // TODO add optional value to set when using methods with parameters
-                }
+            switch (ApplicationCore.detectOS()) {
+                case "Windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
+                case "macOS" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
+                case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
             }
         }
     }
 
+    private static void setSettingsFromMapToPanel(String panel, String[][] settingKeyMethodPairs, String key, String value) {
+        for (String[] keyPair : settingKeyMethodPairs) {
+            if (key.equals(keyPair[0])) {
+                getAndInvokeMethod(panel + "OptionsPanel", convertMethodPrefix(keyPair[1]), value);
+            }
+        }
+    }
+
+    private static String convertMethodPrefix(String method) {
+        if (method.startsWith("get")) {
+            method = method.replace("get", "set");
+        } else if (method.startsWith("is")) {
+            method = method.replace("is", "set");
+        }
+        return method;
     }
 
     private static String getAndInvokeMethod(String className, String methodName, String... optionalValue) {

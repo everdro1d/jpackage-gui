@@ -99,19 +99,19 @@ public class GenericOptionsPanel extends JPanel {
 
     public static class LeftGenericPanel extends JPanel {
         private JLabel nameLabel;
-        private JTextField nameTextField;
+        protected static JTextField nameTextField;
         private JLabel descriptionLabel;
-        private JTextField descriptionTextField;
+        protected static JTextField descriptionTextField;
         private JLabel iconLabel;
-        private TextFieldFileChooser iconPathTextField;
+        protected static TextFieldFileChooser iconPathTextField;
         private JLabel vendorLabel;
-        private JTextField vendorTextField;
+        protected static JTextField vendorTextField;
         private JLabel versionLabel;
-        private JTextField versionTextField;
+        protected static JTextField versionTextField;
         private JLabel copyrightLabel;
-        private JTextField copyrightTextField;
+        protected static JTextField copyrightTextField;
         private JLabel licenseLabel;
-        private TextFieldFileChooser licenseTextField;
+        protected static TextFieldFileChooser licenseTextField;
 
         public LeftGenericPanel() {
             setLayout(new GridBagLayout());
@@ -172,80 +172,23 @@ public class GenericOptionsPanel extends JPanel {
                 }
             }
         }
-
-        // getters and setters
-        public String getNameText() {
-            return nameTextField.getText();
-        }
-
-        public String getDescriptionText() {
-            return descriptionTextField.getText();
-        }
-
-        public String getIconPathText() {
-            return iconPathTextField.getText();
-        }
-
-        public String getVendorText() {
-            return vendorTextField.getText();
-        }
-
-        public String getVersionText() {
-            return versionTextField.getText();
-        }
-
-        public String getCopyrightText() {
-            return copyrightTextField.getText();
-        }
-
-        public String getLicenseText() {
-            return licenseTextField.getText();
-        }
-
-        public void setNameText(String text) {
-            nameTextField.setText(text);
-        }
-
-        public void setDescriptionText(String text) {
-            descriptionTextField.setText(text);
-        }
-
-        public void setIconPathText(String text) {
-            iconPathTextField.setText(text);
-        }
-
-        public void setVendorText(String text) {
-            vendorTextField.setText(text);
-        }
-
-        public void setVersionText(String text) {
-            versionTextField.setText(text);
-        }
-
-        public void setCopyrightText(String text) {
-            copyrightTextField.setText(text);
-        }
-
-        public void setLicenseText(String text) {
-            licenseTextField.setText(text);
-        }
     }
 
     public static class RightGenericPanel extends JPanel {
         private JLabel typeLabel;
-        private JComboBox<String> typeComboBox;
+        protected static JComboBox<String> typeComboBox;
         private JLabel inputLabel; // path is jar or directory
-        private TextFieldFileChooser inputPathTextField;
+        protected static TextFieldFileChooser inputPathTextField;
         private JLabel outputLabel;
-        private TextFieldFileChooser outputPathTextField;
+        protected static TextFieldFileChooser outputPathTextField;
         private JLabel mainJarLabel;
-        private JTextField mainJarTextField;
+        protected static JTextField mainJarTextField;
         private JLabel mainClassLabel;
-        private JTextField mainClassTextField;
+        protected static JTextField mainClassTextField;
         private JLabel argumentsLabel;
-        private JTextField argumentsTextField;
+        protected static JTextField argumentsTextField;
         private JLabel aboutLabel;
-        private JTextField aboutTextField;
+        protected static JTextField aboutTextField;
 
         public RightGenericPanel() {
             setLayout(new GridBagLayout());
@@ -307,62 +250,124 @@ public class GenericOptionsPanel extends JPanel {
             }
         }
 
-        // Getters and Setters ----------------------------------------------------------------------------------------|
-        public String getFileTypeText() {
-            return (String) typeComboBox.getSelectedItem();
-        }
+    }
 
-        public String getInputPathText() {
-            return inputPathTextField.getText();
-        }
+    // Getters and Setters --------------------------------------------------------------------------------------------|
+    public String getNameField() {
+        return LeftGenericPanel.nameTextField.getText();
+    }
 
-        public String getOutputPathText() {
-            return outputPathTextField.getText();
-        }
+    public String getDescription() {
+        return LeftGenericPanel.descriptionTextField.getText();
+    }
 
-        public String getArgumentsText() {
-            return argumentsTextField.getText();
-        }
+    public String getIconPath() {
+        return LeftGenericPanel.iconPathTextField.getText();
+    }
 
-        public String getMainJarText() {
-            return mainJarTextField.getText();
-        }
+    public String getVendor() {
+        return LeftGenericPanel.vendorTextField.getText();
+    }
 
-        public String getMainClassText() {
-            return mainClassTextField.getText();
-        }
+    public String getVersion() {
+        return LeftGenericPanel.versionTextField.getText();
+    }
 
-        public String getAboutText() {
-            return aboutTextField.getText();
-        }
+    public String getCopyright() {
+        return LeftGenericPanel.copyrightTextField.getText();
+    }
 
-        public void setTypeText(String text) {
-            typeComboBox.setSelectedItem(text);
-        }
+    public String getLicense() {
+        return LeftGenericPanel.licenseTextField.getText();
+    }
 
-        public void setInputPathText(String text) {
-            inputPathTextField.setText(text);
-        }
+    public void setNameField(String text) {
+        LeftGenericPanel.nameTextField.setText(text);
+    }
 
-        public void setOutputPathText(String text) {
-            outputPathTextField.setText(text);
-        }
+    public void setDescription(String text) {
+        LeftGenericPanel.descriptionTextField.setText(text);
+    }
 
-        public void setArgumentsText(String text) {
-            argumentsTextField.setText(text);
-        }
+    public void setIconPath(String text) {
+        LeftGenericPanel.iconPathTextField.setText(text);
+    }
 
-        public void setMainJarText(String text) {
-            mainJarTextField.setText(text);
-        }
+    public void setVendor(String text) {
+        LeftGenericPanel.vendorTextField.setText(text);
+    }
 
-        public void setMainClassText(String text) {
-            mainClassTextField.setText(text);
-        }
+    public void setVersion(String text) {
+        LeftGenericPanel.versionTextField.setText(text);
+    }
 
-        public void setAboutText(String text) {
-            aboutTextField.setText(text);
+    public void setCopyright(String text) {
+        LeftGenericPanel.copyrightTextField.setText(text);
+    }
+
+    public void setLicense(String text) {
+        LeftGenericPanel.licenseTextField.setText(text);
+    }
+
+    public String getFileType() {
+        return (String) RightGenericPanel.typeComboBox.getSelectedItem();
+    }
+
+    public String getInputPath() {
+        return RightGenericPanel.inputPathTextField.getText();
+    }
+
+    public String getOutputPath() {
+        return RightGenericPanel.outputPathTextField.getText();
+    }
+
+    public String getArguments() {
+        return RightGenericPanel.argumentsTextField.getText();
+    }
+
+    public String getMainJar() {
+        return RightGenericPanel.mainJarTextField.getText();
+    }
+
+    public String getMainClass() {
+        return RightGenericPanel.mainClassTextField.getText();
+    }
+
+    public String getAboutURL() {
+        return RightGenericPanel.aboutTextField.getText();
+    }
+
+    public void setFileType(String text) {
+        int count = RightGenericPanel.typeComboBox.getItemCount();
+        for (int i = 0; i < count; i++) {
+            if (text.equals(RightGenericPanel.typeComboBox.getItemAt(i))) {
+                RightGenericPanel.typeComboBox.setSelectedIndex(i);
+            }
         }
+    }
+
+    public void setInputPath(String text) {
+        RightGenericPanel.inputPathTextField.setText(text);
+    }
+
+    public void setOutputPath(String text) {
+        RightGenericPanel.outputPathTextField.setText(text);
+    }
+
+    public void setArguments(String text) {
+        RightGenericPanel.argumentsTextField.setText(text);
+    }
+
+    public void setMainJar(String text) {
+        RightGenericPanel.mainJarTextField.setText(text);
+    }
+
+    public void setMainClass(String text) {
+        RightGenericPanel.mainClassTextField.setText(text);
+    }
+
+    public void setAboutURL(String text) {
+        RightGenericPanel.aboutTextField.setText(text);
     }
 
 }

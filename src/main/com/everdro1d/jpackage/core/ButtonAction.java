@@ -91,7 +91,7 @@ public class ButtonAction {
 
     // private methods ------------------------------------------------------------------------------------------------|
 
-    private static void putIntoCommandSettingsMap() {
+    private static void getSettingsFromUI() {
         commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
 
         for (String[] keyPair: genericSettingKeyMethodPairs) {

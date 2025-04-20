@@ -75,18 +75,21 @@ public class ButtonAction {
     private static Map<String,String> commandSettingsMap = new HashMap<>() {};
 
     public static void saveSettingsToFile() {
-        putIntoCommandSettingsMap();
+        // TODO open file chooser to save directory
+        getSettingsFromUI();
+        if (debug) System.out.println("Saved settings to map.");
         // TODO Save the settings from the commandSettingsMap into a file
     }
 
     public static void loadSettingsFromFile() {
-        loadIntoCommandSettingsMap();
+        // TODO open file chooser to load file
+        loadSettingsFromFileToMap();
         setSettingsFromMap();
     }
 
     public static void assembleAndRunJPackageCommand() {
         // TODO assemble the jpackage command from the commandSettingsMap
-        putIntoCommandSettingsMap();
+        getSettingsFromUI();
     }
 
     // private methods ------------------------------------------------------------------------------------------------|
@@ -120,7 +123,7 @@ public class ButtonAction {
         }
     }
 
-    private static void loadIntoCommandSettingsMap() {
+    private static void loadSettingsFromFileToMap() {
         // TODO Load the settings from file into the commandSettingsMap
 
     }

@@ -1,6 +1,5 @@
 package main.com.everdro1d.jpackage.core;
 
-import com.everdro1d.libs.core.ApplicationCore;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import java.lang.reflect.InvocationTargetException;
@@ -108,7 +107,7 @@ public class ButtonAction {
 
         addSettingsToMapFromPanel("Generic", genericSettingKeyMethodPairs);
 
-        switch (ApplicationCore.detectOS()) {
+        switch (MainWorker.detectedOS) {
             case "Windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
             case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
             case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
@@ -141,7 +140,7 @@ public class ButtonAction {
 
             setSettingsFromMapToPanel("Generic", genericSettingKeyMethodPairs, key, value);
 
-            switch (ApplicationCore.detectOS()) {
+            switch (MainWorker.detectedOS) {
                 case "Windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
                 case "macOS" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
                 case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);

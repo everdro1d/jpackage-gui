@@ -38,6 +38,7 @@ public class MainWorker {
     public static int[] windowPosition = {0, 0, 0};
 
     private static MainWindow mainWindow;
+    public static String detectedOS = "";
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -62,7 +63,7 @@ public class MainWorker {
             showDebugConsole();
             if (debug) System.out.println("Loaded locale: locale_" + currentLocale);
             System.out.println("Starting " + MainWindow.titleText + " v" + currentVersion + "...");
-            System.out.println("Detected OS: " + ApplicationCore.detectOS());
+            System.out.println("Detected OS: " + MainWorker.detectedOS);
         }
 
         //checkUpdate(); TODO re-enable when ready for release
@@ -83,6 +84,7 @@ public class MainWorker {
 
     public static void checkOSCompatibility() {
         String detectedOS = ApplicationCore.detectOS();
+        MainWorker.detectedOS = detectedOS;
         executeOSSpecificCode(detectedOS);
     }
 

@@ -1,10 +1,10 @@
 package main.com.everdro1d.jpackage.ui;
 
-import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
 import main.com.everdro1d.jpackage.core.ButtonAction;
+import main.com.everdro1d.jpackage.core.MainWorker;
 import main.com.everdro1d.jpackage.ui.panels.*;
 
 import javax.swing.*;
@@ -301,11 +301,14 @@ public class MainWindow extends JFrame {
     }
 
     private void enableTabbedPaneWithOS(JTabbedPane tabbedPane) {
-        String os = ApplicationCore.detectOS();
-        tabbedPane.setEnabledAt(0, os.equals("Windows"));
-        tabbedPane.setEnabledAt(1, os.equals("macOS"));
-        tabbedPane.setEnabledAt(2, os.equals("Unix"));
-        tabbedPane.setSelectedIndex(os.equals("Windows") ? 0 : os.equals("macOS") ? 1 : 2);
+//        tabbedPane.setEnabledAt(0, os.equals("Windows"));
+//        tabbedPane.setEnabledAt(1, os.equals("macOS"));
+//        tabbedPane.setEnabledAt(2, os.equals("Unix"));
+        tabbedPane.setSelectedIndex(
+                MainWorker.detectedOS.equals("Windows")
+                ? 0 : MainWorker.detectedOS.equals("macOS")
+                ? 1 : 2
+        );
     }
 
     public String getJdkBinPath() {

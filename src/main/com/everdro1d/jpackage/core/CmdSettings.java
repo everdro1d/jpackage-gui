@@ -1,7 +1,5 @@
 package main.com.everdro1d.jpackage.core;
 
-import com.everdro1d.libs.core.ApplicationCore;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +16,8 @@ public class CmdSettings {
     };
 
     public static String[] getSubsetOSTypeArray() {
-        String os = ApplicationCore.detectOS();
         return osTypeMap.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(os))
+                .filter(entry -> entry.getValue().equals(MainWorker.detectedOS))
                 .map(Map.Entry::getKey)
                 .toArray(String[]::new);
     }

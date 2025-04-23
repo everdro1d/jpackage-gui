@@ -18,6 +18,7 @@ import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import java.awt.*;
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.prefs.Preferences;
@@ -39,6 +40,7 @@ public class MainWorker {
 
     private static MainWindow mainWindow;
     public static String detectedOS = "";
+    public static String jdkDirectory = "";
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -106,10 +108,25 @@ public class MainWorker {
         }
     }
 
+    private static String getJdkDirectoryPath() {
+        String javaHome = System.getProperty("java.home");
+        if (debug) System.out.println("Java Home: " + javaHome);
+
+        File jdkDir = new File(javaHome);
+        if (jdkDir.isDirectory() && jdkDir.getName().toLowerCase().contains("jdk")) {
+            if (debug) System.out.println("JDK Directory: " + jdkDir.getAbsolutePath());
+            return jdkDir.getAbsolutePath();
+        }
+
+        if (debug) System.err.println("JDK Directory cannot be found.");
+        return null;
+    }
+
     private static void loadPreferencesAndQueueSave() {
         loadWindowPosition();
 
         currentLocale = prefs.get("currentLocale", "eng");
+        jdkDirectory = prefs.get("jdkDirectory", getJdkDirectoryPath());
 
         savePreferencesOnExit();
     }
@@ -119,6 +136,7 @@ public class MainWorker {
             saveWindowPosition();
 
             prefs.put("currentLocale", currentLocale);
+            prefs.put("jdkDirectory", jdkDirectory);
         }));
     }
 

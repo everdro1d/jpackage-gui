@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -190,9 +193,21 @@ public class MainWindow extends JFrame {
                     c.gridx++;
                     c.weightx = 0.95;
                     jdkBinTextField = new TextFieldFileChooser(localeManager, false, true);
+                    setJdkBinPath(jdkDirectory);
                     jdkBinTextField.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     jdkBinPanel.add(jdkBinTextField, c);
-                    //TODO implement locale manager for this TextFieldFileChooser in libs
+
+                    jdkBinTextField.getTextField().addKeyListener(new KeyListener() {
+                        @Override
+                        public void keyTyped(KeyEvent e) {}
+                        @Override
+                        public void keyPressed(KeyEvent e) {}
+
+                        @Override
+                        public void keyReleased(KeyEvent e) {
+                            jdkDirectory = getJdkBinPath();
+                        }
+                    });
                 }
 
                 // Option Panels
@@ -316,6 +331,10 @@ public class MainWindow extends JFrame {
     }
 
     public void setJdkBinPath(String text) {
+        String bin = File.separator + "bin" + File.separator;
+        if (!text.endsWith(bin)) {
+            text = text + bin;
+        }
         jdkBinTextField.setText(text);
     }
 

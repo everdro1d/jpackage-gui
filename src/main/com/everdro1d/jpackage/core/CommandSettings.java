@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CmdSettings {
+public class CommandSettings {
     private static final String[][] mainSettingKeyMethodPair = new String[][] {
             // MainWindow
             {"main_jdkBinPath","getJdkBinPath"}

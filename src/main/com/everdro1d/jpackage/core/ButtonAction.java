@@ -1,6 +1,6 @@
 package main.com.everdro1d.jpackage.core;
 
-import static main.com.everdro1d.jpackage.core.CmdSettings.*;
+import static main.com.everdro1d.jpackage.core.CommandSettings.*;
 import static main.com.everdro1d.jpackage.core.MainWorker.debug;
 
 public class ButtonAction {

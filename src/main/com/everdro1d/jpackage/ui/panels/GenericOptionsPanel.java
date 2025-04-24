@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static main.com.everdro1d.jpackage.core.CmdSettings.getSubsetOSTypeArray;
+import static main.com.everdro1d.jpackage.core.CommandSettings.getSubsetOSTypeArray;
 import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
 
 public class GenericOptionsPanel extends JPanel {

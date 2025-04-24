@@ -1,9 +1,5 @@
-/* requires everdro1dCoreLib, flatlaf, and json libraries
- * TODO
- *  - Detect and autofill jdk bin directory
- *  - save jdk directory to preferences
- *  - actually let buttons do something
- *  - add command assembly line
+/*
+ * requires everdro1dCoreLib, flatlaf, and json libraries
  */
 package main.com.everdro1d.jpackage.core;
 

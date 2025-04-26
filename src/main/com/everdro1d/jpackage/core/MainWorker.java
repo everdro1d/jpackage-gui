@@ -132,7 +132,7 @@ public class MainWorker {
                 if (jdkDirs != null) {
                     for (File dir : jdkDirs) {
                         if (dir.isDirectory() && dir.getName().toLowerCase().contains("jdk")) {
-                            if (debug) System.out.println("JDK Directory: " + dir.getAbsolutePath());
+                            if (debug) System.out.println("JDK Fallback Directory: " + dir.getAbsolutePath());
                             return dir.getAbsolutePath();
                         }
                     }

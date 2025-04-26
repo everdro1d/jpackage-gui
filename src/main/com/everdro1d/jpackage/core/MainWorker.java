@@ -42,6 +42,7 @@ public class MainWorker {
 
     public static void main(String[] args) {
         startUpActions(args);
+        jdkDirectory = getJdkDirectoryPath();
         startMainWindow();
     }
 
@@ -114,15 +115,38 @@ public class MainWorker {
             return jdkDir.getAbsolutePath();
         }
 
-        if (debug) System.err.println("JDK Directory cannot be found.");
-        return null;
+        if (debug) System.err.println("Java Home could not be found. Attempting to auto-fill JDK path based on OS.");
+        String pathTest = switch (detectedOS) {
+            case "Windows" -> System.getenv("ProgramFiles") + "\\Java";
+            case "macOS" -> "/Library/Java/JavaVirtualMachines/";
+            case "Unix" -> "/usr/lib/jvm/";
+            default -> null;
+        };
+
+        if (pathTest != null) {
+            File jdkDirFallback = new File(pathTest);
+            // Check if the directory exists, then check for JDKs
+            if (jdkDirFallback.isDirectory()) {
+                File[] jdkDirs = jdkDirFallback.listFiles();
+                if (jdkDirs != null) {
+                    for (File dir : jdkDirs) {
+                        if (dir.isDirectory() && dir.getName().toLowerCase().contains("jdk")) {
+                            if (debug) System.out.println("JDK Directory: " + dir.getAbsolutePath());
+                            return dir.getAbsolutePath();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (debug) System.err.println("JDK Directory could not be found. Please set it manually.");
+        return "CHANGE ME to \"/bin\" directory of your JDK";
     }
 
     private static void loadPreferencesAndQueueSave() {
         loadWindowPosition();
 
         currentLocale = prefs.get("currentLocale", "eng");
-        jdkDirectory = prefs.get("jdkDirectory", getJdkDirectoryPath());
 
         savePreferencesOnExit();
     }
@@ -132,7 +156,6 @@ public class MainWorker {
             saveWindowPosition();
 
             prefs.put("currentLocale", currentLocale);
-            prefs.put("jdkDirectory", jdkDirectory);
         }));
     }
 

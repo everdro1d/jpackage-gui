@@ -331,9 +331,16 @@ public class MainWindow extends JFrame {
     }
 
     public void setJdkBinPath(String text) {
-        String bin = File.separator + "bin" + File.separator;
-        if (!text.endsWith(bin)) {
-            text = text + bin;
+        String s = File.separator;
+        String binPath;
+        if ("MacOS".equals(detectedOS)) {
+            binPath = s + "Contents" + s + "Home" + s + "bin";
+        } else {
+            binPath = s + "bin" + s;
+        }
+
+        if (!text.endsWith(binPath)) {
+            text = text + binPath;
         }
         jdkBinTextField.setText(text);
     }

@@ -333,7 +333,7 @@ public class MainWindow extends JFrame {
     public void setJdkBinPath(String text) {
         String s = File.separator;
         String binPath;
-        if (detectedOS.equals("macOS")) {
+        if (detectedOS.equals("macOS") && !text.contains("Contents"+s+"Home")) {
             binPath = s + "Contents" + s + "Home" + s + "bin";
         } else {
             binPath = s + "bin" + s;

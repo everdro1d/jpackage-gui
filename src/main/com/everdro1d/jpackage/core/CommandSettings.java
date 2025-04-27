@@ -5,10 +5,7 @@ import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import static main.com.everdro1d.jpackage.core.MainWorker.debug;
 

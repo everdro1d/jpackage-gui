@@ -7,6 +7,8 @@ import com.everdro1d.libs.swing.windows.FileChooser;
 import javax.swing.*;
 
 import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.*;
 import static main.com.everdro1d.jpackage.core.MainWorker.*;
@@ -53,6 +55,8 @@ public class ButtonAction {
     // worker methods -------------------------------------------------------------------------------------------------|
 
     private static String openFileChooser(boolean load) {
+        localeCheck();
+
         String fileChooserDialogTitleText = load ? fileChooserLoadDialogTitleText : fileChooserSaveDialogTitleText;
 
         String output = System.getProperty("user.home");
@@ -81,6 +85,15 @@ public class ButtonAction {
         return output;
     }
 
+    private static void localeCheck() {
+        if (!localeManager.getClassesInLocaleMap().contains("FileChooser")
+                || !localeManager.getComponentsInClassMap("FileChooser").contains("ButtonAction")
+        ) {
+            addFileChooserComponentToLocale();
+        }
+        useLocale();
+    }
+
     private static String assembleFileName() {
         String programName = getCommandSettingsMap().get("gen_name");
         if (programName != null) {
@@ -92,5 +105,27 @@ public class ButtonAction {
                 + Utils.getSanitizedCurrentTime(
                         true, true, false
                   );
+    }
+
+    private static void addFileChooserComponentToLocale() {
+        Map<String, String> fileChooserMap = new TreeMap<>();
+        fileChooserMap.put("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
+        fileChooserMap.put("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
+        fileChooserMap.put("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
+        fileChooserMap.put("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
+
+        if (!localeManager.getClassesInLocaleMap().contains("FileChooser")) {
+            localeManager.addClassSpecificMap("FileChooser", new TreeMap<>());
+        }
+
+        localeManager.addComponentSpecificMap("FileChooser", "ButtonAction", fileChooserMap);
+    }
+
+    private static void useLocale() {
+        Map<String, String> fileChooserMap = localeManager.getComponentSpecificMap("FileChooser", "ButtonAction");
+        fileChooserSaveDialogTitleText = fileChooserMap.getOrDefault("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
+        fileChooserLoadDialogTitleText = fileChooserMap.getOrDefault("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
+        setSaveLocationDialogMessageText = fileChooserMap.getOrDefault("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
+        setSaveLocationDialogTitleText = fileChooserMap.getOrDefault("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
     }
 }

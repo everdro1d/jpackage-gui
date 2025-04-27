@@ -190,7 +190,7 @@ public class CommandSettings {
                     .map(value -> (value.equals("true") || value.equals("false")) ? Boolean.parseBoolean(value) : value)
                     .toArray();
 
-            // setter methods require a parameter to pass getters dont
+            // setter methods require a parameter to pass, getters dont
             Method method;
             method = methodName.startsWith("set")
                     ? clazz.getMethod(methodName, parameterTypes)

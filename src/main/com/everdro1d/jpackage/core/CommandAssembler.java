@@ -110,7 +110,7 @@ public class CommandAssembler {
                     commandList.add(key);
                 } else if (!value.equals("false")) {
                     commandList.add(key);
-                    commandList.add(" \"" + value + "\"");
+                    commandList.add(value);
                 }
             }
         }

@@ -99,11 +99,18 @@ public class ButtonAction {
         if (programName != null) {
             programName = programName.trim().toLowerCase().replaceAll("\\s+", "_");
         }
+        String version = getCommandSettingsMap().get("gen_version");
+        if (version != null) {
+            version = version.trim().replaceAll("\\s+", "_");
+        } else {
+            version = "";
+        }
 
         return detectedOS + "_"
                 + programName + "_"
+                + version + "_"
                 + Utils.getSanitizedCurrentTime(
-                        true, true, false
+                        true, false, false
                   );
     }
 

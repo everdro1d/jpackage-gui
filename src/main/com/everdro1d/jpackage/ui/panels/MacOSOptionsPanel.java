@@ -96,18 +96,18 @@ public class MacOSOptionsPanel extends JPanel {
         int widthPx = 290;
 
         // Col 0
-        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
-                macPackageIdentifierLabelText +
-                "</div></html>"
-        );
-        add(macPackageIdentifierLabel, gbc);
-        gbc.gridy++;
-
         macPackageNameLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
                 macPackageNameLabelText +
                 "</div></html>"
         );
         add(macPackageNameLabel, gbc);
+        gbc.gridy++;
+
+        macPackageIdentifierLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +
+                macPackageIdentifierLabelText +
+                "</div></html>"
+        );
+        add(macPackageIdentifierLabel, gbc);
         gbc.gridy++;
 
         macPackageSigningPrefixLabel = new JLabel("<html><div style='width:"+widthPx+"px'>" +

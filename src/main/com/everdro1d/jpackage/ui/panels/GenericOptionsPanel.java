@@ -231,13 +231,13 @@ public class GenericOptionsPanel extends JPanel {
             add((outputPathTextField = new TextFieldFileChooser(localeManager)), gbc);
             gbc.gridy++;
 
-            add((argumentsTextField = new JTextField()), gbc);
-            gbc.gridy++;
-
             add((mainJarTextField = new JTextField()), gbc);
             gbc.gridy++;
 
             add((mainClassTextField = new JTextField()), gbc);
+            gbc.gridy++;
+
+            add((argumentsTextField = new JTextField()), gbc);
             gbc.gridy++;
 
             gbc.weighty = 1;

@@ -1,5 +1,6 @@
 package main.com.everdro1d.jpackage.core;
 
+import com.everdro1d.libs.io.Files;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import java.lang.reflect.InvocationTargetException;
@@ -7,6 +8,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
+
+import static main.com.everdro1d.jpackage.core.MainWorker.debug;
 
 public class CommandSettings {
     private static final String[][] mainSettingKeyMethodPair = new String[][] {
@@ -72,7 +76,7 @@ public class CommandSettings {
             {"nix_desktopShortcut","isLinuxDesktopShortcut"}
     };
 
-    private static Map<String,String> commandSettingsMap = new HashMap<>() {};
+    private static Map<String,String> commandSettingsMap = new TreeMap<>() {};
 
     public static final Map<String, String> osTypeMap = new HashMap<>() {
         {
@@ -92,7 +96,7 @@ public class CommandSettings {
                 .toArray(String[]::new);
     }
 
-    protected static void getSettingsFromUI() {
+    protected static void setSettingsMapFromUI() {
         commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
 
         addSettingsToMapFromPanel("Generic", genericSettingKeyMethodPairs);
@@ -102,6 +106,8 @@ public class CommandSettings {
             case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
             case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
         }
+
+        if (debug) System.out.println("Saved settings from ui to map.");
     }
 
     protected static void addSettingsToMapFromPanel(String panel, String[][] settingKeyMethodPairs) {
@@ -110,12 +116,15 @@ public class CommandSettings {
         }
     }
 
-    protected static void loadSettingsFromFileToMap() {
-        // TODO Load the settings from file into the commandSettingsMap
+    protected static void loadSettingsFromFileToMap(String path) {
+        commandSettingsMap.clear();
+        if (debug) System.out.println("Cleared commandSettingsMap, ready to load from file.");
+        commandSettingsMap = Files.loadMapFromFile(path);
 
+        if (debug) System.out.println("Loaded settings from file to map.");
     }
 
-    protected static void setSettingsFromMap() {
+    protected static void setUIFromSettingsMap() {
         // Set the settings from the commandSettingsMap
         for (Map.Entry<String, String> entry : commandSettingsMap.entrySet()) {
             String key = entry.getKey();
@@ -136,6 +145,8 @@ public class CommandSettings {
                 case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
             }
         }
+
+        if (debug) System.out.println("Loaded settings from map to ui.");
     }
 
     protected static void setSettingsFromMapToPanel(String panel, String[][] settingKeyMethodPairs, String key, String value) {

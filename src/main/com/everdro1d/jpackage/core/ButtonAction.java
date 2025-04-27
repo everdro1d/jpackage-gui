@@ -49,11 +49,13 @@ public class ButtonAction {
 
     public static void assembleAndRunJPackageCommand() {
         setSettingsMapFromUI();
+        //todo: add checks for valid jpackage args
+        //      (e.x. no spec. chars in name, etc.)
         CommandAssembler.populateCommandMapFromCommandSettingsMap();
+        if (debug) System.out.println("Running JPackage Command.");
         ArrayList<String> cmd = CommandAssembler.getCommandList();
         String pwd = getCommandSettingsMap().get("main_jdkBinPath");
         Utils.runCommand(cmd, pwd, debug, debug);
-        if (debug) System.out.println("Running JPackage Command.");
     }
 
     // worker methods -------------------------------------------------------------------------------------------------|

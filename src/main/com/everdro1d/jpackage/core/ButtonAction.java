@@ -7,6 +7,7 @@ import com.everdro1d.libs.swing.windows.FileChooser;
 import javax.swing.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -47,9 +48,12 @@ public class ButtonAction {
     }
 
     public static void assembleAndRunJPackageCommand() {
-        // TODO assemble the jpackage command from the commandSettingsMap
         setSettingsMapFromUI();
-
+        CommandAssembler.populateCommandMapFromCommandSettingsMap();
+        ArrayList<String> cmd = CommandAssembler.getCommandList();
+        String pwd = getCommandSettingsMap().get("main_jdkBinPath");
+        Utils.runCommand(cmd, pwd, debug, debug);
+        if (debug) System.out.println("Running JPackage Command.");
     }
 
     // worker methods -------------------------------------------------------------------------------------------------|

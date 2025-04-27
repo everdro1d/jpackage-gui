@@ -35,6 +35,9 @@ public class MainWorker {
     public static int[] windowPosition = {0, 0, 0};
 
     private static MainWindow mainWindow;
+    /**
+     * Valid: "Windows", "macOS", "Unix"
+     */
     public static String detectedOS = "";
     public static String jdkDirectory = "";
 

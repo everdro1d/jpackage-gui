@@ -28,7 +28,7 @@ public class MainWorker {
             "-debug", new DebugCommand()
     );
     public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP);
-    private static String currentLocale = "eng";
+    protected static String currentLocale = "eng";
     public static final LocaleManager localeManager = new LocaleManager(MainWorker.class);
     public static boolean debug = false;
     public static DebugConsoleWindow debugConsoleWindow;
@@ -61,6 +61,7 @@ public class MainWorker {
         loadPreferencesAndQueueSave();
 
         localeManager.loadLocaleFromFile("locale_" + currentLocale);
+        currentLocale = localeManager.getCurrentLocale();
 
         if (debug) {
             showDebugConsole();

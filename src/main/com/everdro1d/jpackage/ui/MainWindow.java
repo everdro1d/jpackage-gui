@@ -27,6 +27,7 @@ public class MainWindow extends JFrame {
     private JPanel mainPanel;
         private JPanel northPanel;
             private JLabel titleLabel;
+            private JButton settingsButton;
             private JSeparator titleSeparator;
         private JPanel centerPanel;
             private JPanel jdkBinPanel;
@@ -157,12 +158,40 @@ public class MainWindow extends JFrame {
             mainPanel.add(northPanel, BorderLayout.NORTH);
             {
                 // Add components to northPanel
+                JPanel spacer = new JPanel();
+                spacer.setMinimumSize(new Dimension(50, 50));
+                northPanel.add(spacer, gbc);
+
+                gbc.gridx++;
+                gbc.weightx = 1;
                 titleLabel = new JLabel(titleText);
                 titleLabel.setFont(new Font(fontName, Font.BOLD, fontSize + 12));
                 titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
                 northPanel.add(titleLabel, gbc);
 
+                gbc.gridx++;
+                gbc.weightx = 0;
+                gbc.fill = GridBagConstraints.NONE;
+                gbc.anchor = GridBagConstraints.LINE_END;
+                settingsButton = new JButton();
+                settingsButton.setPreferredSize(new Dimension(50, 50));
+                Icon settingsIcon = SwingGUI.getApplicationIcon("images/settings.png", this.getClass());
+                settingsButton.setIcon(settingsIcon);
+                settingsButton.setBorderPainted(false);
+                settingsButton.setContentAreaFilled(false);
+                northPanel.add(settingsButton, gbc);
+
+                settingsButton.addActionListener(e -> {
+                    System.out.println("beep"); //TODO
+                });
+
+                gbc.weightx = 0;
+                gbc.gridx = 0;
                 gbc.gridy++;
+                gbc.gridwidth = 2;
+                gbc.weightx = 1.0;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                gbc.anchor = GridBagConstraints.CENTER;
                 titleSeparator = new JSeparator();
                 titleSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
                 northPanel.add(titleSeparator, gbc);

@@ -56,8 +56,8 @@ public class MainWindow extends JFrame {
     public static String macOSTabText = "MacOS";
     public static String unixTabText = "Unix";
     public static String osTabbedPaneTitleText = "OS Specific Options";
-    public static String saveSettingsButtonText = "Save Settings";
-    public static String loadSettingsButtonText = "Load Settings";
+    public static String saveSettingsButtonText = "Save Options";
+    public static String loadSettingsButtonText = "Load Options";
     public static String runCommandButtonText = "Create Installer";
 
     public static String fontName = "Tahoma";

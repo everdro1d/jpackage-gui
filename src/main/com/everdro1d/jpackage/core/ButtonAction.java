@@ -3,6 +3,8 @@ package main.com.everdro1d.jpackage.core;
 import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
 import com.everdro1d.libs.swing.windows.FileChooser;
+import com.everdro1d.libs.swing.windows.settings.BasicSettingsWindow;
+import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 
@@ -16,6 +18,8 @@ import static main.com.everdro1d.jpackage.core.MainWorker.*;
 import static main.com.everdro1d.jpackage.ui.MainWindow.topFrame;
 
 public class ButtonAction {
+
+    private static BasicSettingsWindow settingsWindow;
 
     private static String fileChooserSaveDialogTitleText = "Save As:";
     private static String fileChooserLoadDialogTitleText = "Load From:";
@@ -56,6 +60,27 @@ public class ButtonAction {
         ArrayList<String> cmd = CommandAssembler.getCommandList();
         String pwd = getCommandSettingsMap().get("main_jdkBinPath");
         Utils.runCommand(cmd, pwd, debug, debug);
+    }
+
+    public static void showSettingsWindow() {
+        if (debug) System.out.println("Showing settings window.");
+        if (settingsWindow == null) {
+            settingsWindow = new BasicSettingsWindow(
+                    topFrame, MainWindow.fontName, MainWindow.fontSize,
+                    prefs, debug, localeManager, new JPanel()
+            ) {
+                @Override
+                public void applySettings() {
+                    localeManager.reloadLocaleInProgram(prefs.get("currentLocale", localeManager.getCurrentLocale()));
+                    currentLocale = localeManager.getCurrentLocale();
+                }
+            };
+        } else {
+            settingsWindow.setVisible(true);
+            settingsWindow.requestFocus();
+            settingsWindow.toFront();
+        }
+
     }
 
     // worker methods -------------------------------------------------------------------------------------------------|

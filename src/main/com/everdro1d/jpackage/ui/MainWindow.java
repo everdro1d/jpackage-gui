@@ -17,6 +17,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static main.com.everdro1d.jpackage.core.ButtonAction.showSettingsWindow;
 import static main.com.everdro1d.jpackage.core.MainWorker.*;
 
 public class MainWindow extends JFrame {
@@ -182,7 +183,7 @@ public class MainWindow extends JFrame {
                 northPanel.add(settingsButton, gbc);
 
                 settingsButton.addActionListener(e -> {
-                    System.out.println("beep"); //TODO
+                    showSettingsWindow();
                 });
 
                 gbc.weightx = 0;

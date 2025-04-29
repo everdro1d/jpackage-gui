@@ -195,6 +195,19 @@ public class ButtonAction {
                         "JPackage Error",
                         JOptionPane.ERROR_MESSAGE
                 );
+            } else if (p.exitValue() == 0) {
+                if (debug) System.out.println("Successfully created installer.");
+                String outputPath = getCommandSettingsMap().get("gen_outputPath");
+                JOptionPane.showMessageDialog(
+                        topFrame,
+                        "Successfully created installer at:\n"
+                                + outputPath,
+                        "Success!",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+                if (debug) System.out.println("Attempting to open: " + outputPath);
+                Files.openInFileManager(outputPath);
             }
 
             if (debug) {

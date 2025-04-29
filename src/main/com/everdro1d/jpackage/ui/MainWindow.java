@@ -3,6 +3,7 @@ package main.com.everdro1d.jpackage.ui;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
+import com.everdro1d.libs.swing.dialogs.SimpleWorkingDialog;
 import main.com.everdro1d.jpackage.core.ButtonAction;
 import main.com.everdro1d.jpackage.core.MainWorker;
 import main.com.everdro1d.jpackage.ui.panels.*;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static main.com.everdro1d.jpackage.core.ButtonAction.interruptProcess;
 import static main.com.everdro1d.jpackage.core.ButtonAction.showSettingsWindow;
 import static main.com.everdro1d.jpackage.core.MainWorker.*;
 
@@ -47,6 +49,8 @@ public class MainWindow extends JFrame {
                 private JButton runCommandButton;
         private JPanel eastPanel;
         private JPanel westPanel;
+
+    private static SimpleWorkingDialog workingDialog;
 
     // End of Swing components --------------------------------------------|
 
@@ -331,7 +335,20 @@ public class MainWindow extends JFrame {
                     runCommandButton = new JButton(runCommandButtonText);
                     runCommandButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
                     buttonPanel.add(runCommandButton, gbc2);
-                    runCommandButton.addActionListener((e) -> ButtonAction.assembleAndRunJPackageCommand());
+                    runCommandButton.addActionListener((e) -> {
+                        if (debug) System.out.println("Running JPackage Command.");
+                        ButtonAction.assembleAndRunJPackageCommand();
+
+                        workingDialog = new SimpleWorkingDialog(
+                                "Creating Installer...", localeManager
+                        ) {
+                            @Override
+                            public void onCancel() {
+                                interruptProcess();
+                            }
+                        };
+                        workingDialog.showDialog(topFrame, true);
+                    });
                 }
             }
 
@@ -393,5 +410,9 @@ public class MainWindow extends JFrame {
                 return null;
             }
         }
+    }
+
+    public static SimpleWorkingDialog getWorkingDialog() {
+        return workingDialog;
     }
 }

@@ -2,7 +2,6 @@ package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
-import com.everdro1d.libs.io.SyncPipe;
 import com.everdro1d.libs.swing.windows.FileChooser;
 import com.everdro1d.libs.swing.windows.settings.BasicSettingsWindow;
 import main.com.everdro1d.jpackage.ui.MainWindow;
@@ -17,11 +16,13 @@ import java.util.TreeMap;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.*;
 import static main.com.everdro1d.jpackage.core.MainWorker.*;
+import static main.com.everdro1d.jpackage.ui.MainWindow.getWorkingDialog;
 import static main.com.everdro1d.jpackage.ui.MainWindow.topFrame;
 
 public class ButtonAction {
 
     private static BasicSettingsWindow settingsWindow;
+    private static Process currentProcess;
 
     private static String fileChooserSaveDialogTitleText = "Save As:";
     private static String fileChooserLoadDialogTitleText = "Load From:";
@@ -64,10 +65,9 @@ public class ButtonAction {
         //todo: add checks for valid jpackage args
         //      (e.x. no spec. chars in name, etc.)
         CommandAssembler.populateCommandMapFromCommandSettingsMap();
-        if (debug) System.out.println("Running JPackage Command.");
         ArrayList<String> cmd = CommandAssembler.getCommandList();
         String pwd = getCommandSettingsMap().get("main_jdkBinPath");
-        runCommand(cmd, pwd, debug);
+        new Thread(() -> runCommand(cmd, pwd)).start();
     }
 
     public static void showSettingsWindow() {
@@ -213,15 +213,17 @@ public class ButtonAction {
         successInstallerCreationDialogTitleText = dialogMap.getOrDefault("successInstallerCreationDialogTitleText", successInstallerCreationDialogTitleText);
     }
 
-    private static void runCommand(ArrayList<String> cmd, String pwd, boolean debug) {
+    private static void runCommand(ArrayList<String> cmd, String pwd) {
         ProcessBuilder pb = new ProcessBuilder(cmd);
         if (pwd != null && (new File(pwd)).exists()) {
             pb.directory(new File(pwd));
         }
 
         try {
-            Process p = pb.start();
-            Scanner errorScanner = new Scanner(p.getErrorStream());
+            currentProcess = pb.start();
+            if (debug) System.out.println("Process started: " + currentProcess);
+
+            Scanner errorScanner = new Scanner(currentProcess.getErrorStream());
             StringBuilder errorOutput = new StringBuilder();
 
             while (errorScanner.hasNextLine()) {
@@ -229,9 +231,9 @@ public class ButtonAction {
                 errorOutput.append(line).append(System.lineSeparator());
             }
 
-            p.waitFor();
+            currentProcess.waitFor();
 
-            if (p.exitValue() != 0 && errorOutput.length() > 0) {
+            if (currentProcess.exitValue() != 0 && !errorOutput.isEmpty()) {
                 if (debug) System.err.println("Jpackage Error: " + errorOutput.toString().trim());
                 JOptionPane.showMessageDialog(
                         topFrame,
@@ -239,7 +241,7 @@ public class ButtonAction {
                         "JPackage Error",
                         JOptionPane.ERROR_MESSAGE
                 );
-            } else if (p.exitValue() == 0) {
+            } else if (currentProcess.exitValue() == 0) {
                 if (debug) System.out.println("Successfully created installer.");
                 String outputPath = getCommandSettingsMap().get("gen_outputPath");
                 JOptionPane.showMessageDialog(
@@ -255,12 +257,36 @@ public class ButtonAction {
             }
 
             if (debug) {
-                System.out.println("JPackage process exited with code: " + p.exitValue());
+                System.out.println("JPackage process exited with code: " + currentProcess.exitValue());
             }
         } catch (Exception e) {
             if (debug) {
                 e.printStackTrace(System.err);
             }
+        } finally {
+            if (debug) System.out.println("JPackage process completed. Setting currentProcess to null.");
+            getWorkingDialog().dispose();
+            currentProcess = null;
+        }
+    }
+
+    public static void interruptProcess() {
+        if (currentProcess != null) {
+            try {
+                if (currentProcess.isAlive()) {
+                    currentProcess.destroy();
+                    if (debug) System.out.println("Process interrupted.");
+                } else {
+                    if (debug) System.out.println("Process already terminated.");
+                }
+            } catch (Exception e) {
+                if (debug) {
+                    System.err.println("Error while interrupting the process: " + e.getMessage());
+                    e.printStackTrace(System.err);
+                }
+            }
+        } else if (debug) {
+            System.out.println("No process to interrupt.");
         }
     }
 

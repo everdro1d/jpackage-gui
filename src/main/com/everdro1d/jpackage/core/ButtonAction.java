@@ -27,6 +27,10 @@ public class ButtonAction {
     private static String fileChooserLoadDialogTitleText = "Load From:";
     private static String setSaveLocationDialogMessageText = "Saved to:";
     private static String setSaveLocationDialogTitleText = "Saved Successfully!:";
+    private static String saveLocationOverwriteDialogMessageText = "File already exists. Overwrite?";
+    private static String saveLocationOverwriteDialogTitleText = "File Overwrite!";
+    private static String cannotLoadDirectoryDialogMessageText = "Cannot load a Directory, please select a valid file.";
+    private static String cannotLoadDirectoryDialogTitleText = "Error!";
 
     public static void saveSettingsToFile() {
         if (debug) System.out.println("Saving settings to file from map.");
@@ -37,7 +41,7 @@ public class ButtonAction {
         Files.saveMapToFile(path,
                 fileName,
                 getCommandSettingsMap(),
-                false
+                true
         );
         if (debug) System.out.println("Saving settings to file" +
                 "\n at: " + path + "\n as: " + fileName + ".txt"
@@ -103,7 +107,29 @@ public class ButtonAction {
         int returnValue = fileChooser.showOpenDialog(topFrame);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
-            // TODO: overwrite warning dialog for save?
+            if (!load) {
+                int result = JOptionPane.showConfirmDialog(
+                        topFrame,
+                        saveLocationOverwriteDialogMessageText + " "
+                                + f.getAbsolutePath() + File.separator
+                                + assembleFileName(),
+                        saveLocationOverwriteDialogTitleText,
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                if (result == JOptionPane.CANCEL_OPTION) {
+                    if (debug) System.out.println("Save FileChooser cancelled by user.");
+                    return null;
+                }
+            } else if (f.isDirectory()) {
+                if (debug) System.out.println("Cannot load a directory: " + f.getAbsolutePath());
+                JOptionPane.showMessageDialog(
+                        topFrame, cannotLoadDirectoryDialogMessageText,
+                        cannotLoadDirectoryDialogTitleText, JOptionPane.ERROR_MESSAGE
+                );
+                return null;
+            }
+
             output = f.getAbsolutePath();
             if (!load) JOptionPane.showMessageDialog(
                     topFrame, setSaveLocationDialogMessageText
@@ -119,10 +145,10 @@ public class ButtonAction {
     }
 
     private static void localeCheck() {
-        if (!localeManager.getClassesInLocaleMap().contains("FileChooser")
-                || !localeManager.getComponentsInClassMap("FileChooser").contains("ButtonAction")
+        if (!localeManager.getClassesInLocaleMap().contains("Dialogs")
+                || !localeManager.getComponentsInClassMap("Dialogs").contains("ButtonAction")
         ) {
-            addFileChooserComponentToLocale();
+            addDialogComponentsToLocale();
         }
         useLocale();
     }
@@ -147,26 +173,36 @@ public class ButtonAction {
                   );
     }
 
-    private static void addFileChooserComponentToLocale() {
-        Map<String, String> fileChooserMap = new TreeMap<>();
-        fileChooserMap.put("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
-        fileChooserMap.put("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
-        fileChooserMap.put("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
-        fileChooserMap.put("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
+    private static void addDialogComponentsToLocale() {
+        Map<String, String> dialogMap = new TreeMap<>();
+        dialogMap.put("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
+        dialogMap.put("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
+        dialogMap.put("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
+        dialogMap.put("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
 
-        if (!localeManager.getClassesInLocaleMap().contains("FileChooser")) {
-            localeManager.addClassSpecificMap("FileChooser", new TreeMap<>());
+        dialogMap.put("saveLocationOverwriteDialogMessageText", saveLocationOverwriteDialogMessageText);
+        dialogMap.put("saveLocationOverwriteDialogTitleText", saveLocationOverwriteDialogTitleText);
+        dialogMap.put("cannotLoadDirectoryDialogMessageText", cannotLoadDirectoryDialogMessageText);
+        dialogMap.put("cannotLoadDirectoryDialogTitleText", cannotLoadDirectoryDialogTitleText);
+
+        if (!localeManager.getClassesInLocaleMap().contains("Dialogs")) {
+            localeManager.addClassSpecificMap("Dialogs", new TreeMap<>());
         }
 
-        localeManager.addComponentSpecificMap("FileChooser", "ButtonAction", fileChooserMap);
+        localeManager.addComponentSpecificMap("Dialogs", "ButtonAction", dialogMap);
     }
 
     private static void useLocale() {
-        Map<String, String> fileChooserMap = localeManager.getComponentSpecificMap("FileChooser", "ButtonAction");
-        fileChooserSaveDialogTitleText = fileChooserMap.getOrDefault("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
-        fileChooserLoadDialogTitleText = fileChooserMap.getOrDefault("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
-        setSaveLocationDialogMessageText = fileChooserMap.getOrDefault("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
-        setSaveLocationDialogTitleText = fileChooserMap.getOrDefault("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
+        Map<String, String> dialogMap = localeManager.getComponentSpecificMap("Dialogs", "ButtonAction");
+        fileChooserSaveDialogTitleText = dialogMap.getOrDefault("fileChooserSaveDialogTitleText", fileChooserSaveDialogTitleText);
+        fileChooserLoadDialogTitleText = dialogMap.getOrDefault("fileChooserLoadDialogTitleText", fileChooserLoadDialogTitleText);
+        setSaveLocationDialogMessageText = dialogMap.getOrDefault("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
+        setSaveLocationDialogTitleText = dialogMap.getOrDefault("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
+
+        saveLocationOverwriteDialogMessageText = dialogMap.getOrDefault("saveLocationOverwriteDialogMessageText", saveLocationOverwriteDialogMessageText);
+        saveLocationOverwriteDialogTitleText = dialogMap.getOrDefault("saveLocationOverwriteDialogTitleText", saveLocationOverwriteDialogTitleText);
+        cannotLoadDirectoryDialogMessageText = dialogMap.getOrDefault("cannotLoadDirectoryDialogMessageText", cannotLoadDirectoryDialogMessageText);
+        cannotLoadDirectoryDialogTitleText = dialogMap.getOrDefault("cannotLoadDirectoryDialogTitleText", cannotLoadDirectoryDialogTitleText);
     }
 
     private static void runCommand(ArrayList<String> cmd, String pwd, boolean debug) {

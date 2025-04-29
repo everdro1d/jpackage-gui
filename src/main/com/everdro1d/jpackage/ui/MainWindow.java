@@ -186,9 +186,7 @@ public class MainWindow extends JFrame {
                 settingsButton.setContentAreaFilled(false);
                 northPanel.add(settingsButton, gbc);
 
-                settingsButton.addActionListener(e -> {
-                    showSettingsWindow();
-                });
+                settingsButton.addActionListener(e -> showSettingsWindow());
 
                 gbc.weightx = 0;
                 gbc.gridx = 0;

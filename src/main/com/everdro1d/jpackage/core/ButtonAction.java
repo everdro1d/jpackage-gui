@@ -231,6 +231,8 @@ public class ButtonAction {
 
             currentProcess.waitFor();
 
+            getWorkingDialog().dispose();
+
             if (currentProcess.exitValue() != 0 && !errorOutput.isEmpty()) {
                 if (debug) System.err.println("Jpackage Error: " + errorOutput.toString().trim());
                 JOptionPane.showMessageDialog(
@@ -239,6 +241,7 @@ public class ButtonAction {
                         "JPackage Error",
                         JOptionPane.ERROR_MESSAGE
                 );
+
             } else if (currentProcess.exitValue() == 0) {
                 if (debug) System.out.println("Successfully created installer.");
                 String outputPath = getCommandSettingsMap().get("gen_outputPath");
@@ -263,7 +266,6 @@ public class ButtonAction {
             }
         } finally {
             if (debug) System.out.println("JPackage process completed. Setting currentProcess to null.");
-            getWorkingDialog().dispose();
             currentProcess = null;
         }
     }

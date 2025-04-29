@@ -31,6 +31,8 @@ public class ButtonAction {
     private static String saveLocationOverwriteDialogTitleText = "File Overwrite!";
     private static String cannotLoadDirectoryDialogMessageText = "Cannot load a Directory, please select a valid file.";
     private static String cannotLoadDirectoryDialogTitleText = "Error!";
+    private static String successInstallerCreationDialogMessageText = "Successfully created installer at:";
+    private static String successInstallerCreationDialogTitleText = "Success!";
 
     public static void saveSettingsToFile() {
         if (debug) System.out.println("Saving settings to file from map.");
@@ -185,6 +187,9 @@ public class ButtonAction {
         dialogMap.put("cannotLoadDirectoryDialogMessageText", cannotLoadDirectoryDialogMessageText);
         dialogMap.put("cannotLoadDirectoryDialogTitleText", cannotLoadDirectoryDialogTitleText);
 
+        dialogMap.put("successInstallerCreationDialogMessageText", successInstallerCreationDialogMessageText);
+        dialogMap.put("successInstallerCreationDialogTitleText", successInstallerCreationDialogTitleText);
+
         if (!localeManager.getClassesInLocaleMap().contains("Dialogs")) {
             localeManager.addClassSpecificMap("Dialogs", new TreeMap<>());
         }
@@ -203,6 +208,9 @@ public class ButtonAction {
         saveLocationOverwriteDialogTitleText = dialogMap.getOrDefault("saveLocationOverwriteDialogTitleText", saveLocationOverwriteDialogTitleText);
         cannotLoadDirectoryDialogMessageText = dialogMap.getOrDefault("cannotLoadDirectoryDialogMessageText", cannotLoadDirectoryDialogMessageText);
         cannotLoadDirectoryDialogTitleText = dialogMap.getOrDefault("cannotLoadDirectoryDialogTitleText", cannotLoadDirectoryDialogTitleText);
+
+        successInstallerCreationDialogMessageText = dialogMap.getOrDefault("successInstallerCreationDialogMessageText", successInstallerCreationDialogMessageText);
+        successInstallerCreationDialogTitleText = dialogMap.getOrDefault("successInstallerCreationDialogTitleText", successInstallerCreationDialogTitleText);
     }
 
     private static void runCommand(ArrayList<String> cmd, String pwd, boolean debug) {
@@ -236,9 +244,9 @@ public class ButtonAction {
                 String outputPath = getCommandSettingsMap().get("gen_outputPath");
                 JOptionPane.showMessageDialog(
                         topFrame,
-                        "Successfully created installer at:\n"
+                        successInstallerCreationDialogMessageText + " \n"
                                 + outputPath,
-                        "Success!",
+                        successInstallerCreationDialogTitleText,
                         JOptionPane.INFORMATION_MESSAGE
                 );
 

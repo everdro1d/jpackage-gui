@@ -62,8 +62,6 @@ public class ButtonAction {
 
     public static void assembleAndRunJPackageCommand() {
         setSettingsMapFromUI();
-        //todo: add checks for valid jpackage args
-        //      (e.x. no spec. chars in name, etc.)
         CommandAssembler.populateCommandMapFromCommandSettingsMap();
         ArrayList<String> cmd = CommandAssembler.getCommandList();
         String pwd = getCommandSettingsMap().get("main_jdkBinPath");

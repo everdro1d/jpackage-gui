@@ -2,6 +2,7 @@ package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
+import com.everdro1d.libs.io.SyncPipe;
 import com.everdro1d.libs.swing.windows.FileChooser;
 import com.everdro1d.libs.swing.windows.settings.BasicSettingsWindow;
 import main.com.everdro1d.jpackage.ui.MainWindow;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.*;
@@ -59,7 +61,7 @@ public class ButtonAction {
         if (debug) System.out.println("Running JPackage Command.");
         ArrayList<String> cmd = CommandAssembler.getCommandList();
         String pwd = getCommandSettingsMap().get("main_jdkBinPath");
-        Utils.runCommand(cmd, pwd, debug, debug);
+        runCommand(cmd, pwd, debug);
     }
 
     public static void showSettingsWindow() {
@@ -166,4 +168,43 @@ public class ButtonAction {
         setSaveLocationDialogMessageText = fileChooserMap.getOrDefault("setSaveLocationDialogMessageText", setSaveLocationDialogMessageText);
         setSaveLocationDialogTitleText = fileChooserMap.getOrDefault("setSaveLocationDialogTitleText", setSaveLocationDialogTitleText);
     }
+
+    private static void runCommand(ArrayList<String> cmd, String pwd, boolean debug) {
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        if (pwd != null && (new File(pwd)).exists()) {
+            pb.directory(new File(pwd));
+        }
+
+        try {
+            Process p = pb.start();
+            Scanner errorScanner = new Scanner(p.getErrorStream());
+            StringBuilder errorOutput = new StringBuilder();
+
+            while (errorScanner.hasNextLine()) {
+                String line = errorScanner.nextLine();
+                errorOutput.append(line).append(System.lineSeparator());
+            }
+
+            p.waitFor();
+
+            if (p.exitValue() != 0 && errorOutput.length() > 0) {
+                if (debug) System.err.println("Jpackage Error: " + errorOutput.toString().trim());
+                JOptionPane.showMessageDialog(
+                        topFrame,
+                        errorOutput.toString().trim(),
+                        "JPackage Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+
+            if (debug) {
+                System.out.println("JPackage process exited with code: " + p.exitValue());
+            }
+        } catch (Exception e) {
+            if (debug) {
+                e.printStackTrace(System.err);
+            }
+        }
+    }
+
 }

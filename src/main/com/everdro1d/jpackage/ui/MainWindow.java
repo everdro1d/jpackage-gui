@@ -198,7 +198,6 @@ public class MainWindow extends JFrame {
                 titleSeparator = new JSeparator();
                 titleSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
                 northPanel.add(titleSeparator, gbc);
-
             }
 
             centerPanel = new JPanel();

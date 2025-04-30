@@ -24,8 +24,8 @@ import static main.com.everdro1d.jpackage.core.ButtonAction.settingsWindow;
 
 public class MainWorker {
     // Variables ------------------------------------------------------------------------------------------------------|
-    public static final String githubRepoURL = "https://github.com/everdro1d/jpackage-gui/releases/latest/";
-    public static final String dro1dDevWebsite = "https://everdro1d.github.io/";
+    public static final String githubRepoURL = "https://github.com/everdro1d/jpackage-gui/";
+    public static final String dro1dDevWebsite = "https://everdro1d.github.io/posts/jpackage-gui/";
     public static final String currentVersion = "1.0.0"; //TODO: update this with each release
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
             "-debug", new DebugCommand()
@@ -241,7 +241,7 @@ public class MainWorker {
     public static void checkUpdate() {
         // checks project GitHub for the latest version at launch
         new Thread(() -> UpdateCheckerDialog.showUpdateCheckerDialog(currentVersion, null, debug,
-                githubRepoURL, dro1dDevWebsite + "posts/jpackage-gui/", prefs, localeManager
+                githubRepoURL + "releases/latest/", dro1dDevWebsite, prefs, localeManager
         )).start(); //TODO webpage doesn't exist yet
     }
 }

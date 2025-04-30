@@ -165,6 +165,8 @@ public class MainWorker {
     }
 
     private static void loadPreferencesAndQueueSave() {
+        ApplicationCore.loadConfigFile(MainWorker.class);
+
         loadWindowPosition();
 
         currentLocale = prefs.get("currentLocale", "eng");
@@ -179,6 +181,8 @@ public class MainWorker {
 
             prefs.put("currentLocale", currentLocale);
             prefs.putBoolean("darkMode", darkMode);
+
+            ApplicationCore.saveConfigFile(MainWorker.class, prefs);
         }));
     }
 

@@ -1,0 +1,170 @@
+{
+  "!head": {
+    "version": {
+      "currentVersion": "1.0.0"
+    }
+  },
+  "BasicSettingsWindow": {
+    "Defaults": {
+      "acceptText": "OK",
+      "cancelText": "Cancel",
+      "exportButtonToolTipText": "Export Settings",
+      "exportText": "Export",
+      "generalBorderTitleText": "General",
+      "importButtonToolTipText": "Import Settings",
+      "importText": "Import",
+      "localeBorderTitleText": "Locale",
+      "localeSwitchLabelText": "Change Language (Restart Required):",
+      "openHelpWebsiteTooltipText": "Open Help Website",
+      "openLocaleDirectoryButtonText": "Open Locale Directory",
+      "openLocaleRepositoryTooltipText": "Open Locale Website",
+      "titleText": "Settings"
+    },
+    "GeneralSettingsPanel": {
+      "darkModeSwitchLabelText": "Enable Dark Mode:",
+      "debugSwitchLabelText": "Enable Debug Mode:",
+      "enableDisableSwitchOptions0": "Enabled",
+      "enableDisableSwitchOptions1": "Disabled"
+    }
+  },
+  "DebugConsoleWindow": {
+    "Main": {
+      "clearButtonText": "Clear",
+      "closeButtonText": "Close",
+      "copyButtonText": "Copy",
+      "numberOfLinesText": "Number of Lines:",
+      "saveButtonText": "Save as",
+      "titleText": "Debug Console"
+    }
+  },
+  "Dialogs": {
+    "ButtonAction": {
+      "cannotLoadDirectoryDialogMessageText": "Cannot load a Directory, please select a valid file.",
+      "cannotLoadDirectoryDialogTitleText": "Error!",
+      "fileChooserLoadDialogTitleText": "Load From:",
+      "fileChooserSaveDialogTitleText": "Save As:",
+      "saveLocationOverwriteDialogMessageText": "File already exists. Overwrite?",
+      "saveLocationOverwriteDialogTitleText": "File Overwrite!",
+      "setSaveLocationDialogMessageText": "Saved to:",
+      "setSaveLocationDialogTitleText": "Saved Successfully!:",
+      "successInstallerCreationDialogMessageText": "Successfully created installer at:",
+      "successInstallerCreationDialogTitleText": "Success!"
+    },
+    "SimpleWorkingDialog": {
+      "cancelText": "Cancel",
+      "progressText": "Please wait...",
+      "titleText": "Working..."
+    },
+    "UpdateCheckerDialog": {
+      "updateCheckerDialogText0": "An update is available.",
+      "updateCheckerDialogText1": "Would you like to update now?",
+      "updateCheckerDialogText2": "Latest Version: v",
+      "updateCheckerDialogText3": "Installed Version: v",
+      "updateCheckerDialogText4": "Update Available"
+    }
+  },
+  "FileChooser": {
+    "DebugConsoleWindow": {
+      "fileChooserCustomMessage": "Text File",
+      "fileChooserTitle": "Save To",
+      "savedSuccessDialogMessage": "Saved debug console to file at:",
+      "savedSuccessDialogTitle": "Success!"
+    },
+    "Defaults": {
+      "anyFileOrDirectory": "Any File or Directory (Folder)",
+      "approveButtonText": "Select",
+      "cancelButtonText": "Cancel",
+      "cancelButtonToolTipText": "Cancel",
+      "detailsViewButtonToolTipText": "Details",
+      "dirOnlyDescription": "Directory (Folder)",
+      "directoryOpenButtonText": "Open",
+      "directoryOpenButtonToolTipText": "Open selected directory",
+      "extFilterDescription": "Files",
+      "fileAttrHeaderText": "Attributes",
+      "fileDateHeaderText": "Date",
+      "fileNameHeaderText": "Name",
+      "fileNameLabelText": "File Name:",
+      "fileSizeHeaderText": "Size",
+      "fileTypeHeaderText": "Type",
+      "filesOfTypeLabelText": "Files of Type:",
+      "filesOnlyDescription": "Any File",
+      "homeFolderToolTipText": "Home",
+      "listViewButtonToolTipText": "List",
+      "lookInLabelText": "Look In:",
+      "newFolderErrorText": "Error creating new folder",
+      "newFolderToolTipText": "Create New Folder",
+      "openButtonText": "Open",
+      "openButtonToolTipText": "Open selected file",
+      "saveButtonText": "Save",
+      "saveButtonToolTipText": "Save selected file",
+      "saveInLabelText": "Save In:",
+      "upFolderToolTipText": "Up One Level"
+    },
+    "TextFieldFileChooser": {
+      "dialogTitle": "Select path:"
+    }
+  },
+  "MainWindow": {
+    "GenericOptionsPanel": {
+      "aboutLabelText": "About URL:",
+      "argumentsLabelText": "Arguments:",
+      "copyrightLabelText": "Copyright:",
+      "descriptionLabelText": "Description:",
+      "iconPathLabelText": "Icon Path:",
+      "inputLabelText": "Input Path:",
+      "licensePathLabelText": "License Path:",
+      "mainClassLabelText": "Main Class:",
+      "mainJarLabelText": "Main Jar:",
+      "nameLabelText": "Name:",
+      "outputLabelText": "Output Path:",
+      "typeLabelText": "Type:",
+      "vendorLabelText": "Vendor:",
+      "versionLabelText": "Version:"
+    },
+    "MacOSOptionsPanel": {
+      "macAppCategoryLabelText": "String used to construct LSApplicationCategoryType in application plist:",
+      "macAppStoreLabelText": "Indicates that the jpackage output is intended for the Mac App Store:",
+      "macEntitlementsLabelText": "Path to file containing entitlements to use:",
+      "macPackageIdentifierLabelText": "An identifier that uniquely identifies the application for macOS:",
+      "macPackageNameLabelText": "Name of the application as it appears in the Menu Bar:",
+      "macPackageSigningPrefixLabelText": "Component package identifier prefix:",
+      "macSignLabelText": "Request that the package be signed:",
+      "macSigningKeyUserNameLabelText": "Team or username portion in Apple signing identities:",
+      "macSigningKeychainLabelText": "Name of the keychain to search for the signing identity:"
+    },
+    "Main": {
+      "genericOptionsPanelTitleText": "Generic Options",
+      "jdkBinLabelText": "Path to JDK \"/bin\" directory:",
+      "loadSettingsButtonText": "Load Options",
+      "macOSTabText": "MacOS",
+      "osTabbedPaneTitleText": "OS Specific Options",
+      "runCommandButtonText": "Create Installer",
+      "saveSettingsButtonText": "Save Options",
+      "titleText": "JPackage GUI",
+      "unixTabText": "Unix",
+      "windowsTabText": "Windows"
+    },
+    "UnixOptionsPanel": {
+      "linuxAppCategoryLabelText": "Group value of the RPM /.spec file or Section value of DEB control file:",
+      "linuxAppReleaseLabelText": "Release value of the RPM <name>.spec file or Debian revision value of the DEB control file:",
+      "linuxDebMaintainerLabelText": "Maintainer for .deb bundle:",
+      "linuxMenuGroupLabelText": "Menu group this application is placed in:",
+      "linuxPackageDepsLabelText": "Required packages or capabilities for the application:",
+      "linuxPackageNameLabelText": "Name for Linux package:",
+      "linuxRpmLicenseTypeLabelText": "Type of the license:",
+      "linuxShortcutLabelText": "Creates a shortcut for the application:"
+    },
+    "WindowsOptionsPanel": {
+      "winConsoleLabelText": "Launch with console window:",
+      "winDirChooserLabelText": "Allow the user to choose a directory in which the product is installed:",
+      "winHelpUrlLabelText": "URL where user can obtain further information or support:",
+      "winMenuGroupLabelText": "Start Menu group this application is placed in:",
+      "winMenuLabelText": "Request to add a Start Menu shortcut for this application:",
+      "winPerUserInstallLabelText": "Request to perform an install on a per-user basis:",
+      "winShortcutLabelText": "Request to create a desktop shortcut for this application:",
+      "winShortcutPromptLabelText": "Allow the user to choose if shortcuts will be created by installer:",
+      "winUpdateUrlLabelText": "URL of available application update information:",
+      "winUpgradeUuidLabelText": "UUID associated with upgrades for this package:"
+    }
+  }
+}

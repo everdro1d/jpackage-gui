@@ -32,7 +32,7 @@ public class MainWorker {
     );
     public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP);
     protected static String currentLocale = "eng";
-    public static final LocaleManager localeManager = new LocaleManager(MainWorker.class);
+    public static final LocaleManager localeManager = new LocaleManager();
     public static boolean debug = false;
     public static DebugConsoleWindow debugConsoleWindow;
     public static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);

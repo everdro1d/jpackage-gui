@@ -2,9 +2,11 @@ package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
+import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.windows.FileChooser;
 import com.everdro1d.libs.swing.windows.settings.BasicSettingsWindow;
 import main.com.everdro1d.jpackage.ui.MainWindow;
+import main.com.everdro1d.jpackage.ui.panels.GeneralSettingsPanel;
 
 import javax.swing.*;
 
@@ -21,7 +23,7 @@ import static main.com.everdro1d.jpackage.ui.MainWindow.topFrame;
 
 public class ButtonAction {
 
-    private static BasicSettingsWindow settingsWindow;
+    public static BasicSettingsWindow settingsWindow;
     private static Process currentProcess;
 
     private static String fileChooserSaveDialogTitleText = "Save As:";
@@ -70,19 +72,36 @@ public class ButtonAction {
 
     public static void showSettingsWindow() {
         if (debug) System.out.println("Showing settings window.");
-        if (settingsWindow == null) {
+        if (settingsWindow == null ||  !settingsWindow.isVisible()) {
             settingsWindow = new BasicSettingsWindow(
                     topFrame, MainWindow.fontName, MainWindow.fontSize,
-                    prefs, debug, localeManager, new JPanel()
+                    prefs, debug, localeManager, new GeneralSettingsPanel()
             ) {
                 @Override
                 public void applySettings() {
                     localeManager.reloadLocaleInProgram(prefs.get("currentLocale", localeManager.getCurrentLocale()));
                     currentLocale = localeManager.getCurrentLocale();
+
+                    debug = prefs.getBoolean("debug", debug);
+                    darkMode = prefs.getBoolean("darkMode", darkMode);
+
+                    if (debug) {
+                        showDebugConsole();
+                        if (debug) System.out.println("Active locale: " + currentLocale);
+                        System.out.println("Active: " + MainWindow.titleText + " v" + currentVersion);
+                        System.out.println("Detected OS: " + MainWorker.detectedOS);
+                    } else if (debugConsoleWindow != null) {
+                        debugConsoleWindow.dispose();
+                        debugConsoleWindow = null;
+                        windowFrameArray[1] = null;
+                    }
+
+                    SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
+                    getInstanceOfMainWindow().customActionsOnDarkModeSwitch();
                 }
             };
+            windowFrameArray[2] = settingsWindow;
         } else {
-            settingsWindow.setVisible(true);
             settingsWindow.requestFocus();
             settingsWindow.toFront();
         }

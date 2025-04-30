@@ -412,4 +412,12 @@ public class MainWindow extends JFrame {
     public static SimpleWorkingDialog getWorkingDialog() {
         return workingDialog;
     }
+
+    public void customActionsOnDarkModeSwitch() {
+        Icon i = SwingGUI.changeIconColor(
+                settingsButton.getIcon(),
+                UIManager.getColor("RootPane.foreground")
+        );
+        settingsButton.setIcon(i);
+    }
 }

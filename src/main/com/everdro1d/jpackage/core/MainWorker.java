@@ -13,17 +13,20 @@ import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
 import main.com.everdro1d.jpackage.core.commands.DebugCommand;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.prefs.Preferences;
 
+import static main.com.everdro1d.jpackage.core.ButtonAction.settingsWindow;
+
 public class MainWorker {
     // Variables ------------------------------------------------------------------------------------------------------|
     public static final String githubRepoURL = "https://github.com/everdro1d/jpackage-gui/releases/latest/";
     public static final String dro1dDevWebsite = "https://everdro1d.github.io/";
-    public static final String currentVersion = "0.0.9"; //TODO: update this with each release
+    public static final String currentVersion = "1.0.0"; //TODO: update this with each release
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
             "-debug", new DebugCommand()
     );
@@ -32,15 +35,22 @@ public class MainWorker {
     public static final LocaleManager localeManager = new LocaleManager(MainWorker.class);
     public static boolean debug = false;
     public static DebugConsoleWindow debugConsoleWindow;
-    static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);
+    public static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);
     public static int[] windowPosition = {0, 0, 0};
 
     private static MainWindow mainWindow;
+    public static JFrame[] windowFrameArray = new JFrame[]{
+            mainWindow,
+            debugConsoleWindow,
+            settingsWindow
+    };
+
     /**
      * Valid: "Windows", "macOS", "Unix"
      */
     public static String detectedOS = "";
     public static String jdkDirectory = "";
+    public static boolean darkMode = false;
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -54,7 +64,7 @@ public class MainWorker {
         ApplicationCore.checkCLIArgs(args, commandManager);
         checkOSCompatibility();
 
-        SwingGUI.setupLookAndFeel(true, false);
+        SwingGUI.setupLookAndFeel(true, true);
 
         SwingGUI.uiSetup(MainWindow.fontName, MainWindow.fontSize);
 
@@ -65,12 +75,12 @@ public class MainWorker {
 
         if (debug) {
             showDebugConsole();
-            if (debug) System.out.println("Loaded locale: locale_" + currentLocale);
+            if (debug) System.out.println("Loaded locale: " + currentLocale + " at: " + localeManager.getLocaleDirPath());
             System.out.println("Starting " + MainWindow.titleText + " v" + currentVersion + "...");
             System.out.println("Detected OS: " + MainWorker.detectedOS);
         }
 
-        //checkUpdate(); TODO re-enable when ready for release
+        checkUpdate();
 
         if (!localeManager.getClassesInLocaleMap().contains("!head")) {
             addVersionToLocale();
@@ -153,6 +163,7 @@ public class MainWorker {
         loadWindowPosition();
 
         currentLocale = prefs.get("currentLocale", "eng");
+        darkMode = prefs.getBoolean("darkMode", false);
 
         savePreferencesOnExit();
     }
@@ -162,6 +173,7 @@ public class MainWorker {
             saveWindowPosition();
 
             prefs.put("currentLocale", currentLocale);
+            prefs.putBoolean("darkMode", darkMode);
         }));
     }
 
@@ -181,13 +193,19 @@ public class MainWorker {
         EventQueue.invokeLater(() -> {
             try {
                 mainWindow = new MainWindow();
+                windowFrameArray[0] = mainWindow;
+
                 SwingGUI.setFramePosition(
-                        MainWindow.topFrame,
+                        mainWindow,
                         windowPosition[0],
                         windowPosition[1],
                         windowPosition[2]
                 );
-                SwingGUI.setFrameIcon(MainWindow.topFrame, "images/icon32.png", MainWorker.class);
+                SwingGUI.setFrameIcon(mainWindow, "images/icon32.png", MainWorker.class);
+
+                SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
+                mainWindow.customActionsOnDarkModeSwitch();
+
             } catch (Exception ex) {
                 if (debug) ex.printStackTrace(System.err);
                 System.err.println("Failed to start MainWindow.");
@@ -201,6 +219,9 @@ public class MainWorker {
                     MainWindow.topFrame, MainWindow.fontName,
                     MainWindow.fontSize - 2, prefs, debug, localeManager
             );
+
+            windowFrameArray[1] = debugConsoleWindow;
+
             if (debug) System.out.println("Debug console created.");
 
         } else if (!debugConsoleWindow.isVisible()) {

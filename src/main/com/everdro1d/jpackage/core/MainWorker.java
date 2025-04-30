@@ -126,7 +126,12 @@ public class MainWorker {
 
         File jdkDir = new File(javaHome);
         String name = jdkDir.getName().toLowerCase();
-        if (jdkDir.isDirectory() && (name.contains("jdk") || name.endsWith("home"))) {
+        if (jdkDir.isDirectory()
+                && (name.contains("jdk")
+                || (jdkDir.getAbsolutePath().toLowerCase().contains("jdk")
+                && name.endsWith("home"))
+        )
+        ) {
             if (debug) System.out.println("JDK Directory: " + jdkDir.getAbsolutePath());
             return jdkDir.getAbsolutePath();
         }

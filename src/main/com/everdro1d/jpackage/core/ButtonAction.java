@@ -39,9 +39,9 @@ public class ButtonAction {
 
     public static void saveSettingsToFile() {
         if (debug) System.out.println("Saving settings to file from map.");
+        setSettingsMapFromUI();
         String path = openFileChooser(false);
         if (path == null) return;
-        setSettingsMapFromUI();
         String fileName = assembleFileName();
         Files.saveMapToFile(path,
                 fileName,
@@ -127,7 +127,9 @@ public class ButtonAction {
         int returnValue = fileChooser.showOpenDialog(topFrame);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
-            if (!load) {
+            File existTest = new File(f.getAbsolutePath() + File.separator + assembleFileName() + ".txt");
+            if (debug) System.out.println(existTest.getAbsolutePath() + "\n" + existTest.exists());
+            if (!load && existTest.exists()) {
                 int result = JOptionPane.showConfirmDialog(
                         topFrame,
                         saveLocationOverwriteDialogMessageText + " "
@@ -141,7 +143,7 @@ public class ButtonAction {
                     if (debug) System.out.println("Save FileChooser cancelled by user.");
                     return null;
                 }
-            } else if (f.isDirectory()) {
+            } else if (load && f.isDirectory()) {
                 if (debug) System.out.println("Cannot load a directory: " + f.getAbsolutePath());
                 JOptionPane.showMessageDialog(
                         topFrame, cannotLoadDirectoryDialogMessageText,

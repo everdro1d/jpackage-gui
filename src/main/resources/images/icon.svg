@@ -1,0 +1,19 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Box base -->
+    <rect x="40" y="60" width="120" height="100" fill="#d6a461" stroke="#8b5a2b" stroke-width="2"/>
+
+    <!-- Box top -->
+    <polygon points="40,60 100,30 160,60 100,90" fill="#e7b87b" stroke="#8b5a2b" stroke-width="2"/>
+
+    <!-- Front flap left -->
+    <polygon points="100,90 40,60 40,160 100,190" fill="#b37943" stroke="#8b5a2b" stroke-width="2"/>
+
+    <!-- Front flap right -->
+    <polygon points="100,90 160,60 160,160 100,190" fill="#c08a53" stroke="#8b5a2b" stroke-width="2"/>
+
+    <!-- "J" centered on the left face -->
+    <text x="70" y="145" font-family="Tahoma, sans-serif" font-size="72" font-weight="bold" fill="#5a3412" text-anchor="middle">J</text>
+
+    <!-- "P" centered on the right face -->
+    <text x="130" y="145" font-family="Tahoma, sans-serif" font-size="72" font-weight="bold" fill="#5a3412" text-anchor="middle">P</text>
+</svg>

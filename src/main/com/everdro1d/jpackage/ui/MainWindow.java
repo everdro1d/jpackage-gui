@@ -180,7 +180,7 @@ public class MainWindow extends JFrame {
                 gbc.anchor = GridBagConstraints.LINE_END;
                 settingsButton = new JButton();
                 settingsButton.setPreferredSize(new Dimension(50, 50));
-                Icon settingsIcon = SwingGUI.getApplicationIcon("images/settings.png", this.getClass());
+                Icon settingsIcon = SwingGUI.getApplicationIcon("images/button-icons/settings.png", this.getClass());
                 settingsButton.setIcon(settingsIcon);
                 settingsButton.setBorderPainted(false);
                 settingsButton.setContentAreaFilled(false);

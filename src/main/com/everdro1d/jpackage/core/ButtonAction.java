@@ -11,10 +11,7 @@ import main.com.everdro1d.jpackage.ui.panels.GeneralSettingsPanel;
 import javax.swing.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.*;
 import static main.com.everdro1d.jpackage.core.MainWorker.*;
@@ -80,7 +77,6 @@ public class ButtonAction {
             ) {
                 @Override
                 public void applySettings() {
-                    localeManager.reloadLocaleInProgram(prefs.get("currentLocale", localeManager.getCurrentLocale()));
                     currentLocale = localeManager.getCurrentLocale();
 
                     debug = prefs.getBoolean("debug", debug);
@@ -99,6 +95,26 @@ public class ButtonAction {
 
                     SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
                     getInstanceOfMainWindow().customActionsOnDarkModeSwitch();
+                }
+
+                @Override
+                public Map<String, String> setOriginalSettingsMap() {
+                    Map<String, String> originalSettingsMap = new TreeMap<>();
+
+                    originalSettingsMap.put("debug", String.valueOf(debug));
+                    originalSettingsMap.put("darkMode", String.valueOf(darkMode));
+
+                    return originalSettingsMap;
+                }
+
+                @Override
+                public Map<String, Boolean> setRestartRequiredSettingsMap() {
+                    Map<String, Boolean> restartRequiredSettingsMap = new TreeMap<>();
+
+                    restartRequiredSettingsMap.put("debug", false);
+                    restartRequiredSettingsMap.put("darkMode", false);
+
+                    return restartRequiredSettingsMap;
                 }
             };
             windowFrameArray[2] = settingsWindow;

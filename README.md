@@ -14,7 +14,7 @@ JPackage GUI came about because I got tired of having to manage and update multi
 
 ### Planned Features
 As of writing this readme, I've still got a few features I want to add:
-* Monolith File - A single file that saves jpackage settings for all platforms.
+* ~Monolith File - A single file that saves jpackage settings for all platforms.~ **Done!**
 * Version Check - A check if the version has been changed after loading options from a file, before running the installer creation command. I've forgotten to bump the release version too many times... -_-
 * Exit Prompt - A dialog that pops up when exiting the program if the options have been changed and not saved before exit.
 * Startup Prompt - Remember what option file was loaded in the previous session, and prompt the user on startup if they want to load that file again.

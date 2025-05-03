@@ -143,8 +143,8 @@ public class ButtonAction {
         int returnValue = fileChooser.showOpenDialog(topFrame);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File f = fileChooser.getSelectedFile();
-            if (debug) System.out.println(existTest.getAbsolutePath() + "\n" + existTest.exists());
             File existTest = new File(f.getAbsolutePath() + (load ? "" : (File.separator + assembleFileName() + ".txt")));
+            if (debug) System.out.println("File: " + existTest.getAbsolutePath() + "\nExists: " + existTest.exists());
             if (!load && existTest.exists()) {
                 int result = JOptionPane.showConfirmDialog(
                         topFrame,

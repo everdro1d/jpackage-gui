@@ -1,7 +1,7 @@
 {
   "!head": {
     "version": {
-      "currentVersion": "1.0.1"
+      "currentVersion": "1.1.0"
     }
   },
   "BasicSettingsWindow": {
@@ -148,6 +148,7 @@
       "saveSettingsButtonText": "Save Options",
       "titleText": "JPackage GUI",
       "unixTabText": "Unix",
+      "useMonolithOptionFileCheckBoxText": "Use Monolith Option File",
       "windowsTabText": "Windows"
     },
     "UnixOptionsPanel": {

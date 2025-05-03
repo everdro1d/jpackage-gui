@@ -51,6 +51,7 @@ public class MainWorker {
     public static String detectedOS = "";
     public static String jdkDirectory = "";
     public static boolean darkMode = false;
+    public static boolean useMonolithOptionFile = false;
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -171,6 +172,7 @@ public class MainWorker {
 
         currentLocale = prefs.get("currentLocale", "eng");
         darkMode = prefs.getBoolean("darkMode", false);
+        useMonolithOptionFile = prefs.getBoolean("monolithOptionFile", false);
 
         savePreferencesOnExit();
     }
@@ -181,6 +183,7 @@ public class MainWorker {
 
             prefs.put("currentLocale", currentLocale);
             prefs.putBoolean("darkMode", darkMode);
+            prefs.putBoolean("monolithOptionFile", useMonolithOptionFile);
 
             ApplicationCore.saveConfigFile(MainWorker.class, prefs);
         }));

@@ -192,6 +192,8 @@ public class ButtonAction {
     }
 
     private static String assembleFileName() {
+        String prefix = useMonolithOptionFile ? "mono" : detectedOS;
+
         String programName = getCommandSettingsMap().get("gen_name");
         if (programName != null) {
             programName = programName.trim().toLowerCase().replaceAll("\\s+", "_");
@@ -203,12 +205,10 @@ public class ButtonAction {
             version = "";
         }
 
-        return detectedOS + "_"
+        return prefix + "_"
                 + programName + "_"
                 + version + "_"
-                + Utils.getSanitizedCurrentTime(
-                        true, false, false
-                  );
+                + Utils.getSanitizedCurrentTime(true, false, false);
     }
 
     private static void addDialogComponentsToLocale() {

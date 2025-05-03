@@ -42,6 +42,7 @@ public class MainWindow extends JFrame {
                 private JPanel macOSPanel;
                 private JPanel unixPanel;
         private JPanel southPanel;
+            private JCheckBox useMonolithOptionFileCheckBox;
             private JSeparator buttonSeparator;
             private JPanel buttonPanel;
                 private JButton saveSettingsButton;
@@ -61,6 +62,7 @@ public class MainWindow extends JFrame {
     public static String macOSTabText = "MacOS";
     public static String unixTabText = "Unix";
     public static String osTabbedPaneTitleText = "OS Specific Options";
+    public static String useMonolithOptionFileCheckBoxText = "Use Monolith Option File";
     public static String saveSettingsButtonText = "Save Options";
     public static String loadSettingsButtonText = "Load Options";
     public static String runCommandButtonText = "Create Installer";
@@ -104,6 +106,7 @@ public class MainWindow extends JFrame {
         mainMap.put("macOSTabText", macOSTabText);
         mainMap.put("unixTabText", unixTabText);
         mainMap.put("osTabbedPaneTitleText", osTabbedPaneTitleText);
+        mainMap.put("useMonolithOptionFileCheckBoxText", useMonolithOptionFileCheckBoxText);
         mainMap.put("saveSettingsButtonText", saveSettingsButtonText);
         mainMap.put("loadSettingsButtonText", loadSettingsButtonText);
         mainMap.put("runCommandButtonText", runCommandButtonText);
@@ -122,6 +125,7 @@ public class MainWindow extends JFrame {
         macOSTabText = varMap.getOrDefault("macOSTabText", macOSTabText);
         unixTabText = varMap.getOrDefault("unixTabText", unixTabText);
         osTabbedPaneTitleText = varMap.getOrDefault("osTabbedPaneTitleText", osTabbedPaneTitleText);
+        useMonolithOptionFileCheckBoxText = varMap.getOrDefault("useMonolithOptionFileCheckBoxText", useMonolithOptionFileCheckBoxText);
         saveSettingsButtonText = varMap.getOrDefault("saveSettingsButtonText", saveSettingsButtonText);
         loadSettingsButtonText = varMap.getOrDefault("loadSettingsButtonText", loadSettingsButtonText);
         runCommandButtonText = varMap.getOrDefault("runCommandButtonText", runCommandButtonText);
@@ -286,7 +290,7 @@ public class MainWindow extends JFrame {
             }
 
             southPanel = new JPanel();
-            southPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 50));
+            southPanel.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 2), 80));
             southPanel.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
             c.gridx = 0;
@@ -295,6 +299,18 @@ public class MainWindow extends JFrame {
             c.weighty = 1;
             mainPanel.add(southPanel, BorderLayout.SOUTH);
             {
+                useMonolithOptionFileCheckBox = new JCheckBox(useMonolithOptionFileCheckBoxText);
+                useMonolithOptionFileCheckBox.setFont(new Font(fontName, Font.PLAIN, fontSize));
+                useMonolithOptionFileCheckBox.setSelected(useMonolithOptionFile);
+                southPanel.add(useMonolithOptionFileCheckBox, c);
+
+                useMonolithOptionFileCheckBox.addActionListener(e -> {
+                    useMonolithOptionFile = useMonolithOptionFileCheckBox.isSelected();
+                    if (debug) System.out.println("Monolith Option File: " + useMonolithOptionFile);
+                    enableTabbedPaneWithOS(osTabbedPane);
+                });
+
+                c.gridy++;
                 buttonSeparator = new JSeparator();
                 buttonSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
                 southPanel.add(buttonSeparator, c);
@@ -306,9 +322,9 @@ public class MainWindow extends JFrame {
                 GridBagConstraints gbc2 = new GridBagConstraints();
                 gbc2.gridx = 0;
                 gbc2.gridy = 0;
-                gbc2.weightx = 0.5;
+                gbc2.weightx = 1;
                 gbc2.weighty = 0;
-                gbc2.anchor = GridBagConstraints.WEST;
+                gbc2.anchor = GridBagConstraints.CENTER;
                 gbc2.fill = GridBagConstraints.HORIZONTAL;
                 gbc2.insets = new Insets(4, 4, 4, 4);
                 southPanel.add(buttonPanel, c);
@@ -360,14 +376,20 @@ public class MainWindow extends JFrame {
     }
 
     private void enableTabbedPaneWithOS(JTabbedPane tabbedPane) {
-        tabbedPane.setEnabledAt(0, MainWorker.detectedOS.equals("Windows"));
-        tabbedPane.setEnabledAt(1, MainWorker.detectedOS.equals("macOS"));
-        tabbedPane.setEnabledAt(2, MainWorker.detectedOS.equals("Unix"));
+        tabbedPane.setEnabledAt(0, MainWorker.detectedOS.equals("Windows") || useMonolithOptionFile);
+        tabbedPane.setEnabledAt(1, MainWorker.detectedOS.equals("macOS") || useMonolithOptionFile);
+        tabbedPane.setEnabledAt(2, MainWorker.detectedOS.equals("Unix") || useMonolithOptionFile);
         tabbedPane.setSelectedIndex(
-                MainWorker.detectedOS.equals("Windows")
-                ? 0 : MainWorker.detectedOS.equals("macOS")
-                ? 1 : 2
+                isOSTabbedPaneExpanded()
+                ? MainWorker.detectedOS.equals("Windows")
+                    ? 0 : MainWorker.detectedOS.equals("macOS")
+                    ? 1 : 2
+                : -1
         );
+    }
+
+    private boolean isOSTabbedPaneExpanded() {
+        return !(osTabbedPane.getTabComponentAt(0) instanceof JLabel);
     }
 
     public String getJdkBinPath() {
@@ -387,6 +409,15 @@ public class MainWindow extends JFrame {
             text = text + binPath;
         }
         jdkBinTextField.setText(text);
+    }
+
+    public boolean isMonolithOptionFile() {
+        return useMonolithOptionFile;
+    }
+
+    public void setMonolithOptionFile(boolean useMonolithOptionFile) {
+        MainWorker.useMonolithOptionFile = useMonolithOptionFile;
+        useMonolithOptionFileCheckBox.setSelected(MainWorker.useMonolithOptionFile);
     }
 
     public Object getInstanceOf(Class<?> clazz, MainWindow instance) {

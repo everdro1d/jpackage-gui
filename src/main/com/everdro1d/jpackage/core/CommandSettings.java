@@ -12,7 +12,8 @@ import static main.com.everdro1d.jpackage.core.MainWorker.debug;
 public class CommandSettings {
     private static final String[][] mainSettingKeyMethodPair = new String[][] {
             // MainWindow
-            {"main_jdkBinPath","getJdkBinPath"}
+            {"main_jdkBinPath","getJdkBinPath"},
+            {"main_useMonolithOptionFile","isMonolithOptionFile"},
     };
 
     private static final String[][] genericSettingKeyMethodPairs = new String[][] {
@@ -95,13 +96,20 @@ public class CommandSettings {
 
     protected static void setSettingsMapFromUI() {
         commandSettingsMap.put(mainSettingKeyMethodPair[0][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[0][1]));
+        commandSettingsMap.put(mainSettingKeyMethodPair[1][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[1][1]));
 
         addSettingsToMapFromPanel("Generic", genericSettingKeyMethodPairs);
 
-        switch (MainWorker.detectedOS) {
-            case "Windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
-            case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
-            case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
+        if (MainWorker.useMonolithOptionFile) {
+            addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
+            addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
+            addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
+        } else {
+            switch (MainWorker.detectedOS) {
+                case "Windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
+                case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
+                case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
+            }
         }
 
         if (debug) System.out.println("Saved settings from ui to map.");
@@ -132,14 +140,22 @@ public class CommandSettings {
             // this is the jdk "/bin" dir
             if (key.equals(mainSettingKeyMethodPair[0][0])) {
                 getAndInvokeMethod("MainWindow", convertMethodPrefix(mainSettingKeyMethodPair[0][1]), value);
+            } else if (key.equals(mainSettingKeyMethodPair[1][0])) {
+                getAndInvokeMethod("MainWindow", convertMethodPrefix(mainSettingKeyMethodPair[1][1]), value);
             }
 
             setSettingsFromMapToPanel("Generic", genericSettingKeyMethodPairs, key, value);
 
-            switch (MainWorker.detectedOS) {
-                case "Windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
-                case "macOS" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
-                case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
+            if (MainWorker.useMonolithOptionFile) {
+                setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
+                setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
+                setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
+            } else {
+                switch (MainWorker.detectedOS) {
+                    case "Windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
+                    case "macOS" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
+                    case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
+                }
             }
         }
 

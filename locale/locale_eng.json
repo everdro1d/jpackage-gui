@@ -1,7 +1,7 @@
 {
   "!head": {
     "version": {
-      "currentVersion": "1.0.0"
+      "currentVersion": "1.0.1"
     }
   },
   "BasicSettingsWindow": {
@@ -38,6 +38,12 @@
     }
   },
   "Dialogs": {
+    "BasicSettingsWindow": {
+      "confirmCancelDialogMessageText": "You have unsaved changes. Are you sure you want to cancel?",
+      "confirmCancelDialogTitleText": "Unsaved Changes!",
+      "restartRequiredDialogMessageText": "Some changes require a restart to take effect. Would you like to exit now?",
+      "restartRequiredDialogTitleText": "Restart Required!"
+    },
     "ButtonAction": {
       "cannotLoadDirectoryDialogMessageText": "Cannot load a Directory, please select a valid file.",
       "cannotLoadDirectoryDialogTitleText": "Error!",

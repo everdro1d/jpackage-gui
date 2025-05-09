@@ -1,5 +1,5 @@
 /*
- * requires everdro1dCoreLib, flatlaf, and json libraries
+ * requires dro1d-libs-java, flatlaf, and json libraries
  */
 package main.com.everdro1d.jpackage.core;
 

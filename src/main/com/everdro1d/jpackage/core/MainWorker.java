@@ -77,7 +77,7 @@ public class MainWorker {
 
         if (debug) {
             showDebugConsole();
-            if (debug) System.out.println("Loaded locale: " + currentLocale + " at: " + localeManager.getLocaleDirPath());
+            System.out.println("Loaded locale: " + currentLocale + " at: " + localeManager.getLocaleDirectoryPath());
             System.out.println("Starting " + MainWindow.titleText + " v" + currentVersion + "...");
             System.out.println("Detected OS: " + MainWorker.detectedOS);
         }

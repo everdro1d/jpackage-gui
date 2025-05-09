@@ -167,7 +167,7 @@ public class MainWorker {
     }
 
     private static void loadPreferencesAndQueueSave() {
-        ApplicationCore.loadConfigFile(MainWorker.class);
+        ApplicationCore.loadConfigFile(MainWorker.class, developerConfigDirectoryName);
 
         loadWindowPosition();
 
@@ -186,7 +186,7 @@ public class MainWorker {
             prefs.putBoolean("darkMode", darkMode);
             prefs.putBoolean("monolithOptionFile", useMonolithOptionFile);
 
-            ApplicationCore.saveConfigFile(MainWorker.class, prefs);
+            ApplicationCore.saveConfigFile(MainWorker.class, developerConfigDirectoryName, prefs);
         }));
     }
 

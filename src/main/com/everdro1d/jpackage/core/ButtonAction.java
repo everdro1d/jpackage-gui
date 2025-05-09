@@ -84,7 +84,7 @@ public class ButtonAction {
 
                     if (debug) {
                         showDebugConsole();
-                        if (debug) System.out.println("Active locale: " + currentLocale);
+                        System.out.println("Active locale: " + currentLocale);
                         System.out.println("Active: " + MainWindow.titleText + " v" + currentVersion);
                         System.out.println("Detected OS: " + MainWorker.detectedOS);
                     } else if (debugConsoleWindow != null) {

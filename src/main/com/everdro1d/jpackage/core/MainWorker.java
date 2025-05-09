@@ -6,7 +6,7 @@ package main.com.everdro1d.jpackage.core;
 import com.everdro1d.libs.commands.CommandInterface;
 import com.everdro1d.libs.commands.CommandManager;
 import com.everdro1d.libs.core.ApplicationCore;
-import com.everdro1d.libs.core.LocaleManager;
+import com.everdro1d.libs.locale.LocaleManager;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.dialogs.UpdateCheckerDialog;
 import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
@@ -27,12 +27,13 @@ public class MainWorker {
     public static final String githubRepoURL = "https://github.com/everdro1d/jpackage-gui/";
     public static final String dro1dDevWebsite = "https://everdro1d.github.io/posts/jpackage-gui/";
     public static final String currentVersion = "1.0.1"; //TODO: update this with each release
+    public static final String developerConfigDirectoryName = "dro1dDev";
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
             "-debug", new DebugCommand()
     );
     public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP);
     protected static String currentLocale = "eng";
-    public static final LocaleManager localeManager = new LocaleManager(MainWorker.class);
+    public static final LocaleManager localeManager = new LocaleManager(MainWorker.class, developerConfigDirectoryName);
     public static boolean debug = false;
     public static DebugConsoleWindow debugConsoleWindow;
     public static final Preferences prefs = Preferences.userNodeForPackage(MainWorker.class);

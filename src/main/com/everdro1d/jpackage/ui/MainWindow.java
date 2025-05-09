@@ -444,7 +444,9 @@ public class MainWindow extends JFrame {
         return workingDialog;
     }
 
-    public void customActionsOnDarkModeSwitch() {
+    public void darkModeSwitch() {
+        SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
+
         Icon i = SwingGUI.changeIconColor(
                 settingsButton.getIcon(),
                 UIManager.getColor("RootPane.foreground")

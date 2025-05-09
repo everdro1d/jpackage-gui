@@ -93,8 +93,7 @@ public class ButtonAction {
                         windowFrameArray[1] = null;
                     }
 
-                    SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
-                    getInstanceOfMainWindow().customActionsOnDarkModeSwitch();
+                    getInstanceOfMainWindow().darkModeSwitch();
                 }
 
                 @Override

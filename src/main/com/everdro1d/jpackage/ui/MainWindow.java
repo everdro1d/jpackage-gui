@@ -68,9 +68,9 @@ public class MainWindow extends JFrame {
     public static String loadSettingsButtonText = "Load Options";
     public static String runCommandButtonText = "Create Installer";
 
-    public static String fontName = "Tahoma";
+    public static String fontName = SwingGUI.getDefaultFontNameForOS();
     // Font name for the application
-    public static int fontSize = 16;
+    public static int fontSize = detectedOS.equals("unix") ? 17 : 16;
     // Font size for the application
 
     private final int WINDOW_WIDTH = 800;

@@ -1,5 +1,6 @@
 package main.com.everdro1d.jpackage.ui;
 
+import com.everdro1d.libs.swing.ImageUtils;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.CollapsableTitledBorder;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
@@ -31,7 +32,6 @@ public class MainWindow extends JFrame {
         private JPanel northPanel;
             private JLabel titleLabel;
             private JButton settingsButton;
-            private JSeparator titleSeparator;
         private JPanel centerPanel;
             private JPanel jdkBinPanel;
                 private JLabel jdkBinLabel;
@@ -191,17 +191,6 @@ public class MainWindow extends JFrame {
                 northPanel.add(settingsButton, gbc);
 
                 settingsButton.addActionListener(e -> showSettingsWindow());
-
-                gbc.weightx = 0;
-                gbc.gridx = 0;
-                gbc.gridy++;
-                gbc.gridwidth = 2;
-                gbc.weightx = 1.0;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.anchor = GridBagConstraints.CENTER;
-                titleSeparator = new JSeparator();
-                titleSeparator.setPreferredSize(new Dimension(WINDOW_WIDTH - (EDGE_PADDING * 4), 4));
-                northPanel.add(titleSeparator, gbc);
             }
 
             centerPanel = new JPanel();

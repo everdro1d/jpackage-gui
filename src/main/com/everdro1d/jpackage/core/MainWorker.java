@@ -27,7 +27,7 @@ public class MainWorker {
     // Variables ------------------------------------------------------------------------------------------------------|
     public static final String githubRepoURL = "https://github.com/everdro1d/jpackage-gui/";
     public static final String dro1dDevWebsite = "https://everdro1d.github.io/posts/jpackage-gui/";
-    public static final String currentVersion = "1.0.1"; //TODO: update this with each release
+    public static final String currentVersion = "1.1.1"; //TODO: update this with each release
     public static final String developerConfigDirectoryName = "dro1dDev";
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
             "-debug", new DebugCommand()

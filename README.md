@@ -121,7 +121,7 @@ Please note, changing the Display Language currently requires a restart of the a
    ```
 3. Install the new version:
    ```bash
-   sudo dpkg -i <new-installer-file>.deb
+   sudo dpkg -i linux_jpackage-gui_<version>_amd64.deb
    ```
 
 ## Uninstallation

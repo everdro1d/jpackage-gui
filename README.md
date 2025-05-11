@@ -3,6 +3,8 @@
 
 [Download from GitHub ->](https://github.com/everdro1d/jpackage-gui/releases/latest)
 
+[View Post ->](https://everdro1d.github.io/posts/jpackage-gui/)
+
 ---
 ## About
 

@@ -376,13 +376,13 @@ public class MainWindow extends JFrame {
     }
 
     private void enableTabbedPaneWithOS(JTabbedPane tabbedPane) {
-        tabbedPane.setEnabledAt(0, MainWorker.detectedOS.equals("Windows") || useMonolithOptionFile);
-        tabbedPane.setEnabledAt(1, MainWorker.detectedOS.equals("macOS") || useMonolithOptionFile);
-        tabbedPane.setEnabledAt(2, MainWorker.detectedOS.equals("Unix") || useMonolithOptionFile);
+        tabbedPane.setEnabledAt(0, MainWorker.detectedOS.equals("windows") || useMonolithOptionFile);
+        tabbedPane.setEnabledAt(1, MainWorker.detectedOS.equals("mac") || useMonolithOptionFile);
+        tabbedPane.setEnabledAt(2, MainWorker.detectedOS.equals("unix") || useMonolithOptionFile);
         tabbedPane.setSelectedIndex(
                 isOSTabbedPaneExpanded()
-                ? MainWorker.detectedOS.equals("Windows")
-                    ? 0 : MainWorker.detectedOS.equals("macOS")
+                ? MainWorker.detectedOS.equals("windows")
+                    ? 0 : MainWorker.detectedOS.equals("mac")
                     ? 1 : 2
                 : -1
         );

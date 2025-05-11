@@ -73,13 +73,13 @@ public class CommandAssembler {
         commandMap.clear();
         parseCommandSettingsMap(genericSettingKeyArgumentPairs, commandSettingsMap);
         switch (detectedOS) {
-            case "Windows":
+            case "windows":
                 parseCommandSettingsMap(winSettingKeyArgumentPairs, commandSettingsMap);
                 break;
-            case "macOS":
+            case "mac":
                 parseCommandSettingsMap(macSettingKeyArgumentPairs, commandSettingsMap);
                 break;
-            case "Unix":
+            case "unix":
                 parseCommandSettingsMap(nixSettingKeyArgumentPairs, commandSettingsMap);
                 break;
             default:

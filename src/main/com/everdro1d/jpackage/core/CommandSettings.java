@@ -78,12 +78,12 @@ public class CommandSettings {
 
     public static final Map<String, String> osTypeMap = new HashMap<>() {
         {
-            put("exe", "Windows");
-            put("msi", "Windows");
-            put("pkg", "macOS");
-            put("dmg", "macOS");
-            put("rpm", "Unix");
-            put("deb", "Unix");
+            put("exe", "windows");
+            put("msi", "windows");
+            put("pkg", "mac");
+            put("dmg", "mac");
+            put("rpm", "unix");
+            put("deb", "unix");
         }
     };
 
@@ -106,9 +106,9 @@ public class CommandSettings {
             addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
         } else {
             switch (MainWorker.detectedOS) {
-                case "Windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
-                case "macOS" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
-                case "Unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
+                case "windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
+                case "mac" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
+                case "unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
             }
         }
 
@@ -152,9 +152,9 @@ public class CommandSettings {
                 setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
             } else {
                 switch (MainWorker.detectedOS) {
-                    case "Windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
-                    case "macOS" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
-                    case "Unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
+                    case "windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
+                    case "mac" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
+                    case "unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
                 }
             }
         }

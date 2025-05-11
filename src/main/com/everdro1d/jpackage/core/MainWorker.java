@@ -47,7 +47,7 @@ public class MainWorker {
     };
 
     /**
-     * Valid: "Windows", "macOS", "Unix"
+     * Valid: "windows", "mac", "unix"
      */
     public static String detectedOS = "";
     public static String jdkDirectory = "";
@@ -140,9 +140,9 @@ public class MainWorker {
 
         if (debug) System.err.println("Java Home could not be found. Attempting to auto-fill JDK path based on OS.");
         String pathTest = switch (detectedOS) {
-            case "Windows" -> System.getenv("ProgramFiles") + "\\Java";
-            case "macOS" -> "/Library/Java/JavaVirtualMachines/";
-            case "Unix" -> "/usr/lib/jvm/";
+            case "windows" -> System.getenv("ProgramFiles") + "\\Java";
+            case "mac" -> "/Library/Java/JavaVirtualMachines/";
+            case "unix" -> "/usr/lib/jvm/";
             default -> null;
         };
 

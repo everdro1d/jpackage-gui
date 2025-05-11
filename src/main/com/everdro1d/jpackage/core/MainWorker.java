@@ -7,6 +7,7 @@ import com.everdro1d.libs.commands.CommandInterface;
 import com.everdro1d.libs.commands.CommandManager;
 import com.everdro1d.libs.core.ApplicationCore;
 import com.everdro1d.libs.locale.LocaleManager;
+import com.everdro1d.libs.swing.ImageUtils;
 import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.dialogs.UpdateCheckerDialog;
 import com.everdro1d.libs.swing.windows.DebugConsoleWindow;
@@ -214,7 +215,7 @@ public class MainWorker {
                         windowPosition[1],
                         windowPosition[2]
                 );
-                SwingGUI.setFrameIcon(mainWindow, "images/icon50.png", MainWorker.class);
+                ImageUtils.setFrameIcon(mainWindow, "images/icon50.png", MainWorker.class);
 
                 mainWindow.darkModeSwitch();
 

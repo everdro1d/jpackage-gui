@@ -75,8 +75,8 @@ public class MainWindow extends JFrame {
     private final int WINDOW_WIDTH = 800;
     private final int EDGE_PADDING = 15;
     private final int WINDOW_HEIGHT = 750;
-    private final int GENERIC_OPTION_PANEL_HEIGHT = 475; // expanded height
-    private final int OS_OPTION_PANEL_HEIGHT = 475; // expanded height
+    private final int GENERIC_OPTION_PANEL_HEIGHT = detectedOS.equals("mac") ? 475 : 465; // expanded height
+    private final int OS_OPTION_PANEL_HEIGHT = detectedOS.equals("mac") ? 475 : 465; // expanded height
 
     // End of variables -----------------------------------------------------------------------------------------------|
 

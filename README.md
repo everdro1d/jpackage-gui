@@ -6,6 +6,31 @@
 [View Post ->](https://everdro1d.github.io/posts/jpackage-gui/)
 
 ---
+## Table of Contents
+
+- [JPackage GUI](#jpackage-gui)
+- [About](#about)
+   - [What is it](#what-is-it)
+   - [Why does it exist](#why-does-it-exist)
+   - [Planned Features](#planned-features)
+- [Usage](#usage)
+   - [Creating An Installer](#creating-an-installer)
+   - [Locale & Language](#locale--language)
+- [Installation](#installation)
+   - [Windows](#windows)
+   - [MacOS](#macos)
+   - [Linux](#linux)
+      - [GUI](#gui)
+      - [CLI](#cli)
+- [Updating](#updating)
+   - [Windows & MacOS](#windows--macos)
+   - [Linux](#linux-1)
+- [Uninstallation](#uninstallation)
+   - [Windows](#windows-1)
+   - [MacOS](#macos-1)
+   - [Linux](#linux-2)
+
+---
 ## About
 
 ### What is it

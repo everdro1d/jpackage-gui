@@ -44,7 +44,7 @@ As of writing this readme, I've still got a few features I want to add:
 ## Usage
 
 ### Creating An Installer
-1. Enter the minimum required options for the jpackage program, the input directory, the main jar, the installer type, and the name of the application.
+1. Enter the minimum required options for the jpackage program; the input directory, the main jar, the installer type, and the name of the application.
 2. Configure any other options in the Generic or OS specific panels.
 3. Click the "Create Installer" button.
 4. Profit.
@@ -53,6 +53,6 @@ As of writing this readme, I've still got a few features I want to add:
 ### Locale & Language
 In the settings window, you can change the language from a dropdown. This dropdown reads the locale files in the locale directory to populate the list. The locale directory can be opened using the button with a folder icon to the right of the dropdown, and more locales can be found on the github page under the locale directory. This github directory can also be quickly opened using the "Open External" button to the right of the locale directory button.
 
-Locale files use JSON formatting for convenience when translating. When creating translations, rename the file to "locale_[code]", with [code] being the [ISO 639-3](https://en.wikipedia.org/w/index.php?title=ISO_639) three letter code for the language, and place your file in the locale directory. Re-open the settings window and your locale should appear. If you've done everything correctly and it still isnt showing up, please contact me with the locale information you're trying to add as the validation may have gone askew. I've had to fix & add some locales by hand.
+Locale files use JSON formatting for convenience when translating. When creating translations, rename the file to "locale_[code]", with [code] being the [ISO 639-3](https://en.wikipedia.org/w/index.php?title=ISO_639) three-letter code for the language, and place your file in the locale directory. Re-open the settings window and your locale should appear. If you've done everything correctly and it still isn't showing up, please contact me with the locale information you're trying to add as the validation may have gone askew. I've had to fix and add some locales by hand.
 
 Please note, changing the Display Language currently requires a restart of the application.

@@ -214,7 +214,7 @@ public class MainWorker {
                         windowPosition[1],
                         windowPosition[2]
                 );
-                SwingGUI.setFrameIcon(mainWindow, "images/icon32.png", MainWorker.class);
+                SwingGUI.setFrameIcon(mainWindow, "images/icon50.png", MainWorker.class);
 
                 mainWindow.darkModeSwitch();
 

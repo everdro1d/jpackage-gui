@@ -30,6 +30,7 @@ public class MainWindow extends JFrame {
     public static JFrame topFrame;
     private JPanel mainPanel;
         private JPanel northPanel;
+            private JLabel logoIconContainer;
             private JLabel titleLabel;
             private JButton settingsButton;
         private JPanel centerPanel;
@@ -159,32 +160,40 @@ public class MainWindow extends JFrame {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.weightx = 0;
+            gbc.weightx = 1;
             gbc.weighty = 1;
-            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.anchor = GridBagConstraints.LINE_END;
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.insets = new Insets(4, 4, 4, 4);
+            gbc.insets = new Insets(4, EDGE_PADDING + 50 - 8, 4, 4);
             mainPanel.add(northPanel, BorderLayout.NORTH);
             {
                 // Add components to northPanel
-                JPanel spacer = new JPanel();
-                spacer.setMinimumSize(new Dimension(50, 50));
-                northPanel.add(spacer, gbc);
+                logoIconContainer = new JLabel();
+                logoIconContainer.setPreferredSize(new Dimension(50, 50));
+                Icon logoIcon = ImageUtils.getApplicationIcon("images/icon50.png", this.getClass());
+                logoIconContainer.setIcon(logoIcon);
+                logoIconContainer.setHorizontalAlignment(SwingConstants.RIGHT);
+                northPanel.add(logoIconContainer, gbc);
 
                 gbc.gridx++;
                 gbc.weightx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                gbc.insets = new Insets(4, 4, 4, 4);
+
                 titleLabel = new JLabel(titleText);
                 titleLabel.setFont(new Font(fontName, Font.BOLD, fontSize + 12));
-                titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                titleLabel.setHorizontalAlignment(SwingConstants.LEFT);
                 northPanel.add(titleLabel, gbc);
 
                 gbc.gridx++;
                 gbc.weightx = 0;
                 gbc.fill = GridBagConstraints.NONE;
                 gbc.anchor = GridBagConstraints.LINE_END;
+                gbc.insets = new Insets(4, 4, 4, EDGE_PADDING - 4);
+
                 settingsButton = new JButton();
                 settingsButton.setPreferredSize(new Dimension(50, 50));
-                Icon settingsIcon = SwingGUI.getApplicationIcon("images/button-icons/settings.png", this.getClass());
+                Icon settingsIcon = ImageUtils.getApplicationIcon("images/button-icons/settings.png", this.getClass());
                 settingsButton.setIcon(settingsIcon);
                 settingsButton.setBorderPainted(false);
                 settingsButton.setContentAreaFilled(false);
@@ -436,10 +445,13 @@ public class MainWindow extends JFrame {
     public void darkModeSwitch() {
         SwingGUI.switchLightOrDarkMode(darkMode, windowFrameArray);
 
-        Icon i = SwingGUI.changeIconColor(
+        Icon i = ImageUtils.changeIconColor(
                 settingsButton.getIcon(),
                 UIManager.getColor("RootPane.foreground")
         );
         settingsButton.setIcon(i);
+
+        Icon logoIcon = ImageUtils.getApplicationIcon("images/icon50.png", this.getClass());
+        logoIconContainer.setIcon(darkMode ? ImageUtils.darkenIcon(logoIcon) : logoIcon);
     }
 }

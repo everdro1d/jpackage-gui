@@ -23,6 +23,25 @@ As of writing this readme, I've still got a few features I want to add:
 * Option File Repository - A single directory where the user is recomended to save their option files.
 
 ---
+
+## Usage
+
+### Creating An Installer
+1. Enter the minimum required options for the jpackage program; the input directory, the main jar, the installer type, and the name of the application.
+2. Configure any other options in the Generic or OS specific panels.
+3. Click the "Create Installer" button.
+4. Profit.
+5. Extra tip: Save the options as a file for easy future use.
+
+### Locale & Language
+In the settings window, you can change the language from a dropdown. This dropdown reads the locale files in the locale directory to populate the list. The locale directory can be opened using the button with a folder icon to the right of the dropdown, and more locales can be found on the github page under the locale directory. This github directory can also be quickly opened using the "Open External" button to the right of the locale directory button.
+
+Locale files use JSON formatting for convenience when translating. When creating translations, rename the file to "locale_[code]", with [code] being the [ISO 639-3](https://en.wikipedia.org/w/index.php?title=ISO_639) three-letter code for the language, and place your file in the locale directory. Re-open the settings window and your locale should appear. If you've done everything correctly and it still isn't showing up, please contact me with the locale information you're trying to add as the validation may have gone askew. I've had to fix and add some locales by hand.
+
+Please note, changing the Display Language currently requires a restart of the application.
+
+---
+
 ## Installation
 
 ### Windows
@@ -41,20 +60,67 @@ As of writing this readme, I've still got a few features I want to add:
 3. Continue with installation normally. Continue pressing 'next' or 'continue' until finished.
 4. After the application has been installed you can find it in Launchpad.
 
----
+### Linux
+#### GUI
+1. Download the installer from the Releases section in GitHub.
+2. Run the installer. At this stage you should encounter a notification from your package manager stating something along the lines of "from an unidentified developer". This is normal.
+    - To proceed with the installation, you may be asked to enter your password in a dialog box. 
+3. Continue with installation normally. Continue pressing 'next' or 'continue', until finished.
+4. After the application has been installed you can, depending on your distribution, find it in your applications menu or by searching for it in your package manager.
 
-## Usage
+#### CLI
+1. Download the installer from the Releases section in GitHub.
+2. Open a terminal and navigate to the directory where you downloaded the installer.
+3. Run the installer with the following command:
+    ```bash
+    sudo dpkg -i linux_jpackage-gui_<version>_amd64.deb
+    ```
+4. If you encounter any dependency issues, run the following command to fix them:
+    ```bash
+    sudo apt --fix-broken install
+    ```
+5. If you want to run the application from the terminal, you can do so by typing:
+    ```bash
+    jpackage-gui
+    ```
 
-### Creating An Installer
-1. Enter the minimum required options for the jpackage program; the input directory, the main jar, the installer type, and the name of the application.
-2. Configure any other options in the Generic or OS specific panels.
-3. Click the "Create Installer" button.
-4. Profit.
-5. Extra tip: Save the options as a file for easy future use.
+## Updating
+### Windows & MacOS
+1. Download the latest installer from the Releases section on GitHub.
+2. Run the new installer. It will overwrite the previous version.
+### Linux
+1. Download the latest .deb installer from the Releases section on GitHub.
+2. Remove the old version:
+   ```bash
+   sudo apt remove jpackage-gui
+   ```
+3. Install the new version:
+   ```bash
+   sudo dpkg -i <new-installer-file>.deb
+   ```
 
-### Locale & Language
-In the settings window, you can change the language from a dropdown. This dropdown reads the locale files in the locale directory to populate the list. The locale directory can be opened using the button with a folder icon to the right of the dropdown, and more locales can be found on the github page under the locale directory. This github directory can also be quickly opened using the "Open External" button to the right of the locale directory button.
+## Uninstallation
 
-Locale files use JSON formatting for convenience when translating. When creating translations, rename the file to "locale_[code]", with [code] being the [ISO 639-3](https://en.wikipedia.org/w/index.php?title=ISO_639) three-letter code for the language, and place your file in the locale directory. Re-open the settings window and your locale should appear. If you've done everything correctly and it still isn't showing up, please contact me with the locale information you're trying to add as the validation may have gone askew. I've had to fix and add some locales by hand.
+#### Windows
+1. Open the Control Panel and navigate to **Programs and Features**.
+2. Find **JPackage GUI** in the list, select it, and click **Uninstall**.
 
-Please note, changing the Display Language currently requires a restart of the application.
+#### MacOS
+1. Navigate to the `/Applications` folder.
+2. Drag the **JPackage GUI** application to the Trash.
+3. Empty the Trash to complete the removal.
+
+#### Linux
+1. Open a terminal and run:
+   ```bash
+   sudo apt remove jpackage-gui
+   ```
+2. If you want to remove the configuration files as well, run:
+   ```bash
+    sudo apt purge jpackage-gui
+    ```
+3. Optionally, you can remove any unused dependencies by running:
+   ```bash
+   sudo apt autoremove
+   ```
+

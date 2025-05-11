@@ -189,7 +189,7 @@ public class MainWindow extends JFrame {
                 gbc.weightx = 0;
                 gbc.fill = GridBagConstraints.NONE;
                 gbc.anchor = GridBagConstraints.LINE_END;
-                gbc.insets = new Insets(4, 4, 4, detectedOS.equals("mac") ? ((EDGE_PADDING*2) - 8) : (EDGE_PADDING - 4));
+                gbc.insets = new Insets(4, 4, 4, detectedOS.equals("mac") ? ((EDGE_PADDING*2) - 8) : EDGE_PADDING);
 
                 settingsButton = new JButton();
                 settingsButton.setPreferredSize(new Dimension(50, 50));

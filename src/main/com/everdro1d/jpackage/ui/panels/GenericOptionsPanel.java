@@ -1,15 +1,19 @@
 package main.com.everdro1d.jpackage.ui.panels;
 
+import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.components.TextFieldFileChooser;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.getSubsetOSTypeArray;
-import static main.com.everdro1d.jpackage.core.MainWorker.localeManager;
+import static main.com.everdro1d.jpackage.core.MainWorker.*;
 
 public class GenericOptionsPanel extends JPanel {
     private LeftGenericPanel leftGenericPanel;
@@ -225,7 +229,44 @@ public class GenericOptionsPanel extends JPanel {
             add((typeComboBox = new JComboBox<>(getSubsetOSTypeArray())), gbc);
             gbc.gridy++;
 
-            add((inputPathTextField = new TextFieldFileChooser(localeManager, false, true)), gbc);
+            inputPathTextField = new TextFieldFileChooser(localeManager) {
+                @Override
+                public void customActionOnApprove(File f) {
+
+                    if (f.isFile() && f.getName().endsWith(".jar")) {
+                        setText(f.getParent());
+
+                        mainJarTextField.setText(f.getName());
+
+                        if (debug) System.out.println(
+                                "Input path is a jar file: " + f.getName()
+                                    + "getting parent and setting main jar "
+                                        + "text field to: " + f.getName()
+                        );
+
+                    } else if (f.isFile()) {
+                        setText("");
+
+                        if (debug) System.out.println(
+                                "Input path is a file, but not a jar file: "
+                                    + f.getName() + ", showing error message"
+                        );
+
+                        JOptionPane.showMessageDialog(
+                                getInstanceOfMainWindow(),
+                                "\""+ f.getName() +"\"" + " is not a JAR file. "
+                                    + "Please select a JAR file or Directory.",
+                                "Error", JOptionPane.ERROR_MESSAGE
+                        );
+
+                        setText(f.getParent());
+                        getButton().doClick();
+                    }
+
+                }
+            };
+
+            add(inputPathTextField, gbc);
             gbc.gridy++;
 
             add((outputPathTextField = new TextFieldFileChooser(localeManager, false, true)), gbc);

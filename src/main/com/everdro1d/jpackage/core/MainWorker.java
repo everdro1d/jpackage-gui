@@ -54,6 +54,7 @@ public class MainWorker {
     public static String jdkDirectory = "";
     public static boolean darkMode = false;
     public static boolean useMonolithOptionFile = false;
+    public static final boolean useContrastTitleBars = true;
 
     // End of variables -----------------------------------------------------------------------------------------------|
 
@@ -67,7 +68,9 @@ public class MainWorker {
         ApplicationCore.checkCLIArgs(args, commandManager);
         checkOSCompatibility();
 
-        SwingGUI.setupLookAndFeel(true, true);
+        UIManager.put("Application.useContrastTitleBars", useContrastTitleBars);
+
+        SwingGUI.setupLookAndFeel(true, true, prefs.getBoolean("darkMode", false));
 
         SwingGUI.uiSetup(MainWindow.fontName, MainWindow.fontSize);
 

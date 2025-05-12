@@ -2,7 +2,6 @@ package main.com.everdro1d.jpackage.core;
 
 import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
-import com.everdro1d.libs.swing.SwingGUI;
 import com.everdro1d.libs.swing.windows.FileChooser;
 import com.everdro1d.libs.swing.windows.settings.BasicSettingsWindow;
 import main.com.everdro1d.jpackage.ui.MainWindow;

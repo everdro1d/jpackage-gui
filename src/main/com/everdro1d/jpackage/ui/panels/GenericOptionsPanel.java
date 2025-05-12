@@ -225,10 +225,10 @@ public class GenericOptionsPanel extends JPanel {
             add((typeComboBox = new JComboBox<>(getSubsetOSTypeArray())), gbc);
             gbc.gridy++;
 
-            add((inputPathTextField = new TextFieldFileChooser(localeManager)), gbc);
+            add((inputPathTextField = new TextFieldFileChooser(localeManager, false, true)), gbc);
             gbc.gridy++;
 
-            add((outputPathTextField = new TextFieldFileChooser(localeManager)), gbc);
+            add((outputPathTextField = new TextFieldFileChooser(localeManager, false, true)), gbc);
             gbc.gridy++;
 
             add((mainJarTextField = new JTextField()), gbc);

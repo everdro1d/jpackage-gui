@@ -77,10 +77,7 @@ public class MainWorker {
         currentLocale = localeManager.getCurrentLocale();
 
         if (debug) {
-            showDebugConsole();
-            System.out.println("Loaded locale: " + currentLocale + " at: " + localeManager.getLocaleDirectoryPath());
-            System.out.println("Starting " + MainWindow.titleText + " v" + currentVersion + "...");
-            System.out.println("Detected OS: " + MainWorker.detectedOS);
+            SwingUtilities.invokeLater(MainWorker::showDebugConsole);
         }
 
         checkUpdate();
@@ -112,6 +109,9 @@ public class MainWorker {
             }
             case "mac" -> {
                 // macOS specific code
+
+                System.setProperty("apple.awt.application.name", MainWindow.titleText);
+                System.setProperty("apple.awt.application.appearance", "system");
             }
             case "unix" -> {
                 // Unix specific code
@@ -236,6 +236,9 @@ public class MainWorker {
             windowFrameArray[1] = debugConsoleWindow;
 
             if (debug) System.out.println("Debug console created.");
+            System.out.println("Current locale: " + currentLocale + " at: " + localeManager.getLocaleDirectoryPath());
+            System.out.println("Application: " + MainWindow.titleText + " v" + currentVersion);
+            System.out.println("Detected OS: " + MainWorker.detectedOS);
 
         } else if (!debugConsoleWindow.isVisible()) {
             debugConsoleWindow.setVisible(true);

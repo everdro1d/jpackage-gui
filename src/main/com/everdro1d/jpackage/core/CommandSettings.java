@@ -131,8 +131,26 @@ public class CommandSettings {
         commandSettingsMap.clear();
         if (debug) System.out.println("Cleared commandSettingsMap, ready to load from file.");
         commandSettingsMap = Files.loadMapFromFile(path);
+        // remove any invalid keys from the loaded map
+        pruneCommandSettingsMap();
 
         if (debug) System.out.println("Loaded settings from file to map.");
+    }
+
+    private static void pruneCommandSettingsMap() {
+        // Remove all keys that are not in the <panel>SettingKeyMethodPairs arrays
+        String[][][] allKeyMethodPairs = {
+            genericSettingKeyMethodPairs,
+            osDependentGenericSettingKeyMethodPairs,
+            winSettingKeyMethodPairs,
+            macSettingKeyMethodPairs,
+            nixSettingKeyMethodPairs
+        };
+        for (String[][] keyMethodPairs : allKeyMethodPairs) {
+            for (String[] keyPair : keyMethodPairs) {
+                commandSettingsMap.remove(keyPair[0]);
+            }
+        }
     }
 
     protected static void setUIFromSettingsMap() {

@@ -1,5 +1,6 @@
 package main.com.everdro1d.jpackage.core;
 
+import com.everdro1d.libs.core.Utils;
 import com.everdro1d.libs.io.Files;
 import main.com.everdro1d.jpackage.ui.MainWindow;
 
@@ -8,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 import static main.com.everdro1d.jpackage.core.MainWorker.debug;
+import static main.com.everdro1d.jpackage.core.MainWorker.detectedOS;
 
 public class CommandSettings {
     private static final String[][] mainSettingKeyMethodPair = new String[][] {
@@ -20,18 +22,21 @@ public class CommandSettings {
             // GenericOptionsPanel
             {"gen_name","getNameField"},
             {"gen_description","getDescription"},
-            {"gen_iconPath","getIconPath"},
             {"gen_vendorName","getVendor"},
             {"gen_version","getVersion"},
             {"gen_copyright","getCopyright"},
-            {"gen_license","getLicense"},
             {"gen_fileType","getFileType"},
-            {"gen_inputPath","getInputPath"},
-            {"gen_outputPath","getOutputPath"},
             {"gen_arguments","getArguments"},
             {"gen_mainJarName","getMainJar"},
             {"gen_mainClassName","getMainClass"},
             {"gen_aboutURL","getAboutURL"}
+    };
+
+    private static String[][] osDependentGenericSettingKeyMethodPairs = new String[][] {
+            {"gen_iconPath","getIconPath"},
+            {"gen_license","getLicense"},
+            {"gen_inputPath","getInputPath"},
+            {"gen_outputPath","getOutputPath"}
     };
 
     private static final String[][] winSettingKeyMethodPairs = new String[][] {
@@ -89,7 +94,7 @@ public class CommandSettings {
 
     public static String[] getSubsetOSTypeArray() {
         return osTypeMap.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(MainWorker.detectedOS))
+                .filter(entry -> entry.getValue().equals(detectedOS))
                 .map(Map.Entry::getKey)
                 .toArray(String[]::new);
     }
@@ -99,13 +104,14 @@ public class CommandSettings {
         commandSettingsMap.put(mainSettingKeyMethodPair[1][0], getAndInvokeMethod("MainWindow", mainSettingKeyMethodPair[1][1]));
 
         addSettingsToMapFromPanel("Generic", genericSettingKeyMethodPairs);
+        addSettingsToMapFromPanel("Generic", osDependentGenericSettingKeyMethodPairs);
 
         if (MainWorker.useMonolithOptionFile) {
             addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
             addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
             addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
         } else {
-            switch (MainWorker.detectedOS) {
+            switch (detectedOS) {
                 case "windows" -> addSettingsToMapFromPanel("Windows", winSettingKeyMethodPairs);
                 case "mac" -> addSettingsToMapFromPanel("MacOS", macSettingKeyMethodPairs);
                 case "unix" -> addSettingsToMapFromPanel("Unix", nixSettingKeyMethodPairs);
@@ -115,9 +121,9 @@ public class CommandSettings {
         if (debug) System.out.println("Saved settings from ui to map.");
     }
 
-    protected static void addSettingsToMapFromPanel(String panel, String[][] settingKeyMethodPairs) {
+    private static void addSettingsToMapFromPanel(String panel, String[][] settingKeyMethodPairs) {
         for (String[] keyPair : settingKeyMethodPairs) {
-            commandSettingsMap.put(keyPair[0], getAndInvokeMethod(panel + "OptionsPanel", keyPair[1]));
+            commandSettingsMap.put(osDependentGenericCheck(keyPair[0]), getAndInvokeMethod(panel + "OptionsPanel", keyPair[1]));
         }
     }
 
@@ -145,13 +151,14 @@ public class CommandSettings {
             }
 
             setSettingsFromMapToPanel("Generic", genericSettingKeyMethodPairs, key, value);
+            setSettingsFromMapToPanel("Generic", osDependentGenericSettingKeyMethodPairs, key, value);
 
             if (MainWorker.useMonolithOptionFile) {
                 setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
                 setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
                 setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
             } else {
-                switch (MainWorker.detectedOS) {
+                switch (detectedOS) {
                     case "windows" -> setSettingsFromMapToPanel("Windows", winSettingKeyMethodPairs, key, value);
                     case "mac" -> setSettingsFromMapToPanel("MacOS", macSettingKeyMethodPairs, key, value);
                     case "unix" -> setSettingsFromMapToPanel("Unix", nixSettingKeyMethodPairs, key, value);
@@ -162,9 +169,9 @@ public class CommandSettings {
         if (debug) System.out.println("Loaded settings from map to ui.");
     }
 
-    protected static void setSettingsFromMapToPanel(String panel, String[][] settingKeyMethodPairs, String key, String value) {
+    private static void setSettingsFromMapToPanel(String panel, String[][] settingKeyMethodPairs, String key, String value) {
         for (String[] keyPair : settingKeyMethodPairs) {
-            if (key.equals(keyPair[0])) {
+            if (key.equals( osDependentGenericCheck(keyPair[0]) )) {
                 getAndInvokeMethod(panel + "OptionsPanel", convertMethodPrefix(keyPair[1]), value);
             }
         }
@@ -220,6 +227,24 @@ public class CommandSettings {
 
     public static Map<String, String> getCommandSettingsMap() {
         return commandSettingsMap;
+    }
+
+    /**
+     * Checks if the key is in the osDependentGenericSettingKeyMethodPairs array.
+     * @param key key to check
+     * @return the key with the os prefix if it is in the array, otherwise the unchanged key
+     */
+    protected static String osDependentGenericCheck(String key) {
+        if (Utils.arrayContains(osDependentGenericSettingKeyMethodPairs, key, true)) {
+            String pre = switch(detectedOS) {
+                case "windows" -> "win_";
+                case "mac" -> "mac_";
+                case "unix" -> "nix_";
+                default -> throw new IllegalStateException("Unexpected value: " + detectedOS);
+            };
+            key = pre + key;
+        }
+        return key;
     }
 
 }

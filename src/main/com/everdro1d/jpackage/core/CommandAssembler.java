@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static main.com.everdro1d.jpackage.core.CommandSettings.getCommandSettingsMap;
+import static main.com.everdro1d.jpackage.core.CommandSettings.osDependentGenericCheck;
 import static main.com.everdro1d.jpackage.core.MainWorker.detectedOS;
 
 public class CommandAssembler {
@@ -12,18 +13,21 @@ public class CommandAssembler {
             // GenericOptionsPanel
             {"gen_name","--name"},
             {"gen_description","--description"},
-            {"gen_iconPath","--icon"},
             {"gen_vendorName","--vendor"},
             {"gen_version","--app-version"},
             {"gen_copyright","--copyright"},
-            {"gen_license","--license-file"},
             {"gen_fileType","--type"},
-            {"gen_inputPath","--input"},
-            {"gen_outputPath","--dest"},
             {"gen_arguments","--arguments"},
             {"gen_mainJarName","--main-jar"},
             {"gen_mainClassName","--main-class"},
             {"gen_aboutURL","--about-url"}
+    };
+
+    private static String[][] osDependentGenericSettingKeyMethodPairs = new String[][] {
+            {"gen_iconPath","--icon"},
+            {"gen_license","--license-file"},
+            {"gen_inputPath","--input"},
+            {"gen_outputPath","--dest"}
     };
 
     private static final String[][] winSettingKeyArgumentPairs = new String[][] {
@@ -72,6 +76,7 @@ public class CommandAssembler {
         Map<String,String> commandSettingsMap = getCommandSettingsMap();
         commandMap.clear();
         parseCommandSettingsMap(genericSettingKeyArgumentPairs, commandSettingsMap);
+        parseCommandSettingsMap(osDependentGenericSettingKeyMethodPairs, commandSettingsMap);
         switch (detectedOS) {
             case "windows":
                 parseCommandSettingsMap(winSettingKeyArgumentPairs, commandSettingsMap);
@@ -89,7 +94,7 @@ public class CommandAssembler {
 
     private static void parseCommandSettingsMap(String[][] settingKeyArgumentPairs, Map<String, String> commandSettingsMap) {
         for (String[] settingKeyArgumentPair : settingKeyArgumentPairs) {
-            String key = settingKeyArgumentPair[0];
+            String key = osDependentGenericCheck(settingKeyArgumentPair[0]);
             String argument = settingKeyArgumentPair[1];
             String value = commandSettingsMap.get(key);
 

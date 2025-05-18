@@ -30,9 +30,12 @@ public class MainWorker {
     public static final String currentVersion = "1.1.2"; //TODO: update this with each release
     public static final String developerConfigDirectoryName = "dro1dDev";
     private static final Map<String, CommandInterface> CUSTOM_COMMANDS_MAP = Map.of(
-            "-debug", new DebugCommand()
+            "--debug", new DebugCommand()
     );
-    public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP);
+    private static final Map<String, String> CUSTOM_ALIAS_MAP = Map.of(
+            "-d", "--debug"
+    );
+    public static CommandManager commandManager = new CommandManager(CUSTOM_COMMANDS_MAP, CUSTOM_ALIAS_MAP);
     protected static String currentLocale = "eng";
     public static final LocaleManager localeManager = new LocaleManager(MainWorker.class, developerConfigDirectoryName);
     public static boolean debug = false;
